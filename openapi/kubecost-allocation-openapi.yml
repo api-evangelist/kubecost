@@ -1,0 +1,361 @@
+openapi: 3.1.0
+info:
+  title: Kubecost Allocation API
+  description: >-
+    The Allocation API retrieves cost allocation information for any Kubernetes
+    concept, such as cost by namespace, label, deployment, service, and more.
+    It is directly integrated with the Kubecost ETL caching layer and CSV
+    pipeline so it can scale for large clusters.
+  version: 2.0.0
+  contact:
+    name: Kubecost
+    url: https://docs.kubecost.com/apis/monitoring-apis/api-allocation
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+  - url: http://{kubecost-address}
+    description: Kubecost self-hosted instance
+    variables:
+      kubecost-address:
+        default: localhost:9090
+        description: Address of the Kubecost instance
+paths:
+  /model/allocation:
+    get:
+      operationId: getAllocation
+      summary: Query allocation cost data
+      description: >-
+        Retrieves cost allocation data for Kubernetes workloads, aggregated by
+        the specified field over the given time window.
+      parameters:
+        - name: window
+          in: query
+          required: true
+          description: >-
+            Duration of time over which to query. Accepts units of time
+            (e.g. 3d, 24h, 7d), relative time (e.g. yesterday, lastweek,
+            lastmonth), or RFC3339 date pairs.
+          schema:
+            type: string
+          examples:
+            days:
+              value: "3d"
+              summary: Last 3 days
+            relative:
+              value: "lastweek"
+              summary: Last week
+        - name: aggregate
+          in: query
+          required: false
+          description: >-
+            Field by which to aggregate results. Supported values include
+            cluster, namespace, controllerKind, controller, service,
+            deployment, statefulset, daemonset, job, label, annotation, pod,
+            and container. Supports multi-aggregation via comma-separated
+            values.
+          schema:
+            type: string
+          examples:
+            namespace:
+              value: namespace
+            multi:
+              value: namespace,label:app
+        - name: step
+          in: query
+          required: false
+          description: >-
+            Duration of a single allocation set. If unspecified, this defaults
+            to the window, so that you receive exactly one set for the entire
+            window.
+          schema:
+            type: string
+        - name: accumulate
+          in: query
+          required: false
+          description: >-
+            If true, sum the entire range of sets into a single set.
+          schema:
+            type: boolean
+            default: false
+        - name: idle
+          in: query
+          required: false
+          description: >-
+            Whether to return idle cost. If true, idle allocations are returned.
+          schema:
+            type: boolean
+            default: true
+        - name: external
+          in: query
+          required: false
+          description: >-
+            Whether to include external (out-of-cluster) costs.
+          schema:
+            type: boolean
+            default: false
+        - name: filterClusters
+          in: query
+          required: false
+          description: Filter results by cluster name (comma-separated).
+          schema:
+            type: string
+        - name: filterNamespaces
+          in: query
+          required: false
+          description: Filter results by namespace (comma-separated).
+          schema:
+            type: string
+        - name: filterControllerKinds
+          in: query
+          required: false
+          description: Filter results by controller kind (comma-separated).
+          schema:
+            type: string
+        - name: filterControllers
+          in: query
+          required: false
+          description: Filter results by controller name (comma-separated).
+          schema:
+            type: string
+        - name: filterLabels
+          in: query
+          required: false
+          description: >-
+            Filter results by label in the format label:value
+            (comma-separated).
+          schema:
+            type: string
+        - name: filterAnnotations
+          in: query
+          required: false
+          description: >-
+            Filter results by annotation in the format annotation:value
+            (comma-separated).
+          schema:
+            type: string
+        - name: filterServices
+          in: query
+          required: false
+          description: Filter results by service (comma-separated).
+          schema:
+            type: string
+        - name: shareIdle
+          in: query
+          required: false
+          description: >-
+            If true, idle cost is allocated proportionally across tenants.
+          schema:
+            type: boolean
+            default: false
+        - name: splitIdle
+          in: query
+          required: false
+          description: >-
+            If true, idle cost is split into separate allocations by cluster
+            and node.
+          schema:
+            type: boolean
+            default: false
+        - name: idleByNode
+          in: query
+          required: false
+          description: >-
+            If true, idle allocations are created on a per-node basis.
+          schema:
+            type: boolean
+            default: false
+        - name: format
+          in: query
+          required: false
+          description: Output format. Supports csv and json.
+          schema:
+            type: string
+            enum:
+              - json
+              - csv
+            default: json
+      responses:
+        "200":
+          description: Successful allocation query response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 200
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      additionalProperties:
+                        $ref: "#/components/schemas/Allocation"
+        "400":
+          description: Invalid request parameters.
+  /model/allocation/totals:
+    get:
+      operationId: getAllocationTotals
+      summary: Query total allocation costs
+      description: >-
+        Returns a single total cost value for the given window, without
+        individual allocations breakdown.
+      parameters:
+        - name: window
+          in: query
+          required: true
+          description: Duration of time over which to query.
+          schema:
+            type: string
+        - name: aggregate
+          in: query
+          required: false
+          description: Field by which to aggregate results.
+          schema:
+            type: string
+        - name: filterClusters
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: filterNamespaces
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful total allocation query response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      additionalProperties:
+                        $ref: "#/components/schemas/Allocation"
+components:
+  schemas:
+    Allocation:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the allocation.
+        properties:
+          type: object
+          properties:
+            cluster:
+              type: string
+            node:
+              type: string
+            namespace:
+              type: string
+            controller:
+              type: string
+            controllerKind:
+              type: string
+            pod:
+              type: string
+            container:
+              type: string
+            labels:
+              type: object
+              additionalProperties:
+                type: string
+            annotations:
+              type: object
+              additionalProperties:
+                type: string
+            services:
+              type: array
+              items:
+                type: string
+        window:
+          type: object
+          properties:
+            start:
+              type: string
+              format: date-time
+            end:
+              type: string
+              format: date-time
+        start:
+          type: string
+          format: date-time
+        end:
+          type: string
+          format: date-time
+        cpuCores:
+          type: number
+        cpuCoreRequestAverage:
+          type: number
+        cpuCoreUsageAverage:
+          type: number
+        cpuCoreHours:
+          type: number
+        cpuCost:
+          type: number
+        cpuCostAdjustment:
+          type: number
+        cpuEfficiency:
+          type: number
+        gpuCount:
+          type: number
+        gpuHours:
+          type: number
+        gpuCost:
+          type: number
+        gpuCostAdjustment:
+          type: number
+        networkTransferBytes:
+          type: number
+        networkReceiveBytes:
+          type: number
+        networkCost:
+          type: number
+        networkCostAdjustment:
+          type: number
+        loadBalancerCost:
+          type: number
+        loadBalancerCostAdjustment:
+          type: number
+        pvBytes:
+          type: number
+        pvByteHours:
+          type: number
+        pvCost:
+          type: number
+        pvCostAdjustment:
+          type: number
+        ramBytes:
+          type: number
+        ramByteRequestAverage:
+          type: number
+        ramByteUsageAverage:
+          type: number
+        ramByteHours:
+          type: number
+        ramCost:
+          type: number
+        ramCostAdjustment:
+          type: number
+        ramEfficiency:
+          type: number
+        externalCost:
+          type: number
+        sharedCost:
+          type: number
+        totalCost:
+          type: number
+        totalEfficiency:
+          type: number
+tags:
+  - name: Allocation
+    description: Kubernetes cost allocation endpoints

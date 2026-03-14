@@ -1,0 +1,103 @@
+openapi: 3.1.0
+info:
+  title: Kubecost Forecast API
+  description: >-
+    The Forecast API provides cost forecasting capabilities for Kubernetes
+    workloads, allowing you to predict future spend based on historical
+    cost data and trends.
+  version: 2.0.0
+  contact:
+    name: Kubecost
+    url: https://docs.kubecost.com/apis/governance-apis/forecast-api
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+  - url: http://{kubecost-address}
+    description: Kubecost self-hosted instance
+    variables:
+      kubecost-address:
+        default: localhost:9090
+        description: Address of the Kubecost instance
+paths:
+  /model/forecast/allocation:
+    get:
+      operationId: getForecastAllocation
+      summary: Forecast allocation costs
+      description: >-
+        Returns a cost forecast for Kubernetes workloads based on historical
+        allocation data, projecting future costs over the specified forecast
+        window.
+      parameters:
+        - name: window
+          in: query
+          required: true
+          description: >-
+            Historical window of time to use as the basis for the forecast.
+          schema:
+            type: string
+        - name: forecastWindow
+          in: query
+          required: false
+          description: Duration of time to forecast into the future.
+          schema:
+            type: string
+        - name: aggregate
+          in: query
+          required: false
+          description: >-
+            Field by which to aggregate results. Supports the same values
+            as the Allocation API aggregate parameter.
+          schema:
+            type: string
+        - name: accumulate
+          in: query
+          required: false
+          description: If true, sum the entire range into a single set.
+          schema:
+            type: boolean
+            default: false
+        - name: filterClusters
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: filterNamespaces
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful forecast response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 200
+                  data:
+                    type: object
+                    properties:
+                      totalCost:
+                        type: number
+                        description: Total forecasted cost.
+                      confidence:
+                        type: number
+                        description: Confidence level of the forecast (0-1).
+                      forecastWindow:
+                        type: object
+                        properties:
+                          start:
+                            type: string
+                            format: date-time
+                          end:
+                            type: string
+                            format: date-time
+        "400":
+          description: Invalid request parameters.
+tags:
+  - name: Forecast
+    description: Cost forecasting endpoints

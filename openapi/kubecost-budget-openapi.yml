@@ -1,0 +1,236 @@
+openapi: 3.1.0
+info:
+  title: Kubecost Budget API
+  description: >-
+    The Budget API allows you to create, update, and delete recurring budget
+    rules to control your Kubernetes spending. Weekly and monthly budgets can
+    be established on workloads to set limits on cost spend, with the option
+    to configure alerts for reaching specified budget thresholds via email,
+    Slack, or Microsoft Teams.
+  version: 2.0.0
+  contact:
+    name: Kubecost
+    url: https://docs.kubecost.com/apis/governance-apis/budget-api
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+  - url: http://{kubecost-address}
+    description: Kubecost self-hosted instance
+    variables:
+      kubecost-address:
+        default: localhost:9090
+        description: Address of the Kubecost instance
+paths:
+  /model/budget:
+    get:
+      operationId: listBudgets
+      summary: List all budgets
+      description: Retrieves a list of all configured budget rules.
+      responses:
+        "200":
+          description: Successful budget list response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 200
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Budget"
+    post:
+      operationId: createBudget
+      summary: Create a budget
+      description: Creates a new recurring budget rule for Kubernetes spending.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BudgetInput"
+      responses:
+        "200":
+          description: Budget created successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                  data:
+                    $ref: "#/components/schemas/Budget"
+        "400":
+          description: Invalid request body.
+  /model/budget/{id}:
+    get:
+      operationId: getBudget
+      summary: Get a specific budget
+      description: Retrieves a specific budget rule by ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Unique identifier of the budget.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful budget response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                  data:
+                    $ref: "#/components/schemas/Budget"
+        "404":
+          description: Budget not found.
+    put:
+      operationId: updateBudget
+      summary: Update a budget
+      description: Updates an existing budget rule.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Unique identifier of the budget.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BudgetInput"
+      responses:
+        "200":
+          description: Budget updated successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                  data:
+                    $ref: "#/components/schemas/Budget"
+        "400":
+          description: Invalid request body.
+        "404":
+          description: Budget not found.
+    delete:
+      operationId: deleteBudget
+      summary: Delete a budget
+      description: Deletes an existing budget rule.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Unique identifier of the budget.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Budget deleted successfully.
+        "404":
+          description: Budget not found.
+components:
+  schemas:
+    Budget:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the budget.
+        name:
+          type: string
+          description: Name of the budget rule.
+        amount:
+          type: number
+          description: Budget amount limit.
+        interval:
+          type: string
+          enum:
+            - weekly
+            - monthly
+          description: Recurrence interval of the budget.
+        aggregation:
+          type: string
+          description: >-
+            The field used to scope the budget, such as namespace, cluster,
+            or label.
+        filter:
+          type: string
+          description: Filter expression to scope the budget to specific workloads.
+        actions:
+          type: array
+          items:
+            $ref: "#/components/schemas/BudgetAction"
+          description: Alert actions when budget thresholds are reached.
+        currentSpend:
+          type: number
+          description: Current spend within the budget period.
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    BudgetInput:
+      type: object
+      required:
+        - name
+        - amount
+        - interval
+      properties:
+        name:
+          type: string
+          description: Name of the budget rule.
+        amount:
+          type: number
+          description: Budget amount limit.
+        interval:
+          type: string
+          enum:
+            - weekly
+            - monthly
+          description: Recurrence interval of the budget.
+        aggregation:
+          type: string
+          description: The field used to scope the budget.
+        filter:
+          type: string
+          description: Filter expression to scope the budget.
+        actions:
+          type: array
+          items:
+            $ref: "#/components/schemas/BudgetAction"
+          description: Alert actions for threshold notifications.
+    BudgetAction:
+      type: object
+      properties:
+        threshold:
+          type: number
+          description: >-
+            Percentage threshold (0-1) at which the action triggers.
+        type:
+          type: string
+          enum:
+            - email
+            - slack
+            - msteams
+          description: Type of notification channel.
+        target:
+          type: string
+          description: >-
+            Target for the notification (email address, webhook URL, etc.).
+tags:
+  - name: Budget
+    description: Budget governance endpoints

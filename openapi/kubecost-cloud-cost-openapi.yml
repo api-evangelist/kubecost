@@ -1,0 +1,210 @@
+openapi: 3.1.0
+info:
+  title: Kubecost Cloud Cost API
+  description: >-
+    The Cloud Cost API provides accurate cost information from your cloud
+    service providers (CSPs), including AWS, Azure, and GCP. It offers
+    multiple endpoints for querying, aggregating, and analyzing cloud costs.
+  version: 2.0.0
+  contact:
+    name: Kubecost
+    url: https://docs.kubecost.com/apis/monitoring-apis/cloud-cost-api
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+  - url: http://{kubecost-address}
+    description: Kubecost self-hosted instance
+    variables:
+      kubecost-address:
+        default: localhost:9090
+        description: Address of the Kubecost instance
+paths:
+  /model/cloudCost:
+    get:
+      operationId: getCloudCost
+      summary: Query cloud cost data
+      description: >-
+        Retrieves cloud cost data from cloud service providers, with support
+        for aggregation and filtering.
+      parameters:
+        - name: window
+          in: query
+          required: true
+          description: >-
+            Duration of time over which to query. Accepts daily intervals
+            (e.g. 3d) or RFC3339 date pairs.
+          schema:
+            type: string
+        - name: aggregate
+          in: query
+          required: false
+          description: >-
+            Field by which to aggregate results. Supported values include
+            invoiceEntityID, accountID, provider, service, and label:<name>.
+            Supports multi-aggregation via comma-separated values.
+          schema:
+            type: string
+        - name: accumulate
+          in: query
+          required: false
+          description: If true, sum the entire range into a single set.
+          schema:
+            type: boolean
+            default: false
+        - name: filterInvoiceEntityIDs
+          in: query
+          required: false
+          description: Filter by invoice entity ID (comma-separated).
+          schema:
+            type: string
+        - name: filterAccountIDs
+          in: query
+          required: false
+          description: Filter by account ID (comma-separated).
+          schema:
+            type: string
+        - name: filterProviders
+          in: query
+          required: false
+          description: Filter by provider (comma-separated).
+          schema:
+            type: string
+        - name: filterServices
+          in: query
+          required: false
+          description: Filter by service (comma-separated).
+          schema:
+            type: string
+        - name: filterLabels
+          in: query
+          required: false
+          description: Filter by label in the format label:value.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful cloud cost query response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 200
+                  data:
+                    type: object
+        "400":
+          description: Invalid request parameters.
+  /model/cloudCost/view:
+    get:
+      operationId: getCloudCostView
+      summary: Query cloud cost view data
+      description: >-
+        Default endpoint for querying cloud costs. Provides a comprehensive
+        view of cloud spending.
+      parameters:
+        - name: window
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: aggregate
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: accumulate
+          in: query
+          required: false
+          schema:
+            type: boolean
+            default: false
+        - name: filterInvoiceEntityIDs
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: filterAccountIDs
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: filterProviders
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: filterServices
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful cloud cost view response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                  data:
+                    type: object
+  /model/cloudCost/top:
+    get:
+      operationId: getCloudCostTop
+      summary: Query top cloud costs
+      description: >-
+        Returns the top cloud cost items. Accepts all parameters of the
+        view endpoint.
+      parameters:
+        - name: window
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: aggregate
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: accumulate
+          in: query
+          required: false
+          schema:
+            type: boolean
+            default: false
+        - name: filterProviders
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: filterServices
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: limit
+          in: query
+          required: false
+          description: Maximum number of results to return.
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Successful top cloud cost response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                  data:
+                    type: object
+tags:
+  - name: Cloud Cost
+    description: Cloud service provider cost endpoints

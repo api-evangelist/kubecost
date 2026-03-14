@@ -1,0 +1,267 @@
+openapi: 3.1.0
+info:
+  title: Kubecost Savings API
+  description: >-
+    The Savings APIs provide cost optimization insights, including cluster-level
+    potential savings estimates, recommendations for right-sizing clusters and
+    containers, listing abandoned workloads, orphaned disks, and orphaned IP
+    addresses.
+  version: 2.0.0
+  contact:
+    name: Kubecost
+    url: https://docs.kubecost.com/apis/savings-apis
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+  - url: http://{kubecost-address}
+    description: Kubecost self-hosted instance
+    variables:
+      kubecost-address:
+        default: localhost:9090
+        description: Address of the Kubecost instance
+paths:
+  /model/savings/clusterSizingETL:
+    get:
+      operationId: getClusterRightSizing
+      summary: Get cluster right-sizing recommendations
+      description: >-
+        Returns recommendations for right-sizing clusters based on actual
+        resource usage, including potential monthly savings.
+      parameters:
+        - name: window
+          in: query
+          required: false
+          description: Duration of time to analyze for recommendations.
+          schema:
+            type: string
+            default: "48h"
+      responses:
+        "200":
+          description: Cluster right-sizing recommendations.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/ClusterSizingRecommendation"
+  /model/savings/requestSizingV2:
+    get:
+      operationId: getContainerRequestRightSizing
+      summary: Get container request right-sizing recommendations
+      description: >-
+        Returns recommendations for right-sizing container resource requests
+        (CPU and memory) based on actual usage patterns.
+      parameters:
+        - name: window
+          in: query
+          required: true
+          description: Duration of time to analyze for recommendations.
+          schema:
+            type: string
+        - name: targetCPUUtilization
+          in: query
+          required: false
+          description: Target CPU utilization percentage (0-1).
+          schema:
+            type: number
+            default: 0.65
+        - name: targetRAMUtilization
+          in: query
+          required: false
+          description: Target RAM utilization percentage (0-1).
+          schema:
+            type: number
+            default: 0.65
+        - name: filterClusters
+          in: query
+          required: false
+          description: Filter by cluster name (comma-separated).
+          schema:
+            type: string
+        - name: filterNamespaces
+          in: query
+          required: false
+          description: Filter by namespace (comma-separated).
+          schema:
+            type: string
+        - name: filterControllers
+          in: query
+          required: false
+          description: Filter by controller name (comma-separated).
+          schema:
+            type: string
+        - name: filterLabels
+          in: query
+          required: false
+          description: Filter by label in the format label:value.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Container request right-sizing recommendations.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/RequestSizingRecommendation"
+  /model/savings/abandonedWorkloads:
+    get:
+      operationId: getAbandonedWorkloads
+      summary: List abandoned workloads
+      description: >-
+        Returns a list of workloads that appear to be abandoned based on low
+        resource utilization over the specified window.
+      parameters:
+        - name: window
+          in: query
+          required: false
+          description: Duration of time to analyze.
+          schema:
+            type: string
+            default: "7d"
+      responses:
+        "200":
+          description: List of abandoned workloads.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        cluster:
+                          type: string
+                        namespace:
+                          type: string
+                        controller:
+                          type: string
+                        controllerKind:
+                          type: string
+                        monthlySavings:
+                          type: number
+  /model/savings/orphanedDisks:
+    get:
+      operationId: getOrphanedDisks
+      summary: List orphaned disks
+      description: >-
+        Returns a list of persistent volumes and disks that are not attached
+        to any running workload.
+      responses:
+        "200":
+          description: List of orphaned disks.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        cluster:
+                          type: string
+                        region:
+                          type: string
+                        sizeGB:
+                          type: number
+                        monthlyCost:
+                          type: number
+  /model/savings/orphanedIPs:
+    get:
+      operationId: getOrphanedIPs
+      summary: List orphaned IP addresses
+      description: >-
+        Returns a list of allocated IP addresses that are not associated
+        with any active resource.
+      responses:
+        "200":
+          description: List of orphaned IP addresses.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        address:
+                          type: string
+                        cluster:
+                          type: string
+                        region:
+                          type: string
+                        monthlyCost:
+                          type: number
+components:
+  schemas:
+    ClusterSizingRecommendation:
+      type: object
+      properties:
+        clusterName:
+          type: string
+        currentMonthlyRate:
+          type: number
+        recommendedMonthlyRate:
+          type: number
+        monthlySavings:
+          type: number
+        currentNodeCount:
+          type: integer
+        recommendedNodeCount:
+          type: integer
+        currentNodeType:
+          type: string
+        recommendedNodeType:
+          type: string
+    RequestSizingRecommendation:
+      type: object
+      properties:
+        clusterName:
+          type: string
+        namespace:
+          type: string
+        controllerKind:
+          type: string
+        controllerName:
+          type: string
+        containerName:
+          type: string
+        currentCPURequest:
+          type: number
+        recommendedCPURequest:
+          type: number
+        currentRAMBytesRequest:
+          type: number
+        recommendedRAMBytesRequest:
+          type: number
+        monthlySavings:
+          type: number
+tags:
+  - name: Savings
+    description: Cost optimization and savings recommendation endpoints

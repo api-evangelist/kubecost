@@ -1,0 +1,228 @@
+openapi: 3.1.0
+info:
+  title: Kubecost Assets API
+  description: >-
+    The Assets API retrieves backing cost data broken down by individual
+    Kubernetes assets in your cluster, such as nodes, disks, load balancers,
+    and more. It also provides various aggregations of this data.
+  version: 2.0.0
+  contact:
+    name: Kubecost
+    url: https://docs.kubecost.com/apis/monitoring-apis/assets-api
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+  - url: http://{kubecost-address}
+    description: Kubecost self-hosted instance
+    variables:
+      kubecost-address:
+        default: localhost:9090
+        description: Address of the Kubecost instance
+paths:
+  /model/assets:
+    get:
+      operationId: getAssets
+      summary: Query asset cost data
+      description: >-
+        Retrieves cost data for individual Kubernetes assets such as nodes,
+        persistent volumes, load balancers, and cluster management costs.
+      parameters:
+        - name: window
+          in: query
+          required: true
+          description: >-
+            Duration of time over which to query. Accepts units of time
+            (e.g. 3d, 24h, 7d), relative time (e.g. yesterday, lastweek),
+            or RFC3339 date pairs.
+          schema:
+            type: string
+        - name: aggregate
+          in: query
+          required: false
+          description: >-
+            Field by which to aggregate results. Supported values include
+            account, category, cluster, name, project, providerid, provider,
+            service, type, department, environment, owner, product, team, and
+            label:<name>. Supports multi-aggregation via comma-separated values.
+          schema:
+            type: string
+        - name: accumulate
+          in: query
+          required: false
+          description: If true, sum the entire range into a single set.
+          schema:
+            type: boolean
+            default: false
+        - name: filterClusters
+          in: query
+          required: false
+          description: Filter by cluster name (comma-separated).
+          schema:
+            type: string
+        - name: filterTypes
+          in: query
+          required: false
+          description: >-
+            Filter by asset type (comma-separated). Supported values include
+            Node, Disk, LoadBalancer, ClusterManagement, Network, Attached.
+          schema:
+            type: string
+        - name: filterAccounts
+          in: query
+          required: false
+          description: Filter by account (comma-separated).
+          schema:
+            type: string
+        - name: filterProjects
+          in: query
+          required: false
+          description: Filter by project (comma-separated).
+          schema:
+            type: string
+        - name: filterProviders
+          in: query
+          required: false
+          description: Filter by provider (comma-separated).
+          schema:
+            type: string
+        - name: filterCategories
+          in: query
+          required: false
+          description: Filter by category (comma-separated).
+          schema:
+            type: string
+        - name: filterLabels
+          in: query
+          required: false
+          description: Filter by label in the format label:value.
+          schema:
+            type: string
+        - name: filterServices
+          in: query
+          required: false
+          description: Filter by service (comma-separated).
+          schema:
+            type: string
+        - name: format
+          in: query
+          required: false
+          description: Output format. Supports csv and json.
+          schema:
+            type: string
+            enum:
+              - json
+              - csv
+            default: json
+      responses:
+        "200":
+          description: Successful assets query response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 200
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      additionalProperties:
+                        $ref: "#/components/schemas/Asset"
+        "400":
+          description: Invalid request parameters.
+  /model/assets/totals:
+    get:
+      operationId: getAssetsTotals
+      summary: Query total asset costs
+      description: >-
+        Returns a single total cost for assets in the given window.
+      parameters:
+        - name: window
+          in: query
+          required: true
+          description: Duration of time over which to query.
+          schema:
+            type: string
+        - name: filterClusters
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: filterTypes
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful total assets query response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                  data:
+                    type: array
+                    items:
+                      type: object
+components:
+  schemas:
+    Asset:
+      type: object
+      properties:
+        type:
+          type: string
+          description: >-
+            Type of asset (Node, Disk, LoadBalancer, ClusterManagement, etc.)
+        properties:
+          type: object
+          properties:
+            cluster:
+              type: string
+            name:
+              type: string
+            providerID:
+              type: string
+            provider:
+              type: string
+            account:
+              type: string
+            project:
+              type: string
+            service:
+              type: string
+            category:
+              type: string
+            labels:
+              type: object
+              additionalProperties:
+                type: string
+        window:
+          type: object
+          properties:
+            start:
+              type: string
+              format: date-time
+            end:
+              type: string
+              format: date-time
+        start:
+          type: string
+          format: date-time
+        end:
+          type: string
+          format: date-time
+        minutes:
+          type: number
+        adjustment:
+          type: number
+        totalCost:
+          type: number
+tags:
+  - name: Assets
+    description: Kubernetes asset cost endpoints
