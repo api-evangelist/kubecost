@@ -13,6 +13,10 @@ apis:
         type: Documentation
       - url: openapi/kubecost-allocation-openapi.yml
         type: OpenAPI
+      - url: json-schema/allocation.json
+        type: JSONSchema
+      - url: json-ld/kubecost-context.jsonld
+        type: JSONLD
     description: >-
       The Allocation API retrieves cost allocation information for any
       Kubernetes concept, such as cost by namespace, label, deployment,
@@ -30,6 +34,10 @@ apis:
         type: Documentation
       - url: openapi/kubecost-assets-openapi.yml
         type: OpenAPI
+      - url: json-schema/asset.json
+        type: JSONSchema
+      - url: json-ld/kubecost-context.jsonld
+        type: JSONLD
     description: >-
       The Assets API retrieves backing cost data broken down by individual
       Kubernetes assets in your cluster, such as nodes, disks, load balancers,
@@ -48,6 +56,10 @@ apis:
         type: Documentation
       - url: openapi/kubecost-cloud-cost-openapi.yml
         type: OpenAPI
+      - url: json-schema/cloud-cost.json
+        type: JSONSchema
+      - url: json-ld/kubecost-context.jsonld
+        type: JSONLD
     description: >-
       The Cloud Cost API provides accurate cost information from your cloud
       service providers (CSPs), including AWS, Azure, and GCP. It offers
@@ -64,6 +76,12 @@ apis:
         type: Documentation
       - url: openapi/kubecost-budget-openapi.yml
         type: OpenAPI
+      - url: json-schema/budget.json
+        type: JSONSchema
+      - url: json-schema/budget-action.json
+        type: JSONSchema
+      - url: json-ld/kubecost-context.jsonld
+        type: JSONLD
     description: >-
       The Budget API allows you to create, update, and delete recurring budget
       rules to control your Kubernetes spending. Weekly and monthly budgets can
@@ -82,6 +100,10 @@ apis:
         type: Documentation
       - url: openapi/kubecost-forecast-openapi.yml
         type: OpenAPI
+      - url: json-schema/forecast.json
+        type: JSONSchema
+      - url: json-ld/kubecost-context.jsonld
+        type: JSONLD
     description: >-
       The Forecast API provides cost forecasting capabilities for Kubernetes
       workloads, allowing you to predict future spend based on historical
@@ -98,6 +120,10 @@ apis:
         type: Documentation
       - url: openapi/kubecost-savings-openapi.yml
         type: OpenAPI
+      - url: json-schema/savings-recommendation.json
+        type: JSONSchema
+      - url: json-ld/kubecost-context.jsonld
+        type: JSONLD
     description: >-
       The Savings APIs provide cost optimization insights, including
       cluster-level potential savings estimates, recommendations for

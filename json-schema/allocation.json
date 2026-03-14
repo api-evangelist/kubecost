@@ -1,0 +1,222 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/api-evangelist/kubecost/blob/main/json-schema/allocation.json",
+  "title": "Kubecost Allocation",
+  "description": "A cost allocation record for a Kubernetes workload, containing resource usage metrics and associated costs for CPU, GPU, RAM, storage, network, and load balancers over a given time window.",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Name of the allocation."
+    },
+    "properties": {
+      "type": "object",
+      "description": "Kubernetes metadata properties associated with this allocation.",
+      "properties": {
+        "cluster": {
+          "type": "string",
+          "description": "Cluster name."
+        },
+        "node": {
+          "type": "string",
+          "description": "Node name."
+        },
+        "namespace": {
+          "type": "string",
+          "description": "Namespace name."
+        },
+        "controller": {
+          "type": "string",
+          "description": "Controller name."
+        },
+        "controllerKind": {
+          "type": "string",
+          "description": "Kind of controller (e.g. Deployment, StatefulSet, DaemonSet)."
+        },
+        "pod": {
+          "type": "string",
+          "description": "Pod name."
+        },
+        "container": {
+          "type": "string",
+          "description": "Container name."
+        },
+        "labels": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Kubernetes labels applied to the workload."
+        },
+        "annotations": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Kubernetes annotations applied to the workload."
+        },
+        "services": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Kubernetes services associated with the workload."
+        }
+      }
+    },
+    "window": {
+      "type": "object",
+      "description": "The time window for this allocation.",
+      "properties": {
+        "start": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start of the allocation window."
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End of the allocation window."
+        }
+      }
+    },
+    "start": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Start time of the allocation."
+    },
+    "end": {
+      "type": "string",
+      "format": "date-time",
+      "description": "End time of the allocation."
+    },
+    "cpuCores": {
+      "type": "number",
+      "description": "Number of CPU cores allocated."
+    },
+    "cpuCoreRequestAverage": {
+      "type": "number",
+      "description": "Average CPU core request over the window."
+    },
+    "cpuCoreUsageAverage": {
+      "type": "number",
+      "description": "Average CPU core usage over the window."
+    },
+    "cpuCoreHours": {
+      "type": "number",
+      "description": "Total CPU core-hours consumed."
+    },
+    "cpuCost": {
+      "type": "number",
+      "description": "Total cost attributed to CPU usage."
+    },
+    "cpuCostAdjustment": {
+      "type": "number",
+      "description": "Adjustment applied to CPU cost."
+    },
+    "cpuEfficiency": {
+      "type": "number",
+      "description": "CPU efficiency ratio (usage / request)."
+    },
+    "gpuCount": {
+      "type": "number",
+      "description": "Number of GPUs allocated."
+    },
+    "gpuHours": {
+      "type": "number",
+      "description": "Total GPU-hours consumed."
+    },
+    "gpuCost": {
+      "type": "number",
+      "description": "Total cost attributed to GPU usage."
+    },
+    "gpuCostAdjustment": {
+      "type": "number",
+      "description": "Adjustment applied to GPU cost."
+    },
+    "networkTransferBytes": {
+      "type": "number",
+      "description": "Total network bytes transferred."
+    },
+    "networkReceiveBytes": {
+      "type": "number",
+      "description": "Total network bytes received."
+    },
+    "networkCost": {
+      "type": "number",
+      "description": "Total cost attributed to network usage."
+    },
+    "networkCostAdjustment": {
+      "type": "number",
+      "description": "Adjustment applied to network cost."
+    },
+    "loadBalancerCost": {
+      "type": "number",
+      "description": "Total cost attributed to load balancers."
+    },
+    "loadBalancerCostAdjustment": {
+      "type": "number",
+      "description": "Adjustment applied to load balancer cost."
+    },
+    "pvBytes": {
+      "type": "number",
+      "description": "Persistent volume bytes allocated."
+    },
+    "pvByteHours": {
+      "type": "number",
+      "description": "Total persistent volume byte-hours consumed."
+    },
+    "pvCost": {
+      "type": "number",
+      "description": "Total cost attributed to persistent volumes."
+    },
+    "pvCostAdjustment": {
+      "type": "number",
+      "description": "Adjustment applied to persistent volume cost."
+    },
+    "ramBytes": {
+      "type": "number",
+      "description": "RAM bytes allocated."
+    },
+    "ramByteRequestAverage": {
+      "type": "number",
+      "description": "Average RAM byte request over the window."
+    },
+    "ramByteUsageAverage": {
+      "type": "number",
+      "description": "Average RAM byte usage over the window."
+    },
+    "ramByteHours": {
+      "type": "number",
+      "description": "Total RAM byte-hours consumed."
+    },
+    "ramCost": {
+      "type": "number",
+      "description": "Total cost attributed to RAM usage."
+    },
+    "ramCostAdjustment": {
+      "type": "number",
+      "description": "Adjustment applied to RAM cost."
+    },
+    "ramEfficiency": {
+      "type": "number",
+      "description": "RAM efficiency ratio (usage / request)."
+    },
+    "externalCost": {
+      "type": "number",
+      "description": "External (out-of-cluster) costs attributed to this allocation."
+    },
+    "sharedCost": {
+      "type": "number",
+      "description": "Shared costs attributed to this allocation."
+    },
+    "totalCost": {
+      "type": "number",
+      "description": "Total cost for this allocation."
+    },
+    "totalEfficiency": {
+      "type": "number",
+      "description": "Overall efficiency ratio across all resources."
+    }
+  }
+}

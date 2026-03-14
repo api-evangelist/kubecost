@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/api-evangelist/kubecost/blob/main/json-schema/forecast.json",
+  "title": "Kubecost Forecast",
+  "description": "A cost forecast projecting future Kubernetes workload spend based on historical allocation data and trends.",
+  "type": "object",
+  "properties": {
+    "totalCost": {
+      "type": "number",
+      "description": "Total forecasted cost for the forecast window."
+    },
+    "confidence": {
+      "type": "number",
+      "description": "Confidence level of the forecast (0-1)."
+    },
+    "forecastWindow": {
+      "type": "object",
+      "description": "The time window for the forecast projection.",
+      "properties": {
+        "start": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start of the forecast window."
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End of the forecast window."
+        }
+      }
+    }
+  }
+}

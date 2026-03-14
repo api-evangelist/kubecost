@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/api-evangelist/kubecost/blob/main/json-schema/savings-recommendation.json",
+  "title": "Kubecost Savings Recommendation",
+  "description": "A savings recommendation for optimizing Kubernetes infrastructure costs, including cluster right-sizing and container request right-sizing suggestions.",
+  "type": "object",
+  "properties": {
+    "clusterName": {
+      "type": "string",
+      "description": "Name of the cluster the recommendation applies to."
+    },
+    "namespace": {
+      "type": "string",
+      "description": "Namespace of the workload (for container-level recommendations)."
+    },
+    "controllerKind": {
+      "type": "string",
+      "description": "Kind of controller (e.g. Deployment, StatefulSet)."
+    },
+    "controllerName": {
+      "type": "string",
+      "description": "Name of the controller."
+    },
+    "containerName": {
+      "type": "string",
+      "description": "Name of the container (for container-level recommendations)."
+    },
+    "currentMonthlyRate": {
+      "type": "number",
+      "description": "Current monthly cost rate."
+    },
+    "recommendedMonthlyRate": {
+      "type": "number",
+      "description": "Recommended monthly cost rate after optimization."
+    },
+    "monthlySavings": {
+      "type": "number",
+      "description": "Estimated monthly savings from the recommendation."
+    },
+    "currentNodeCount": {
+      "type": "integer",
+      "description": "Current number of nodes in the cluster (for cluster-level recommendations)."
+    },
+    "recommendedNodeCount": {
+      "type": "integer",
+      "description": "Recommended number of nodes (for cluster-level recommendations)."
+    },
+    "currentNodeType": {
+      "type": "string",
+      "description": "Current node instance type (for cluster-level recommendations)."
+    },
+    "recommendedNodeType": {
+      "type": "string",
+      "description": "Recommended node instance type (for cluster-level recommendations)."
+    },
+    "currentCPURequest": {
+      "type": "number",
+      "description": "Current CPU request (for container-level recommendations)."
+    },
+    "recommendedCPURequest": {
+      "type": "number",
+      "description": "Recommended CPU request (for container-level recommendations)."
+    },
+    "currentRAMBytesRequest": {
+      "type": "number",
+      "description": "Current RAM request in bytes (for container-level recommendations)."
+    },
+    "recommendedRAMBytesRequest": {
+      "type": "number",
+      "description": "Recommended RAM request in bytes (for container-level recommendations)."
+    }
+  }
+}

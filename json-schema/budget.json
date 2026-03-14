@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/api-evangelist/kubecost/blob/main/json-schema/budget.json",
+  "title": "Kubecost Budget",
+  "description": "A recurring budget rule for controlling Kubernetes spending, with configurable thresholds and notification actions.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the budget."
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of the budget rule."
+    },
+    "amount": {
+      "type": "number",
+      "description": "Budget amount limit."
+    },
+    "interval": {
+      "type": "string",
+      "enum": [
+        "weekly",
+        "monthly"
+      ],
+      "description": "Recurrence interval of the budget."
+    },
+    "aggregation": {
+      "type": "string",
+      "description": "The field used to scope the budget, such as namespace, cluster, or label."
+    },
+    "filter": {
+      "type": "string",
+      "description": "Filter expression to scope the budget to specific workloads."
+    },
+    "actions": {
+      "type": "array",
+      "description": "Alert actions triggered when budget thresholds are reached.",
+      "items": {
+        "$ref": "budget-action.json"
+      }
+    },
+    "currentSpend": {
+      "type": "number",
+      "description": "Current spend within the budget period."
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the budget was created."
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the budget was last updated."
+    }
+  }
+}

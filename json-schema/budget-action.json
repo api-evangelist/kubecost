@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/api-evangelist/kubecost/blob/main/json-schema/budget-action.json",
+  "title": "Kubecost Budget Action",
+  "description": "A notification action that triggers when a budget threshold is reached.",
+  "type": "object",
+  "properties": {
+    "threshold": {
+      "type": "number",
+      "description": "Percentage threshold (0-1) at which the action triggers."
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "email",
+        "slack",
+        "msteams"
+      ],
+      "description": "Type of notification channel."
+    },
+    "target": {
+      "type": "string",
+      "description": "Target for the notification (email address, webhook URL, etc.)."
+    }
+  }
+}

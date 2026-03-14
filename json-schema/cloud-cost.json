@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/api-evangelist/kubecost/blob/main/json-schema/cloud-cost.json",
+  "title": "Kubecost Cloud Cost",
+  "description": "A cloud cost record representing spending from a cloud service provider (AWS, Azure, or GCP), aggregated by account, service, provider, or label.",
+  "type": "object",
+  "properties": {
+    "invoiceEntityID": {
+      "type": "string",
+      "description": "Invoice entity identifier from the cloud provider."
+    },
+    "accountID": {
+      "type": "string",
+      "description": "Cloud provider account identifier."
+    },
+    "provider": {
+      "type": "string",
+      "description": "Cloud service provider name (e.g. AWS, Azure, GCP)."
+    },
+    "service": {
+      "type": "string",
+      "description": "Cloud provider service name."
+    },
+    "labels": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Labels associated with the cloud cost item."
+    },
+    "window": {
+      "type": "object",
+      "description": "The time window for this cloud cost record.",
+      "properties": {
+        "start": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start of the window."
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End of the window."
+        }
+      }
+    },
+    "listCost": {
+      "type": "number",
+      "description": "List price cost before discounts."
+    },
+    "netCost": {
+      "type": "number",
+      "description": "Net cost after discounts and credits."
+    },
+    "amortizedNetCost": {
+      "type": "number",
+      "description": "Amortized net cost spreading upfront payments over time."
+    },
+    "invoicedCost": {
+      "type": "number",
+      "description": "Invoiced cost from the cloud provider."
+    }
+  }
+}

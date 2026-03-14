@@ -1,0 +1,117 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "kubecost": "https://docs.kubecost.com/apis/",
+    "Allocation": {
+      "@id": "kubecost:monitoring-apis/api-allocation",
+      "@context": {
+        "name": "https://schema.org/name",
+        "cluster": "https://schema.org/memberOf",
+        "node": "https://schema.org/hasPart",
+        "namespace": "https://schema.org/category",
+        "controller": "https://schema.org/controlAction",
+        "controllerKind": "https://schema.org/additionalType",
+        "pod": "https://schema.org/hasPart",
+        "container": "https://schema.org/hasPart",
+        "labels": "https://schema.org/keywords",
+        "annotations": "https://schema.org/description",
+        "services": "https://schema.org/serviceType",
+        "cpuCost": "https://schema.org/price",
+        "gpuCost": "https://schema.org/price",
+        "ramCost": "https://schema.org/price",
+        "pvCost": "https://schema.org/price",
+        "networkCost": "https://schema.org/price",
+        "loadBalancerCost": "https://schema.org/price",
+        "totalCost": "https://schema.org/totalPrice",
+        "totalEfficiency": "https://schema.org/valueReference",
+        "start": "https://schema.org/startDate",
+        "end": "https://schema.org/endDate"
+      }
+    },
+    "Asset": {
+      "@id": "kubecost:monitoring-apis/assets-api",
+      "@context": {
+        "type": "https://schema.org/additionalType",
+        "cluster": "https://schema.org/memberOf",
+        "name": "https://schema.org/name",
+        "providerID": "https://schema.org/identifier",
+        "provider": "https://schema.org/provider",
+        "account": "https://schema.org/account",
+        "project": "https://schema.org/project",
+        "service": "https://schema.org/serviceType",
+        "category": "https://schema.org/category",
+        "labels": "https://schema.org/keywords",
+        "totalCost": "https://schema.org/totalPrice",
+        "adjustment": "https://schema.org/discount",
+        "start": "https://schema.org/startDate",
+        "end": "https://schema.org/endDate"
+      }
+    },
+    "Budget": {
+      "@id": "kubecost:governance-apis/budget-api",
+      "@context": {
+        "id": "https://schema.org/identifier",
+        "name": "https://schema.org/name",
+        "amount": "https://schema.org/price",
+        "interval": "https://schema.org/repeatFrequency",
+        "aggregation": "https://schema.org/category",
+        "filter": "https://schema.org/query",
+        "actions": "https://schema.org/potentialAction",
+        "currentSpend": "https://schema.org/price",
+        "createdAt": "https://schema.org/dateCreated",
+        "updatedAt": "https://schema.org/dateModified"
+      }
+    },
+    "BudgetAction": {
+      "@id": "kubecost:governance-apis/budget-api#action",
+      "@context": {
+        "threshold": "https://schema.org/valueReference",
+        "type": "https://schema.org/additionalType",
+        "target": "https://schema.org/recipient"
+      }
+    },
+    "CloudCost": {
+      "@id": "kubecost:monitoring-apis/cloud-cost-api",
+      "@context": {
+        "invoiceEntityID": "https://schema.org/identifier",
+        "accountID": "https://schema.org/account",
+        "provider": "https://schema.org/provider",
+        "service": "https://schema.org/serviceType",
+        "labels": "https://schema.org/keywords",
+        "listCost": "https://schema.org/price",
+        "netCost": "https://schema.org/totalPrice",
+        "amortizedNetCost": "https://schema.org/price",
+        "invoicedCost": "https://schema.org/price",
+        "start": "https://schema.org/startDate",
+        "end": "https://schema.org/endDate"
+      }
+    },
+    "Forecast": {
+      "@id": "kubecost:governance-apis/forecast-api",
+      "@context": {
+        "totalCost": "https://schema.org/totalPrice",
+        "confidence": "https://schema.org/valueReference",
+        "forecastWindow": "https://schema.org/duration",
+        "start": "https://schema.org/startDate",
+        "end": "https://schema.org/endDate"
+      }
+    },
+    "SavingsRecommendation": {
+      "@id": "kubecost:savings-apis",
+      "@context": {
+        "clusterName": "https://schema.org/name",
+        "namespace": "https://schema.org/category",
+        "controllerKind": "https://schema.org/additionalType",
+        "controllerName": "https://schema.org/name",
+        "containerName": "https://schema.org/name",
+        "monthlySavings": "https://schema.org/discount",
+        "currentMonthlyRate": "https://schema.org/price",
+        "recommendedMonthlyRate": "https://schema.org/price",
+        "currentNodeCount": "https://schema.org/amount",
+        "recommendedNodeCount": "https://schema.org/amount",
+        "currentNodeType": "https://schema.org/additionalType",
+        "recommendedNodeType": "https://schema.org/additionalType"
+      }
+    }
+  }
+}

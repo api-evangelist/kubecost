@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/api-evangelist/kubecost/blob/main/json-schema/asset.json",
+  "title": "Kubecost Asset",
+  "description": "An individual Kubernetes infrastructure asset such as a node, disk, or load balancer, with associated cost data over a given time window.",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "description": "Type of asset (e.g. Node, Disk, LoadBalancer, ClusterManagement, Network, Attached)."
+    },
+    "properties": {
+      "type": "object",
+      "description": "Metadata properties associated with this asset.",
+      "properties": {
+        "cluster": {
+          "type": "string",
+          "description": "Cluster name."
+        },
+        "name": {
+          "type": "string",
+          "description": "Asset name."
+        },
+        "providerID": {
+          "type": "string",
+          "description": "Cloud provider resource identifier."
+        },
+        "provider": {
+          "type": "string",
+          "description": "Cloud provider name (e.g. AWS, Azure, GCP)."
+        },
+        "account": {
+          "type": "string",
+          "description": "Cloud provider account identifier."
+        },
+        "project": {
+          "type": "string",
+          "description": "Cloud provider project identifier."
+        },
+        "service": {
+          "type": "string",
+          "description": "Cloud provider service name."
+        },
+        "category": {
+          "type": "string",
+          "description": "Asset category."
+        },
+        "labels": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Labels applied to the asset."
+        }
+      }
+    },
+    "window": {
+      "type": "object",
+      "description": "The time window for this asset cost record.",
+      "properties": {
+        "start": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start of the window."
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End of the window."
+        }
+      }
+    },
+    "start": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Start time of the asset record."
+    },
+    "end": {
+      "type": "string",
+      "format": "date-time",
+      "description": "End time of the asset record."
+    },
+    "minutes": {
+      "type": "number",
+      "description": "Duration in minutes for the asset record."
+    },
+    "adjustment": {
+      "type": "number",
+      "description": "Cost adjustment applied to the asset."
+    },
+    "totalCost": {
+      "type": "number",
+      "description": "Total cost of the asset over the window."
+    }
+  }
+}
