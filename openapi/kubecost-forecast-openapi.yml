@@ -23,7 +23,7 @@ paths:
   /model/forecast/allocation:
     get:
       operationId: getForecastAllocation
-      summary: Forecast allocation costs
+      summary: Kubecost Forecast allocation costs
       description: >-
         Returns a cost forecast for Kubernetes workloads based on historical
         allocation data, projecting future costs over the specified forecast

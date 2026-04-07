@@ -25,7 +25,7 @@ paths:
   /model/budget:
     get:
       operationId: listBudgets
-      summary: List all budgets
+      summary: Kubecost List all budgets
       description: Retrieves a list of all configured budget rules.
       responses:
         "200":
@@ -44,7 +44,7 @@ paths:
                       $ref: "#/components/schemas/Budget"
     post:
       operationId: createBudget
-      summary: Create a budget
+      summary: Kubecost Create a budget
       description: Creates a new recurring budget rule for Kubernetes spending.
       requestBody:
         required: true
@@ -69,7 +69,7 @@ paths:
   /model/budget/{id}:
     get:
       operationId: getBudget
-      summary: Get a specific budget
+      summary: Kubecost Get a specific budget
       description: Retrieves a specific budget rule by ID.
       parameters:
         - name: id
@@ -94,7 +94,7 @@ paths:
           description: Budget not found.
     put:
       operationId: updateBudget
-      summary: Update a budget
+      summary: Kubecost Update a budget
       description: Updates an existing budget rule.
       parameters:
         - name: id
@@ -127,7 +127,7 @@ paths:
           description: Budget not found.
     delete:
       operationId: deleteBudget
-      summary: Delete a budget
+      summary: Kubecost Delete a budget
       description: Deletes an existing budget rule.
       parameters:
         - name: id

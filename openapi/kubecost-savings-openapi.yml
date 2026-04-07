@@ -24,7 +24,7 @@ paths:
   /model/savings/clusterSizingETL:
     get:
       operationId: getClusterRightSizing
-      summary: Get cluster right-sizing recommendations
+      summary: Kubecost Get cluster right-sizing recommendations
       description: >-
         Returns recommendations for right-sizing clusters based on actual
         resource usage, including potential monthly savings.
@@ -53,7 +53,7 @@ paths:
   /model/savings/requestSizingV2:
     get:
       operationId: getContainerRequestRightSizing
-      summary: Get container request right-sizing recommendations
+      summary: Kubecost Get container request right-sizing recommendations
       description: >-
         Returns recommendations for right-sizing container resource requests
         (CPU and memory) based on actual usage patterns.
@@ -119,7 +119,7 @@ paths:
   /model/savings/abandonedWorkloads:
     get:
       operationId: getAbandonedWorkloads
-      summary: List abandoned workloads
+      summary: Kubecost List abandoned workloads
       description: >-
         Returns a list of workloads that appear to be abandoned based on low
         resource utilization over the specified window.
@@ -159,7 +159,7 @@ paths:
   /model/savings/orphanedDisks:
     get:
       operationId: getOrphanedDisks
-      summary: List orphaned disks
+      summary: Kubecost List orphaned disks
       description: >-
         Returns a list of persistent volumes and disks that are not attached
         to any running workload.
@@ -191,7 +191,7 @@ paths:
   /model/savings/orphanedIPs:
     get:
       operationId: getOrphanedIPs
-      summary: List orphaned IP addresses
+      summary: Kubecost List orphaned IP addresses
       description: >-
         Returns a list of allocated IP addresses that are not associated
         with any active resource.

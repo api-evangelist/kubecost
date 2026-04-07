@@ -24,7 +24,7 @@ paths:
   /model/allocation:
     get:
       operationId: getAllocation
-      summary: Query allocation cost data
+      summary: Kubecost Query allocation cost data
       description: >-
         Retrieves cost allocation data for Kubernetes workloads, aggregated by
         the specified field over the given time window.
@@ -197,7 +197,7 @@ paths:
   /model/allocation/totals:
     get:
       operationId: getAllocationTotals
-      summary: Query total allocation costs
+      summary: Kubecost Query total allocation costs
       description: >-
         Returns a single total cost value for the given window, without
         individual allocations breakdown.

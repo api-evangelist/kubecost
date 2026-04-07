@@ -23,7 +23,7 @@ paths:
   /model/cloudCost:
     get:
       operationId: getCloudCost
-      summary: Query cloud cost data
+      summary: Kubecost Query cloud cost data
       description: >-
         Retrieves cloud cost data from cloud service providers, with support
         for aggregation and filtering.
@@ -100,7 +100,7 @@ paths:
   /model/cloudCost/view:
     get:
       operationId: getCloudCostView
-      summary: Query cloud cost view data
+      summary: Kubecost Query cloud cost view data
       description: >-
         Default endpoint for querying cloud costs. Provides a comprehensive
         view of cloud spending.
@@ -156,7 +156,7 @@ paths:
   /model/cloudCost/top:
     get:
       operationId: getCloudCostTop
-      summary: Query top cloud costs
+      summary: Kubecost Query top cloud costs
       description: >-
         Returns the top cloud cost items. Accepts all parameters of the
         view endpoint.

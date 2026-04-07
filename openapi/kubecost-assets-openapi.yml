@@ -23,7 +23,7 @@ paths:
   /model/assets:
     get:
       operationId: getAssets
-      summary: Query asset cost data
+      summary: Kubecost Query asset cost data
       description: >-
         Retrieves cost data for individual Kubernetes assets such as nodes,
         persistent volumes, load balancers, and cluster management costs.
@@ -136,7 +136,7 @@ paths:
   /model/assets/totals:
     get:
       operationId: getAssetsTotals
-      summary: Query total asset costs
+      summary: Kubecost Query total asset costs
       description: >-
         Returns a single total cost for assets in the given window.
       parameters:
