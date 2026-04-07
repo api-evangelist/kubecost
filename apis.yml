@@ -4,8 +4,8 @@ apis:
   - aid: kubecost:allocation-api
     name: Kubecost Allocation API
     tags:
-      - Kubernetes
       - Cost Allocation
+      - Kubernetes
       - Monitoring
     humanURL: https://docs.kubecost.com/apis/monitoring-apis/api-allocation
     properties:
@@ -25,8 +25,8 @@ apis:
   - aid: kubecost:assets-api
     name: Kubecost Assets API
     tags:
-      - Kubernetes
       - Assets
+      - Kubernetes
       - Monitoring
     humanURL: https://docs.kubecost.com/apis/monitoring-apis/assets-api
     properties:
@@ -45,9 +45,9 @@ apis:
   - aid: kubecost:cloud-cost-api
     name: Kubecost Cloud Cost API
     tags:
-      - Cloud Cost
       - AWS
       - Azure
+      - Cloud Cost
       - GCP
       - Monitoring
     humanURL: https://docs.kubecost.com/apis/monitoring-apis/cloud-cost-api
@@ -91,9 +91,9 @@ apis:
   - aid: kubecost:forecast-api
     name: Kubecost Forecast API
     tags:
+      - Cost Prediction
       - Forecast
       - Governance
-      - Cost Prediction
     humanURL: https://docs.kubecost.com/apis/governance-apis/forecast-api
     properties:
       - url: https://docs.kubecost.com/apis/governance-apis/forecast-api
@@ -111,9 +111,9 @@ apis:
   - aid: kubecost:savings-api
     name: Kubecost Savings API
     tags:
-      - Savings
       - Optimization
       - Right-Sizing
+      - Savings
     humanURL: https://docs.kubecost.com/apis/savings-apis
     properties:
       - url: https://docs.kubecost.com/apis/savings-apis
@@ -131,11 +131,11 @@ apis:
       orphaned disks, and orphaned IP addresses.
 name: Kubecost
 tags:
-  - Kubernetes
-  - Spending
-  - Cost Monitoring
   - Cloud Cost
+  - Cost Monitoring
+  - Kubernetes
   - Optimization
+  - Spending
 type: Contract
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: 3rd-Party

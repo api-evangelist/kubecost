@@ -133,6 +133,8 @@ paths:
                         $ref: "#/components/schemas/Asset"
         "400":
           description: Invalid request parameters.
+      tags:
+        - Model
   /model/assets/totals:
     get:
       operationId: getAssetsTotals
@@ -170,6 +172,8 @@ paths:
                     type: array
                     items:
                       type: object
+      tags:
+        - Model
 components:
   schemas:
     Asset:
@@ -224,5 +228,4 @@ components:
         totalCost:
           type: number
 tags:
-  - name: Assets
-    description: Kubernetes asset cost endpoints
+  - name: Model

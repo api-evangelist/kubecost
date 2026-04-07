@@ -50,6 +50,8 @@ paths:
                     type: array
                     items:
                       $ref: "#/components/schemas/ClusterSizingRecommendation"
+      tags:
+        - Model
   /model/savings/requestSizingV2:
     get:
       operationId: getContainerRequestRightSizing
@@ -116,6 +118,8 @@ paths:
                     type: array
                     items:
                       $ref: "#/components/schemas/RequestSizingRecommendation"
+      tags:
+        - Model
   /model/savings/abandonedWorkloads:
     get:
       operationId: getAbandonedWorkloads
@@ -156,6 +160,8 @@ paths:
                           type: string
                         monthlySavings:
                           type: number
+      tags:
+        - Model
   /model/savings/orphanedDisks:
     get:
       operationId: getOrphanedDisks
@@ -188,6 +194,8 @@ paths:
                           type: number
                         monthlyCost:
                           type: number
+      tags:
+        - Model
   /model/savings/orphanedIPs:
     get:
       operationId: getOrphanedIPs
@@ -218,6 +226,8 @@ paths:
                           type: string
                         monthlyCost:
                           type: number
+      tags:
+        - Model
 components:
   schemas:
     ClusterSizingRecommendation:
@@ -263,5 +273,4 @@ components:
         monthlySavings:
           type: number
 tags:
-  - name: Savings
-    description: Cost optimization and savings recommendation endpoints
+  - name: Model

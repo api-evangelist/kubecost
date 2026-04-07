@@ -42,6 +42,8 @@ paths:
                     type: array
                     items:
                       $ref: "#/components/schemas/Budget"
+      tags:
+        - Model
     post:
       operationId: createBudget
       summary: Kubecost Create a budget
@@ -66,6 +68,8 @@ paths:
                     $ref: "#/components/schemas/Budget"
         "400":
           description: Invalid request body.
+      tags:
+        - Model
   /model/budget/{id}:
     get:
       operationId: getBudget
@@ -92,6 +96,8 @@ paths:
                     $ref: "#/components/schemas/Budget"
         "404":
           description: Budget not found.
+      tags:
+        - Model
     put:
       operationId: updateBudget
       summary: Kubecost Update a budget
@@ -125,6 +131,8 @@ paths:
           description: Invalid request body.
         "404":
           description: Budget not found.
+      tags:
+        - Model
     delete:
       operationId: deleteBudget
       summary: Kubecost Delete a budget
@@ -141,6 +149,8 @@ paths:
           description: Budget deleted successfully.
         "404":
           description: Budget not found.
+      tags:
+        - Model
 components:
   schemas:
     Budget:
@@ -232,5 +242,4 @@ components:
           description: >-
             Target for the notification (email address, webhook URL, etc.).
 tags:
-  - name: Budget
-    description: Budget governance endpoints
+  - name: Model

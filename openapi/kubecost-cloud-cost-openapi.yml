@@ -97,6 +97,8 @@ paths:
                     type: object
         "400":
           description: Invalid request parameters.
+      tags:
+        - Model
   /model/cloudCost/view:
     get:
       operationId: getCloudCostView
@@ -153,6 +155,8 @@ paths:
                     type: integer
                   data:
                     type: object
+      tags:
+        - Model
   /model/cloudCost/top:
     get:
       operationId: getCloudCostTop
@@ -205,6 +209,7 @@ paths:
                     type: integer
                   data:
                     type: object
+      tags:
+        - Model
 tags:
-  - name: Cloud Cost
-    description: Cloud service provider cost endpoints
+  - name: Model

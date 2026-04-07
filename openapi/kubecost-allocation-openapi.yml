@@ -194,6 +194,8 @@ paths:
                         $ref: "#/components/schemas/Allocation"
         "400":
           description: Invalid request parameters.
+      tags:
+        - Model
   /model/allocation/totals:
     get:
       operationId: getAllocationTotals
@@ -240,6 +242,8 @@ paths:
                       type: object
                       additionalProperties:
                         $ref: "#/components/schemas/Allocation"
+      tags:
+        - Model
 components:
   schemas:
     Allocation:
@@ -357,5 +361,4 @@ components:
         totalEfficiency:
           type: number
 tags:
-  - name: Allocation
-    description: Kubernetes cost allocation endpoints
+  - name: Model
