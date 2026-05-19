@@ -1,0 +1,105 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Kubecost Forecast API — Model
+  description: 'Kubecost Forecast API — Model. 1 operations. Lead operation: Kubecost Forecast allocation costs. Self-contained
+    Naftiko capability covering one Kubecost business surface.'
+  tags:
+  - Kubecost
+  - Model
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    KUBECOST_API_KEY: KUBECOST_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: forecast-model
+    baseUri: http://{kubecost-address}
+    description: Kubecost Forecast API — Model business capability. Self-contained, no shared references.
+    resources:
+    - name: model-forecast-allocation
+      path: /model/forecast/allocation
+      operations:
+      - name: getforecastallocation
+        method: GET
+        description: Kubecost Forecast allocation costs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: window
+          in: query
+          type: string
+          description: Historical window of time to use as the basis for the forecast.
+          required: true
+        - name: forecastWindow
+          in: query
+          type: string
+          description: Duration of time to forecast into the future.
+        - name: aggregate
+          in: query
+          type: string
+          description: Field by which to aggregate results. Supports the same values as the Allocation API aggregate parameter.
+        - name: accumulate
+          in: query
+          type: boolean
+          description: If true, sum the entire range into a single set.
+        - name: filterClusters
+          in: query
+          type: string
+        - name: filterNamespaces
+          in: query
+          type: string
+  exposes:
+  - type: rest
+    namespace: forecast-model-rest
+    port: 8080
+    description: REST adapter for Kubecost Forecast API — Model. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/model/forecast/allocation
+      name: model-forecast-allocation
+      description: REST surface for model-forecast-allocation.
+      operations:
+      - method: GET
+        name: getforecastallocation
+        description: Kubecost Forecast allocation costs
+        call: forecast-model.getforecastallocation
+        with:
+          window: rest.window
+          forecastWindow: rest.forecastWindow
+          aggregate: rest.aggregate
+          accumulate: rest.accumulate
+          filterClusters: rest.filterClusters
+          filterNamespaces: rest.filterNamespaces
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: forecast-model-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Kubecost Forecast API — Model. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: kubecost-forecast-allocation-costs
+      description: Kubecost Forecast allocation costs
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: forecast-model.getforecastallocation
+      with:
+        window: tools.window
+        forecastWindow: tools.forecastWindow
+        aggregate: tools.aggregate
+        accumulate: tools.accumulate
+        filterClusters: tools.filterClusters
+        filterNamespaces: tools.filterNamespaces
+      outputParameters:
+      - type: object
+        mapping: $.

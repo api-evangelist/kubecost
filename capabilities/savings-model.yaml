@@ -1,0 +1,259 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Kubecost Savings API — Model
+  description: 'Kubecost Savings API — Model. 5 operations. Lead operation: Kubecost List abandoned workloads. Self-contained
+    Naftiko capability covering one Kubecost business surface.'
+  tags:
+  - Kubecost
+  - Model
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    KUBECOST_API_KEY: KUBECOST_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: savings-model
+    baseUri: http://{kubecost-address}
+    description: Kubecost Savings API — Model business capability. Self-contained, no shared references.
+    resources:
+    - name: model-savings-abandonedWorkloads
+      path: /model/savings/abandonedWorkloads
+      operations:
+      - name: getabandonedworkloads
+        method: GET
+        description: Kubecost List abandoned workloads
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: window
+          in: query
+          type: string
+          description: Duration of time to analyze.
+    - name: model-savings-clusterSizingETL
+      path: /model/savings/clusterSizingETL
+      operations:
+      - name: getclusterrightsizing
+        method: GET
+        description: Kubecost Get cluster right-sizing recommendations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: window
+          in: query
+          type: string
+          description: Duration of time to analyze for recommendations.
+    - name: model-savings-orphanedDisks
+      path: /model/savings/orphanedDisks
+      operations:
+      - name: getorphaneddisks
+        method: GET
+        description: Kubecost List orphaned disks
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: model-savings-orphanedIPs
+      path: /model/savings/orphanedIPs
+      operations:
+      - name: getorphanedips
+        method: GET
+        description: Kubecost List orphaned IP addresses
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: model-savings-requestSizingV2
+      path: /model/savings/requestSizingV2
+      operations:
+      - name: getcontainerrequestrightsizing
+        method: GET
+        description: Kubecost Get container request right-sizing recommendations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: window
+          in: query
+          type: string
+          description: Duration of time to analyze for recommendations.
+          required: true
+        - name: targetCPUUtilization
+          in: query
+          type: number
+          description: Target CPU utilization percentage (0-1).
+        - name: targetRAMUtilization
+          in: query
+          type: number
+          description: Target RAM utilization percentage (0-1).
+        - name: filterClusters
+          in: query
+          type: string
+          description: Filter by cluster name (comma-separated).
+        - name: filterNamespaces
+          in: query
+          type: string
+          description: Filter by namespace (comma-separated).
+        - name: filterControllers
+          in: query
+          type: string
+          description: Filter by controller name (comma-separated).
+        - name: filterLabels
+          in: query
+          type: string
+          description: Filter by label in the format label:value.
+  exposes:
+  - type: rest
+    namespace: savings-model-rest
+    port: 8080
+    description: REST adapter for Kubecost Savings API — Model. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/model/savings/abandonedworkloads
+      name: model-savings-abandonedworkloads
+      description: REST surface for model-savings-abandonedWorkloads.
+      operations:
+      - method: GET
+        name: getabandonedworkloads
+        description: Kubecost List abandoned workloads
+        call: savings-model.getabandonedworkloads
+        with:
+          window: rest.window
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/model/savings/clustersizingetl
+      name: model-savings-clustersizingetl
+      description: REST surface for model-savings-clusterSizingETL.
+      operations:
+      - method: GET
+        name: getclusterrightsizing
+        description: Kubecost Get cluster right-sizing recommendations
+        call: savings-model.getclusterrightsizing
+        with:
+          window: rest.window
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/model/savings/orphaneddisks
+      name: model-savings-orphaneddisks
+      description: REST surface for model-savings-orphanedDisks.
+      operations:
+      - method: GET
+        name: getorphaneddisks
+        description: Kubecost List orphaned disks
+        call: savings-model.getorphaneddisks
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/model/savings/orphanedips
+      name: model-savings-orphanedips
+      description: REST surface for model-savings-orphanedIPs.
+      operations:
+      - method: GET
+        name: getorphanedips
+        description: Kubecost List orphaned IP addresses
+        call: savings-model.getorphanedips
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/model/savings/requestsizingv2
+      name: model-savings-requestsizingv2
+      description: REST surface for model-savings-requestSizingV2.
+      operations:
+      - method: GET
+        name: getcontainerrequestrightsizing
+        description: Kubecost Get container request right-sizing recommendations
+        call: savings-model.getcontainerrequestrightsizing
+        with:
+          window: rest.window
+          targetCPUUtilization: rest.targetCPUUtilization
+          targetRAMUtilization: rest.targetRAMUtilization
+          filterClusters: rest.filterClusters
+          filterNamespaces: rest.filterNamespaces
+          filterControllers: rest.filterControllers
+          filterLabels: rest.filterLabels
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: savings-model-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Kubecost Savings API — Model. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: kubecost-list-abandoned-workloads
+      description: Kubecost List abandoned workloads
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: savings-model.getabandonedworkloads
+      with:
+        window: tools.window
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: kubecost-get-cluster-right-sizing
+      description: Kubecost Get cluster right-sizing recommendations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: savings-model.getclusterrightsizing
+      with:
+        window: tools.window
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: kubecost-list-orphaned-disks
+      description: Kubecost List orphaned disks
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: savings-model.getorphaneddisks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: kubecost-list-orphaned-ip-addresses
+      description: Kubecost List orphaned IP addresses
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: savings-model.getorphanedips
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: kubecost-get-container-request-right
+      description: Kubecost Get container request right-sizing recommendations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: savings-model.getcontainerrequestrightsizing
+      with:
+        window: tools.window
+        targetCPUUtilization: tools.targetCPUUtilization
+        targetRAMUtilization: tools.targetRAMUtilization
+        filterClusters: tools.filterClusters
+        filterNamespaces: tools.filterNamespaces
+        filterControllers: tools.filterControllers
+        filterLabels: tools.filterLabels
+      outputParameters:
+      - type: object
+        mapping: $.

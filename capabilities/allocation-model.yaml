@@ -1,20 +1,23 @@
 naftiko: 1.0.0-alpha2
 info:
-  label: Kubecost Allocation API
-  description: The Allocation API retrieves cost allocation information for any Kubernetes concept, such as cost by namespace,
-    label, deployment, service, and more. It is directly integrated with the Kubecost ETL caching layer and CSV pipeline so
-    it can scale for large clusters.
+  label: Kubecost Allocation API — Model
+  description: 'Kubecost Allocation API — Model. 2 operations. Lead operation: Kubecost Query allocation cost data. Self-contained
+    Naftiko capability covering one Kubecost business surface.'
   tags:
   - Kubecost
-  - API
-  created: '2026-05-06'
-  modified: '2026-05-06'
+  - Model
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    KUBECOST_API_KEY: KUBECOST_API_KEY
 capability:
   consumes:
   - type: http
-    namespace: kubecost
-    baseUri: http://localhost:9090
-    description: Kubecost Allocation API HTTP API.
+    namespace: allocation-model
+    baseUri: http://{kubecost-address}
+    description: Kubecost Allocation API — Model business capability. Self-contained, no shared references.
     resources:
     - name: model-allocation
       path: /model/allocation
@@ -22,13 +25,18 @@ capability:
       - name: getallocation
         method: GET
         description: Kubecost Query allocation cost data
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
         inputParameters:
         - name: window
           in: query
           type: string
-          required: true
           description: Duration of time over which to query. Accepts units of time (e.g. 3d, 24h, 7d), relative time (e.g.
             yesterday, lastweek, lastmonth), or RFC3339 date pairs.
+          required: true
         - name: aggregate
           in: query
           type: string
@@ -95,23 +103,23 @@ capability:
           in: query
           type: string
           description: Output format. Supports csv and json.
-        outputRawFormat: json
-        outputParameters:
-        - name: result
-          type: object
-          value: $.
     - name: model-allocation-totals
       path: /model/allocation/totals
       operations:
       - name: getallocationtotals
         method: GET
         description: Kubecost Query total allocation costs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
         inputParameters:
         - name: window
           in: query
           type: string
-          required: true
           description: Duration of time over which to query.
+          required: true
         - name: aggregate
           in: query
           type: string
@@ -122,50 +130,72 @@ capability:
         - name: filterNamespaces
           in: query
           type: string
-        outputRawFormat: json
-        outputParameters:
-        - name: result
-          type: object
-          value: $.
   exposes:
   - type: rest
+    namespace: allocation-model-rest
     port: 8080
-    namespace: kubecost-rest
-    description: REST adapter for Kubecost Allocation API.
+    description: REST adapter for Kubecost Allocation API — Model. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
     resources:
-    - path: /model/allocation
-      name: getallocation
+    - path: /v1/model/allocation
+      name: model-allocation
+      description: REST surface for model-allocation.
       operations:
       - method: GET
         name: getallocation
         description: Kubecost Query allocation cost data
-        call: kubecost.getallocation
+        call: allocation-model.getallocation
+        with:
+          window: rest.window
+          aggregate: rest.aggregate
+          step: rest.step
+          accumulate: rest.accumulate
+          idle: rest.idle
+          external: rest.external
+          filterClusters: rest.filterClusters
+          filterNamespaces: rest.filterNamespaces
+          filterControllerKinds: rest.filterControllerKinds
+          filterControllers: rest.filterControllers
+          filterLabels: rest.filterLabels
+          filterAnnotations: rest.filterAnnotations
+          filterServices: rest.filterServices
+          shareIdle: rest.shareIdle
+          splitIdle: rest.splitIdle
+          idleByNode: rest.idleByNode
+          format: rest.format
         outputParameters:
         - type: object
           mapping: $.
-    - path: /model/allocation/totals
-      name: getallocationtotals
+    - path: /v1/model/allocation/totals
+      name: model-allocation-totals
+      description: REST surface for model-allocation-totals.
       operations:
       - method: GET
         name: getallocationtotals
         description: Kubecost Query total allocation costs
-        call: kubecost.getallocationtotals
+        call: allocation-model.getallocationtotals
+        with:
+          window: rest.window
+          aggregate: rest.aggregate
+          filterClusters: rest.filterClusters
+          filterNamespaces: rest.filterNamespaces
         outputParameters:
         - type: object
           mapping: $.
   - type: mcp
+    namespace: allocation-model-mcp
     port: 9090
-    namespace: kubecost-mcp
     transport: http
-    description: MCP adapter for Kubecost Allocation API for AI agent use.
+    description: MCP adapter for Kubecost Allocation API — Model. One tool per consumed operation, routed inline through this
+      capability's consumes block.
     tools:
-    - name: getallocation
+    - name: kubecost-query-allocation-cost-data
       description: Kubecost Query allocation cost data
       hints:
         readOnly: true
         destructive: false
         idempotent: true
-      call: kubecost.getallocation
+      call: allocation-model.getallocation
       with:
         window: tools.window
         aggregate: tools.aggregate
@@ -184,91 +214,21 @@ capability:
         splitIdle: tools.splitIdle
         idleByNode: tools.idleByNode
         format: tools.format
-      inputParameters:
-      - name: window
-        type: string
-        description: Duration of time over which to query. Accepts units of time (e.g. 3d, 24h, 7d), relative time (e.g. yesterday,
-          lastweek, lastmonth), or RFC3339 date pairs.
-        required: true
-      - name: aggregate
-        type: string
-        description: 'Field by which to aggregate results. Supported values include cluster, namespace, controllerKind, controller,
-          service, deployment, statefulset, daemonset, job, '
-      - name: step
-        type: string
-        description: Duration of a single allocation set. If unspecified, this defaults to the window, so that you receive
-          exactly one set for the entire window.
-      - name: accumulate
-        type: boolean
-        description: If true, sum the entire range of sets into a single set.
-      - name: idle
-        type: boolean
-        description: Whether to return idle cost. If true, idle allocations are returned.
-      - name: external
-        type: boolean
-        description: Whether to include external (out-of-cluster) costs.
-      - name: filterClusters
-        type: string
-        description: Filter results by cluster name (comma-separated).
-      - name: filterNamespaces
-        type: string
-        description: Filter results by namespace (comma-separated).
-      - name: filterControllerKinds
-        type: string
-        description: Filter results by controller kind (comma-separated).
-      - name: filterControllers
-        type: string
-        description: Filter results by controller name (comma-separated).
-      - name: filterLabels
-        type: string
-        description: Filter results by label in the format label:value (comma-separated).
-      - name: filterAnnotations
-        type: string
-        description: Filter results by annotation in the format annotation:value (comma-separated).
-      - name: filterServices
-        type: string
-        description: Filter results by service (comma-separated).
-      - name: shareIdle
-        type: boolean
-        description: If true, idle cost is allocated proportionally across tenants.
-      - name: splitIdle
-        type: boolean
-        description: If true, idle cost is split into separate allocations by cluster and node.
-      - name: idleByNode
-        type: boolean
-        description: If true, idle allocations are created on a per-node basis.
-      - name: format
-        type: string
-        description: Output format. Supports csv and json.
       outputParameters:
       - type: object
         mapping: $.
-    - name: getallocationtotals
+    - name: kubecost-query-total-allocation-costs
       description: Kubecost Query total allocation costs
       hints:
         readOnly: true
         destructive: false
         idempotent: true
-      call: kubecost.getallocationtotals
+      call: allocation-model.getallocationtotals
       with:
         window: tools.window
         aggregate: tools.aggregate
         filterClusters: tools.filterClusters
         filterNamespaces: tools.filterNamespaces
-      inputParameters:
-      - name: window
-        type: string
-        description: Duration of time over which to query.
-        required: true
-      - name: aggregate
-        type: string
-        description: Field by which to aggregate results.
-      - name: filterClusters
-        type: string
-        description: filterClusters
-      - name: filterNamespaces
-        type: string
-        description: filterNamespaces
       outputParameters:
       - type: object
         mapping: $.
