@@ -1,0 +1,36 @@
+{
+  "provider": "Kubecost",
+  "providerId": "kubecost",
+  "kind": "json-structure",
+  "description": "Structural overview of the Kubecost API surface; extracted from openapi/.",
+  "schemaCount": 1,
+  "operationCount": 2,
+  "schemas": [
+    {
+      "name": "Allocation",
+      "type": "object",
+      "propertyCount": 37,
+      "required": []
+    }
+  ],
+  "operations": [
+    {
+      "method": "GET",
+      "path": "/model/allocation",
+      "operationId": "getAllocation",
+      "summary": "Kubecost Query allocation cost data",
+      "tags": [
+        "Model"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/model/allocation/totals",
+      "operationId": "getAllocationTotals",
+      "summary": "Kubecost Query total allocation costs",
+      "tags": [
+        "Model"
+      ]
+    }
+  ]
+}

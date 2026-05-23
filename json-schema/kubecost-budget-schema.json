@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Budget",
+  "title": "Budget",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the budget."
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of the budget rule."
+    },
+    "amount": {
+      "type": "number",
+      "description": "Budget amount limit."
+    },
+    "interval": {
+      "type": "string",
+      "enum": [
+        "weekly",
+        "monthly"
+      ],
+      "description": "Recurrence interval of the budget."
+    },
+    "aggregation": {
+      "type": "string",
+      "description": "The field used to scope the budget, such as namespace, cluster, or label."
+    },
+    "filter": {
+      "type": "string",
+      "description": "Filter expression to scope the budget to specific workloads."
+    },
+    "actions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/BudgetAction"
+      },
+      "description": "Alert actions when budget thresholds are reached."
+    },
+    "currentSpend": {
+      "type": "number",
+      "description": "Current spend within the budget period."
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

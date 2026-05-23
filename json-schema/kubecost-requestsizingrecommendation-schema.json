@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/RequestSizingRecommendation",
+  "title": "RequestSizingRecommendation",
+  "type": "object",
+  "properties": {
+    "clusterName": {
+      "type": "string"
+    },
+    "namespace": {
+      "type": "string"
+    },
+    "controllerKind": {
+      "type": "string"
+    },
+    "controllerName": {
+      "type": "string"
+    },
+    "containerName": {
+      "type": "string"
+    },
+    "currentCPURequest": {
+      "type": "number"
+    },
+    "recommendedCPURequest": {
+      "type": "number"
+    },
+    "currentRAMBytesRequest": {
+      "type": "number"
+    },
+    "recommendedRAMBytesRequest": {
+      "type": "number"
+    },
+    "monthlySavings": {
+      "type": "number"
+    }
+  }
+}

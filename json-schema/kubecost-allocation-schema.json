@@ -1,0 +1,173 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Allocation",
+  "title": "Allocation",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Name of the allocation."
+    },
+    "properties": {
+      "type": "object",
+      "properties": {
+        "cluster": {
+          "type": "string"
+        },
+        "node": {
+          "type": "string"
+        },
+        "namespace": {
+          "type": "string"
+        },
+        "controller": {
+          "type": "string"
+        },
+        "controllerKind": {
+          "type": "string"
+        },
+        "pod": {
+          "type": "string"
+        },
+        "container": {
+          "type": "string"
+        },
+        "labels": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "annotations": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "services": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "window": {
+      "type": "object",
+      "properties": {
+        "start": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "start": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "end": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "cpuCores": {
+      "type": "number"
+    },
+    "cpuCoreRequestAverage": {
+      "type": "number"
+    },
+    "cpuCoreUsageAverage": {
+      "type": "number"
+    },
+    "cpuCoreHours": {
+      "type": "number"
+    },
+    "cpuCost": {
+      "type": "number"
+    },
+    "cpuCostAdjustment": {
+      "type": "number"
+    },
+    "cpuEfficiency": {
+      "type": "number"
+    },
+    "gpuCount": {
+      "type": "number"
+    },
+    "gpuHours": {
+      "type": "number"
+    },
+    "gpuCost": {
+      "type": "number"
+    },
+    "gpuCostAdjustment": {
+      "type": "number"
+    },
+    "networkTransferBytes": {
+      "type": "number"
+    },
+    "networkReceiveBytes": {
+      "type": "number"
+    },
+    "networkCost": {
+      "type": "number"
+    },
+    "networkCostAdjustment": {
+      "type": "number"
+    },
+    "loadBalancerCost": {
+      "type": "number"
+    },
+    "loadBalancerCostAdjustment": {
+      "type": "number"
+    },
+    "pvBytes": {
+      "type": "number"
+    },
+    "pvByteHours": {
+      "type": "number"
+    },
+    "pvCost": {
+      "type": "number"
+    },
+    "pvCostAdjustment": {
+      "type": "number"
+    },
+    "ramBytes": {
+      "type": "number"
+    },
+    "ramByteRequestAverage": {
+      "type": "number"
+    },
+    "ramByteUsageAverage": {
+      "type": "number"
+    },
+    "ramByteHours": {
+      "type": "number"
+    },
+    "ramCost": {
+      "type": "number"
+    },
+    "ramCostAdjustment": {
+      "type": "number"
+    },
+    "ramEfficiency": {
+      "type": "number"
+    },
+    "externalCost": {
+      "type": "number"
+    },
+    "sharedCost": {
+      "type": "number"
+    },
+    "totalCost": {
+      "type": "number"
+    },
+    "totalEfficiency": {
+      "type": "number"
+    }
+  }
+}

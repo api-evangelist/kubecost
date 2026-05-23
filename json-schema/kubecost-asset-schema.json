@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Asset",
+  "title": "Asset",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "description": "Type of asset (Node, Disk, LoadBalancer, ClusterManagement, etc.)"
+    },
+    "properties": {
+      "type": "object",
+      "properties": {
+        "cluster": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "providerID": {
+          "type": "string"
+        },
+        "provider": {
+          "type": "string"
+        },
+        "account": {
+          "type": "string"
+        },
+        "project": {
+          "type": "string"
+        },
+        "service": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string"
+        },
+        "labels": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "window": {
+      "type": "object",
+      "properties": {
+        "start": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "start": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "end": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "minutes": {
+      "type": "number"
+    },
+    "adjustment": {
+      "type": "number"
+    },
+    "totalCost": {
+      "type": "number"
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/BudgetInput",
+  "title": "BudgetInput",
+  "type": "object",
+  "required": [
+    "name",
+    "amount",
+    "interval"
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Name of the budget rule."
+    },
+    "amount": {
+      "type": "number",
+      "description": "Budget amount limit."
+    },
+    "interval": {
+      "type": "string",
+      "enum": [
+        "weekly",
+        "monthly"
+      ],
+      "description": "Recurrence interval of the budget."
+    },
+    "aggregation": {
+      "type": "string",
+      "description": "The field used to scope the budget."
+    },
+    "filter": {
+      "type": "string",
+      "description": "Filter expression to scope the budget."
+    },
+    "actions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/BudgetAction"
+      },
+      "description": "Alert actions for threshold notifications."
+    }
+  }
+}

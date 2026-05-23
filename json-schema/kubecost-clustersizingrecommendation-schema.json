@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ClusterSizingRecommendation",
+  "title": "ClusterSizingRecommendation",
+  "type": "object",
+  "properties": {
+    "clusterName": {
+      "type": "string"
+    },
+    "currentMonthlyRate": {
+      "type": "number"
+    },
+    "recommendedMonthlyRate": {
+      "type": "number"
+    },
+    "monthlySavings": {
+      "type": "number"
+    },
+    "currentNodeCount": {
+      "type": "integer"
+    },
+    "recommendedNodeCount": {
+      "type": "integer"
+    },
+    "currentNodeType": {
+      "type": "string"
+    },
+    "recommendedNodeType": {
+      "type": "string"
+    }
+  }
+}

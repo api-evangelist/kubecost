@@ -1,0 +1,6 @@
+name: Kubecost Domain Vocabulary
+provider: Kubecost
+providerId: kubecost
+description: Tag-derived vocabulary for the Kubecost API surface; sourced from openapi/ tags.
+terms:
+- term: Model
