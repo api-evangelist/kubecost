@@ -1,0 +1,65 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kubecost Forecast API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Model",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Kubecost Forecast allocation costs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://{kubecost-address}/model/forecast/allocation",
+            "params": [
+              {
+                "name": "window",
+                "value": "",
+                "type": "query",
+                "description": "Historical window of time to use as the basis for the forecast."
+              },
+              {
+                "name": "forecastWindow",
+                "value": "",
+                "type": "query",
+                "description": "Duration of time to forecast into the future."
+              },
+              {
+                "name": "aggregate",
+                "value": "",
+                "type": "query",
+                "description": "Field by which to aggregate results. Supports the same values as the Allocation API aggregate parameter."
+              },
+              {
+                "name": "accumulate",
+                "value": "",
+                "type": "query",
+                "description": "If true, sum the entire range into a single set."
+              },
+              {
+                "name": "filterClusters",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filterNamespaces",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a cost forecast for Kubernetes workloads based on historical allocation data, projecting future costs over the specified forecast window."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

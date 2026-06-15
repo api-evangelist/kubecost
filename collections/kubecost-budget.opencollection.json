@@ -1,0 +1,105 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kubecost Budget API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Model",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Kubecost List all budgets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://{kubecost-address}/model/budget"
+          },
+          "docs": "Retrieves a list of all configured budget rules."
+        },
+        {
+          "info": {
+            "name": "Kubecost Create a budget",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://{kubecost-address}/model/budget",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new recurring budget rule for Kubernetes spending."
+        },
+        {
+          "info": {
+            "name": "Kubecost Get a specific budget",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://{kubecost-address}/model/budget/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the budget."
+              }
+            ]
+          },
+          "docs": "Retrieves a specific budget rule by ID."
+        },
+        {
+          "info": {
+            "name": "Kubecost Update a budget",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://{kubecost-address}/model/budget/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the budget."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing budget rule."
+        },
+        {
+          "info": {
+            "name": "Kubecost Delete a budget",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://{kubecost-address}/model/budget/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the budget."
+              }
+            ]
+          },
+          "docs": "Deletes an existing budget rule."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

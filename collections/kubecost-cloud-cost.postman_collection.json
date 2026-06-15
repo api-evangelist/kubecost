@@ -1,0 +1,579 @@
+{
+  "item": [
+    {
+      "id": "c23eecc3-64ec-4929-8684-05293f56e4a1",
+      "name": "Model",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b1b2888b-a548-4d67-9ec1-b1980bb9c411",
+          "name": "Kubecost Query cloud cost data",
+          "request": {
+            "name": "Kubecost Query cloud cost data",
+            "description": {
+              "content": "Retrieves cloud cost data from cloud service providers, with support for aggregation and filtering.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "model",
+                "cloudCost"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "window",
+                  "value": "<string>",
+                  "description": "(Required) Duration of time over which to query. Accepts daily intervals (e.g. 3d) or RFC3339 date pairs."
+                },
+                {
+                  "disabled": false,
+                  "key": "aggregate",
+                  "value": "<string>",
+                  "description": "Field by which to aggregate results. Supported values include invoiceEntityID, accountID, provider, service, and label:<name>. Supports multi-aggregation via comma-separated values."
+                },
+                {
+                  "disabled": false,
+                  "key": "accumulate",
+                  "value": "false",
+                  "description": "If true, sum the entire range into a single set."
+                },
+                {
+                  "disabled": false,
+                  "key": "filterInvoiceEntityIDs",
+                  "value": "<string>",
+                  "description": "Filter by invoice entity ID (comma-separated)."
+                },
+                {
+                  "disabled": false,
+                  "key": "filterAccountIDs",
+                  "value": "<string>",
+                  "description": "Filter by account ID (comma-separated)."
+                },
+                {
+                  "disabled": false,
+                  "key": "filterProviders",
+                  "value": "<string>",
+                  "description": "Filter by provider (comma-separated)."
+                },
+                {
+                  "disabled": false,
+                  "key": "filterServices",
+                  "value": "<string>",
+                  "description": "Filter by service (comma-separated)."
+                },
+                {
+                  "disabled": false,
+                  "key": "filterLabels",
+                  "value": "<string>",
+                  "description": "Filter by label in the format label:value."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Address of the Kubecost instance",
+                  "type": "any",
+                  "value": "{{kubecost-address}}",
+                  "key": "kubecost-address"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "804f5b36-c00f-4b9b-8cca-98cf37d169d8",
+              "name": "Successful cloud cost query response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "cloudCost"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "window",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aggregate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accumulate",
+                      "value": "false"
+                    },
+                    {
+                      "key": "filterInvoiceEntityIDs",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterAccountIDs",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterProviders",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterServices",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterLabels",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Address of the Kubecost instance",
+                      "type": "any",
+                      "value": "{{kubecost-address}}",
+                      "key": "kubecost-address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 200,\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "058ee62d-3441-4cee-bfbd-0e52acd08474",
+              "name": "Invalid request parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "cloudCost"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "window",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aggregate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accumulate",
+                      "value": "false"
+                    },
+                    {
+                      "key": "filterInvoiceEntityIDs",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterAccountIDs",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterProviders",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterServices",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterLabels",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Address of the Kubecost instance",
+                      "type": "any",
+                      "value": "{{kubecost-address}}",
+                      "key": "kubecost-address"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c6404b6e-f997-4aad-a5a7-50e02935bd1f",
+          "name": "Kubecost Query cloud cost view data",
+          "request": {
+            "name": "Kubecost Query cloud cost view data",
+            "description": {
+              "content": "Default endpoint for querying cloud costs. Provides a comprehensive view of cloud spending.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "model",
+                "cloudCost",
+                "view"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "window",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "aggregate",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "accumulate",
+                  "value": "false"
+                },
+                {
+                  "disabled": false,
+                  "key": "filterInvoiceEntityIDs",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filterAccountIDs",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filterProviders",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filterServices",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Address of the Kubecost instance",
+                  "type": "any",
+                  "value": "{{kubecost-address}}",
+                  "key": "kubecost-address"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d55fdb35-6419-46c9-bfe2-710bc1213713",
+              "name": "Successful cloud cost view response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "cloudCost",
+                    "view"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "window",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aggregate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accumulate",
+                      "value": "false"
+                    },
+                    {
+                      "key": "filterInvoiceEntityIDs",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterAccountIDs",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterProviders",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterServices",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Address of the Kubecost instance",
+                      "type": "any",
+                      "value": "{{kubecost-address}}",
+                      "key": "kubecost-address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1596,\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f7499f42-78e0-4004-bdd9-1931d132e60d",
+          "name": "Kubecost Query top cloud costs",
+          "request": {
+            "name": "Kubecost Query top cloud costs",
+            "description": {
+              "content": "Returns the top cloud cost items. Accepts all parameters of the view endpoint.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "model",
+                "cloudCost",
+                "top"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "window",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "aggregate",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "accumulate",
+                  "value": "false"
+                },
+                {
+                  "disabled": false,
+                  "key": "filterProviders",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filterServices",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Maximum number of results to return."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Address of the Kubecost instance",
+                  "type": "any",
+                  "value": "{{kubecost-address}}",
+                  "key": "kubecost-address"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2f1b3035-095f-46a5-9e81-fbee866d982e",
+              "name": "Successful top cloud cost response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "cloudCost",
+                    "top"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "window",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aggregate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accumulate",
+                      "value": "false"
+                    },
+                    {
+                      "key": "filterProviders",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterServices",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Address of the Kubecost instance",
+                      "type": "any",
+                      "value": "{{kubecost-address}}",
+                      "key": "kubecost-address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1596,\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Address of the Kubecost instance",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "localhost:9090",
+      "key": "kubecost-address"
+    },
+    {
+      "type": "string",
+      "value": "http://{{kubecost-address}}",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "c32b518e-52f9-42a5-a7a4-8910e930ea89",
+    "name": "Kubecost Cloud Cost API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Cloud Cost API provides accurate cost information from your cloud service providers (CSPs), including AWS, Azure, and GCP. It offers multiple endpoints for querying, aggregating, and analyzing cloud costs.\n\nContact Support:\n Name: Kubecost",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,790 @@
+{
+  "item": [
+    {
+      "id": "cf1a86ca-5d01-4506-b36d-a560e96fb9da",
+      "name": "Model",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "436648d1-1544-4e6e-8c58-8a90f8f5f121",
+          "name": "Kubecost List all budgets",
+          "request": {
+            "name": "Kubecost List all budgets",
+            "description": {
+              "content": "Retrieves a list of all configured budget rules.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "model",
+                "budget"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Address of the Kubecost instance",
+                  "type": "any",
+                  "value": "{{kubecost-address}}",
+                  "key": "kubecost-address"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "228a9b78-0f6b-45a2-be48-e4d1244291cf",
+              "name": "Successful budget list response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "budget"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Address of the Kubecost instance",
+                      "type": "any",
+                      "value": "{{kubecost-address}}",
+                      "key": "kubecost-address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 200,\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"amount\": 8474.856364588653,\n      \"interval\": \"monthly\",\n      \"aggregation\": \"string\",\n      \"filter\": \"string\",\n      \"actions\": [\n        {\n          \"threshold\": 15.963583936687842,\n          \"type\": \"msteams\",\n          \"target\": \"string\"\n        },\n        {\n          \"threshold\": 8304.903136404218,\n          \"type\": \"msteams\",\n          \"target\": \"string\"\n        }\n      ],\n      \"currentSpend\": 7629.814021438935,\n      \"createdAt\": \"1968-07-23T14:35:35.791Z\",\n      \"updatedAt\": \"1986-07-17T01:40:34.993Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"amount\": 8137.869005311392,\n      \"interval\": \"weekly\",\n      \"aggregation\": \"string\",\n      \"filter\": \"string\",\n      \"actions\": [\n        {\n          \"threshold\": 828.7263145400459,\n          \"type\": \"slack\",\n          \"target\": \"string\"\n        },\n        {\n          \"threshold\": 6536.471225146274,\n          \"type\": \"email\",\n          \"target\": \"string\"\n        }\n      ],\n      \"currentSpend\": 4881.095714604512,\n      \"createdAt\": \"1956-11-27T16:46:31.994Z\",\n      \"updatedAt\": \"2015-06-03T00:20:52.399Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "74201d73-f3ac-485e-abc0-7e461539a10d",
+          "name": "Kubecost Create a budget",
+          "request": {
+            "name": "Kubecost Create a budget",
+            "description": {
+              "content": "Creates a new recurring budget rule for Kubernetes spending.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "model",
+                "budget"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Address of the Kubecost instance",
+                  "type": "any",
+                  "value": "{{kubecost-address}}",
+                  "key": "kubecost-address"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"amount\": \"<number>\",\n  \"interval\": \"<string>\",\n  \"aggregation\": \"<string>\",\n  \"filter\": \"<string>\",\n  \"actions\": [\n    {\n      \"threshold\": \"<number>\",\n      \"type\": \"<string>\",\n      \"target\": \"<string>\"\n    },\n    {\n      \"threshold\": \"<number>\",\n      \"type\": \"<string>\",\n      \"target\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6ac2e5a0-8234-454e-9e92-604f5d0646bd",
+              "name": "Budget created successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "budget"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Address of the Kubecost instance",
+                      "type": "any",
+                      "value": "{{kubecost-address}}",
+                      "key": "kubecost-address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"amount\": \"<number>\",\n  \"interval\": \"<string>\",\n  \"aggregation\": \"<string>\",\n  \"filter\": \"<string>\",\n  \"actions\": [\n    {\n      \"threshold\": 3481.155837868184,\n      \"type\": \"slack\",\n      \"target\": \"string\"\n    },\n    {\n      \"threshold\": 8617.973139313186,\n      \"type\": \"email\",\n      \"target\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 4985,\n  \"data\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"amount\": 9409.256219289538,\n    \"interval\": \"monthly\",\n    \"aggregation\": \"string\",\n    \"filter\": \"string\",\n    \"actions\": [\n      {\n        \"threshold\": 962.6220938028862,\n        \"type\": \"msteams\",\n        \"target\": \"string\"\n      },\n      {\n        \"threshold\": 5956.658532689474,\n        \"type\": \"msteams\",\n        \"target\": \"string\"\n      }\n    ],\n    \"currentSpend\": 1628.5575881238078,\n    \"createdAt\": \"2022-04-23T20:59:20.549Z\",\n    \"updatedAt\": \"1995-02-21T23:04:24.712Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7418cc70-1bcc-48ea-8dd8-3308aee61487",
+              "name": "Invalid request body.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "budget"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Address of the Kubecost instance",
+                      "type": "any",
+                      "value": "{{kubecost-address}}",
+                      "key": "kubecost-address"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"amount\": \"<number>\",\n  \"interval\": \"<string>\",\n  \"aggregation\": \"<string>\",\n  \"filter\": \"<string>\",\n  \"actions\": [\n    {\n      \"threshold\": 3481.155837868184,\n      \"type\": \"slack\",\n      \"target\": \"string\"\n    },\n    {\n      \"threshold\": 8617.973139313186,\n      \"type\": \"email\",\n      \"target\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "91122b34-603e-4955-acd1-c8c657bb1797",
+          "name": "Kubecost Get a specific budget",
+          "request": {
+            "name": "Kubecost Get a specific budget",
+            "description": {
+              "content": "Retrieves a specific budget rule by ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "model",
+                "budget",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Unique identifier of the budget."
+                },
+                {
+                  "description": "Address of the Kubecost instance",
+                  "type": "any",
+                  "value": "{{kubecost-address}}",
+                  "key": "kubecost-address"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0a826c14-fd2f-49e2-b88b-024bf8bef885",
+              "name": "Successful budget response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "budget",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique identifier of the budget."
+                    },
+                    {
+                      "description": "Address of the Kubecost instance",
+                      "type": "any",
+                      "value": "{{kubecost-address}}",
+                      "key": "kubecost-address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 4985,\n  \"data\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"amount\": 9409.256219289538,\n    \"interval\": \"monthly\",\n    \"aggregation\": \"string\",\n    \"filter\": \"string\",\n    \"actions\": [\n      {\n        \"threshold\": 962.6220938028862,\n        \"type\": \"msteams\",\n        \"target\": \"string\"\n      },\n      {\n        \"threshold\": 5956.658532689474,\n        \"type\": \"msteams\",\n        \"target\": \"string\"\n      }\n    ],\n    \"currentSpend\": 1628.5575881238078,\n    \"createdAt\": \"2022-04-23T20:59:20.549Z\",\n    \"updatedAt\": \"1995-02-21T23:04:24.712Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1d05ed26-f804-4746-a45e-a3b5282fc69f",
+              "name": "Budget not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "budget",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique identifier of the budget."
+                    },
+                    {
+                      "description": "Address of the Kubecost instance",
+                      "type": "any",
+                      "value": "{{kubecost-address}}",
+                      "key": "kubecost-address"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6921ccaf-4473-43e8-853c-25278eded73d",
+          "name": "Kubecost Update a budget",
+          "request": {
+            "name": "Kubecost Update a budget",
+            "description": {
+              "content": "Updates an existing budget rule.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "model",
+                "budget",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Unique identifier of the budget."
+                },
+                {
+                  "description": "Address of the Kubecost instance",
+                  "type": "any",
+                  "value": "{{kubecost-address}}",
+                  "key": "kubecost-address"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"amount\": \"<number>\",\n  \"interval\": \"<string>\",\n  \"aggregation\": \"<string>\",\n  \"filter\": \"<string>\",\n  \"actions\": [\n    {\n      \"threshold\": \"<number>\",\n      \"type\": \"<string>\",\n      \"target\": \"<string>\"\n    },\n    {\n      \"threshold\": \"<number>\",\n      \"type\": \"<string>\",\n      \"target\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5e7526e9-337e-4940-96a4-64866e1d8889",
+              "name": "Budget updated successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "budget",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique identifier of the budget."
+                    },
+                    {
+                      "description": "Address of the Kubecost instance",
+                      "type": "any",
+                      "value": "{{kubecost-address}}",
+                      "key": "kubecost-address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"amount\": \"<number>\",\n  \"interval\": \"<string>\",\n  \"aggregation\": \"<string>\",\n  \"filter\": \"<string>\",\n  \"actions\": [\n    {\n      \"threshold\": 3481.155837868184,\n      \"type\": \"slack\",\n      \"target\": \"string\"\n    },\n    {\n      \"threshold\": 8617.973139313186,\n      \"type\": \"email\",\n      \"target\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 4985,\n  \"data\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"amount\": 9409.256219289538,\n    \"interval\": \"monthly\",\n    \"aggregation\": \"string\",\n    \"filter\": \"string\",\n    \"actions\": [\n      {\n        \"threshold\": 962.6220938028862,\n        \"type\": \"msteams\",\n        \"target\": \"string\"\n      },\n      {\n        \"threshold\": 5956.658532689474,\n        \"type\": \"msteams\",\n        \"target\": \"string\"\n      }\n    ],\n    \"currentSpend\": 1628.5575881238078,\n    \"createdAt\": \"2022-04-23T20:59:20.549Z\",\n    \"updatedAt\": \"1995-02-21T23:04:24.712Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "32d477d6-2b06-41dd-b23a-bf50b4ae08aa",
+              "name": "Invalid request body.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "budget",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique identifier of the budget."
+                    },
+                    {
+                      "description": "Address of the Kubecost instance",
+                      "type": "any",
+                      "value": "{{kubecost-address}}",
+                      "key": "kubecost-address"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"amount\": \"<number>\",\n  \"interval\": \"<string>\",\n  \"aggregation\": \"<string>\",\n  \"filter\": \"<string>\",\n  \"actions\": [\n    {\n      \"threshold\": 3481.155837868184,\n      \"type\": \"slack\",\n      \"target\": \"string\"\n    },\n    {\n      \"threshold\": 8617.973139313186,\n      \"type\": \"email\",\n      \"target\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8e5dcf85-5bac-48c2-9731-0d530e9a773e",
+              "name": "Budget not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "budget",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique identifier of the budget."
+                    },
+                    {
+                      "description": "Address of the Kubecost instance",
+                      "type": "any",
+                      "value": "{{kubecost-address}}",
+                      "key": "kubecost-address"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"amount\": \"<number>\",\n  \"interval\": \"<string>\",\n  \"aggregation\": \"<string>\",\n  \"filter\": \"<string>\",\n  \"actions\": [\n    {\n      \"threshold\": 3481.155837868184,\n      \"type\": \"slack\",\n      \"target\": \"string\"\n    },\n    {\n      \"threshold\": 8617.973139313186,\n      \"type\": \"email\",\n      \"target\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "19b92177-83fb-425c-8cbf-8237abcbca4b",
+          "name": "Kubecost Delete a budget",
+          "request": {
+            "name": "Kubecost Delete a budget",
+            "description": {
+              "content": "Deletes an existing budget rule.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "model",
+                "budget",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Unique identifier of the budget."
+                },
+                {
+                  "description": "Address of the Kubecost instance",
+                  "type": "any",
+                  "value": "{{kubecost-address}}",
+                  "key": "kubecost-address"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cae6130d-6b90-4a34-a335-4612bd353ba1",
+              "name": "Budget deleted successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "budget",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique identifier of the budget."
+                    },
+                    {
+                      "description": "Address of the Kubecost instance",
+                      "type": "any",
+                      "value": "{{kubecost-address}}",
+                      "key": "kubecost-address"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "685c7f95-1d44-4dd6-8b42-f7365c4e3ecf",
+              "name": "Budget not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "budget",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique identifier of the budget."
+                    },
+                    {
+                      "description": "Address of the Kubecost instance",
+                      "type": "any",
+                      "value": "{{kubecost-address}}",
+                      "key": "kubecost-address"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Address of the Kubecost instance",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "localhost:9090",
+      "key": "kubecost-address"
+    },
+    {
+      "type": "string",
+      "value": "http://{{kubecost-address}}",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "9ccf89fe-69fc-4182-8cf7-a4bda1fbfae6",
+    "name": "Kubecost Budget API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Budget API allows you to create, update, and delete recurring budget rules to control your Kubernetes spending. Weekly and monthly budgets can be established on workloads to set limits on cost spend, with the option to configure alerts for reaching specified budget thresholds via email, Slack, or Microsoft Teams.\n\nContact Support:\n Name: Kubecost",
+      "type": "text/plain"
+    }
+  }
+}

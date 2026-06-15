@@ -1,0 +1,168 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kubecost Allocation API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Model",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Kubecost Query allocation cost data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://{kubecost-address}/model/allocation",
+            "params": [
+              {
+                "name": "window",
+                "value": "",
+                "type": "query",
+                "description": "Duration of time over which to query. Accepts units of time (e.g. 3d, 24h, 7d), relative time (e.g. yesterday, lastweek, lastmonth), or RFC3339 date pairs."
+              },
+              {
+                "name": "aggregate",
+                "value": "",
+                "type": "query",
+                "description": "Field by which to aggregate results. Supported values include cluster, namespace, controllerKind, controller, service, deployment, statefulset, daemonset, job, label, annotation, pod, and container. Supports multi-aggregation via comma-separated values."
+              },
+              {
+                "name": "step",
+                "value": "",
+                "type": "query",
+                "description": "Duration of a single allocation set. If unspecified, this defaults to the window, so that you receive exactly one set for the entire window."
+              },
+              {
+                "name": "accumulate",
+                "value": "",
+                "type": "query",
+                "description": "If true, sum the entire range of sets into a single set."
+              },
+              {
+                "name": "idle",
+                "value": "",
+                "type": "query",
+                "description": "Whether to return idle cost. If true, idle allocations are returned."
+              },
+              {
+                "name": "external",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include external (out-of-cluster) costs."
+              },
+              {
+                "name": "filterClusters",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by cluster name (comma-separated)."
+              },
+              {
+                "name": "filterNamespaces",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by namespace (comma-separated)."
+              },
+              {
+                "name": "filterControllerKinds",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by controller kind (comma-separated)."
+              },
+              {
+                "name": "filterControllers",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by controller name (comma-separated)."
+              },
+              {
+                "name": "filterLabels",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by label in the format label:value (comma-separated)."
+              },
+              {
+                "name": "filterAnnotations",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by annotation in the format annotation:value (comma-separated)."
+              },
+              {
+                "name": "filterServices",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by service (comma-separated)."
+              },
+              {
+                "name": "shareIdle",
+                "value": "",
+                "type": "query",
+                "description": "If true, idle cost is allocated proportionally across tenants."
+              },
+              {
+                "name": "splitIdle",
+                "value": "",
+                "type": "query",
+                "description": "If true, idle cost is split into separate allocations by cluster and node."
+              },
+              {
+                "name": "idleByNode",
+                "value": "",
+                "type": "query",
+                "description": "If true, idle allocations are created on a per-node basis."
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Output format. Supports csv and json."
+              }
+            ]
+          },
+          "docs": "Retrieves cost allocation data for Kubernetes workloads, aggregated by the specified field over the given time window."
+        },
+        {
+          "info": {
+            "name": "Kubecost Query total allocation costs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://{kubecost-address}/model/allocation/totals",
+            "params": [
+              {
+                "name": "window",
+                "value": "",
+                "type": "query",
+                "description": "Duration of time over which to query."
+              },
+              {
+                "name": "aggregate",
+                "value": "",
+                "type": "query",
+                "description": "Field by which to aggregate results."
+              },
+              {
+                "name": "filterClusters",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filterNamespaces",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a single total cost value for the given window, without individual allocations breakdown."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,533 @@
+{
+  "item": [
+    {
+      "id": "d1c28d13-7296-4641-99ef-58d1945e654a",
+      "name": "Model",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "40d2eb7c-1428-4d65-b49e-5535165ce6a0",
+          "name": "Kubecost Query allocation cost data",
+          "request": {
+            "name": "Kubecost Query allocation cost data",
+            "description": {
+              "content": "Retrieves cost allocation data for Kubernetes workloads, aggregated by the specified field over the given time window.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "model",
+                "allocation"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "window",
+                  "value": "<string>",
+                  "description": "(Required) Duration of time over which to query. Accepts units of time (e.g. 3d, 24h, 7d), relative time (e.g. yesterday, lastweek, lastmonth), or RFC3339 date pairs."
+                },
+                {
+                  "disabled": false,
+                  "key": "aggregate",
+                  "value": "<string>",
+                  "description": "Field by which to aggregate results. Supported values include cluster, namespace, controllerKind, controller, service, deployment, statefulset, daemonset, job, label, annotation, pod, and container. Supports multi-aggregation via comma-separated values."
+                },
+                {
+                  "disabled": false,
+                  "key": "step",
+                  "value": "<string>",
+                  "description": "Duration of a single allocation set. If unspecified, this defaults to the window, so that you receive exactly one set for the entire window."
+                },
+                {
+                  "disabled": false,
+                  "key": "accumulate",
+                  "value": "false",
+                  "description": "If true, sum the entire range of sets into a single set."
+                },
+                {
+                  "disabled": false,
+                  "key": "idle",
+                  "value": "true",
+                  "description": "Whether to return idle cost. If true, idle allocations are returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "external",
+                  "value": "false",
+                  "description": "Whether to include external (out-of-cluster) costs."
+                },
+                {
+                  "disabled": false,
+                  "key": "filterClusters",
+                  "value": "<string>",
+                  "description": "Filter results by cluster name (comma-separated)."
+                },
+                {
+                  "disabled": false,
+                  "key": "filterNamespaces",
+                  "value": "<string>",
+                  "description": "Filter results by namespace (comma-separated)."
+                },
+                {
+                  "disabled": false,
+                  "key": "filterControllerKinds",
+                  "value": "<string>",
+                  "description": "Filter results by controller kind (comma-separated)."
+                },
+                {
+                  "disabled": false,
+                  "key": "filterControllers",
+                  "value": "<string>",
+                  "description": "Filter results by controller name (comma-separated)."
+                },
+                {
+                  "disabled": false,
+                  "key": "filterLabels",
+                  "value": "<string>",
+                  "description": "Filter results by label in the format label:value (comma-separated)."
+                },
+                {
+                  "disabled": false,
+                  "key": "filterAnnotations",
+                  "value": "<string>",
+                  "description": "Filter results by annotation in the format annotation:value (comma-separated)."
+                },
+                {
+                  "disabled": false,
+                  "key": "filterServices",
+                  "value": "<string>",
+                  "description": "Filter results by service (comma-separated)."
+                },
+                {
+                  "disabled": false,
+                  "key": "shareIdle",
+                  "value": "false",
+                  "description": "If true, idle cost is allocated proportionally across tenants."
+                },
+                {
+                  "disabled": false,
+                  "key": "splitIdle",
+                  "value": "false",
+                  "description": "If true, idle cost is split into separate allocations by cluster and node."
+                },
+                {
+                  "disabled": false,
+                  "key": "idleByNode",
+                  "value": "false",
+                  "description": "If true, idle allocations are created on a per-node basis."
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "json",
+                  "description": "Output format. Supports csv and json."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Address of the Kubecost instance",
+                  "type": "any",
+                  "value": "{{kubecost-address}}",
+                  "key": "kubecost-address"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "66611b92-29cd-4cbe-8753-d0fd7e27d16f",
+              "name": "Successful allocation query response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "allocation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "window",
+                      "value": "3d"
+                    },
+                    {
+                      "key": "aggregate",
+                      "value": "namespace"
+                    },
+                    {
+                      "key": "step",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accumulate",
+                      "value": "false"
+                    },
+                    {
+                      "key": "idle",
+                      "value": "true"
+                    },
+                    {
+                      "key": "external",
+                      "value": "false"
+                    },
+                    {
+                      "key": "filterClusters",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterNamespaces",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterControllerKinds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterControllers",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterLabels",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterAnnotations",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterServices",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "shareIdle",
+                      "value": "false"
+                    },
+                    {
+                      "key": "splitIdle",
+                      "value": "false"
+                    },
+                    {
+                      "key": "idleByNode",
+                      "value": "false"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Address of the Kubecost instance",
+                      "type": "any",
+                      "value": "{{kubecost-address}}",
+                      "key": "kubecost-address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 200,\n  \"data\": [\n    {\n      \"key_0\": {\n        \"name\": \"string\",\n        \"properties\": {\n          \"cluster\": \"string\",\n          \"node\": \"string\",\n          \"namespace\": \"string\",\n          \"controller\": \"string\",\n          \"controllerKind\": \"string\",\n          \"pod\": \"string\",\n          \"container\": \"string\",\n          \"labels\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\",\n            \"key_2\": \"string\"\n          },\n          \"annotations\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\"\n          },\n          \"services\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"window\": {\n          \"start\": \"1963-06-21T03:46:47.539Z\",\n          \"end\": \"1997-07-05T23:04:46.321Z\"\n        },\n        \"start\": \"1980-02-12T08:01:38.249Z\",\n        \"end\": \"1969-04-08T07:07:09.769Z\",\n        \"cpuCores\": 2073.1389207954107,\n        \"cpuCoreRequestAverage\": 2704.290923454079,\n        \"cpuCoreUsageAverage\": 3752.174069709394,\n        \"cpuCoreHours\": 3530.444766847275,\n        \"cpuCost\": 1855.7073639262721,\n        \"cpuCostAdjustment\": 2177.94395101964,\n        \"cpuEfficiency\": 7172.691519751387,\n        \"gpuCount\": 800.2597867959538,\n        \"gpuHours\": 7947.590976498897,\n        \"gpuCost\": 6306.480464083532,\n        \"gpuCostAdjustment\": 6945.584423802538,\n        \"networkTransferBytes\": 1638.1520714924002,\n        \"networkReceiveBytes\": 7950.1054640693765,\n        \"networkCost\": 1520.57558127219,\n        \"networkCostAdjustment\": 5233.841972202855,\n        \"loadBalancerCost\": 1563.3015576044106,\n        \"loadBalancerCostAdjustment\": 6404.480535811873,\n        \"pvBytes\": 6807.682562057258,\n        \"pvByteHours\": 7497.469182522218,\n        \"pvCost\": 3712.0452424154682,\n        \"pvCostAdjustment\": 1657.1448771830987,\n        \"ramBytes\": 7531.24834823459,\n        \"ramByteRequestAverage\": 40.914073846091135,\n        \"ramByteUsageAverage\": 1878.703717817022,\n        \"ramByteHours\": 7444.952808085979,\n        \"ramCost\": 7494.605959551906,\n        \"ramCostAdjustment\": 9968.081040951784,\n        \"ramEfficiency\": 6352.93693336079,\n        \"externalCost\": 6265.254870903743,\n        \"sharedCost\": 106.52427982794754,\n        \"totalCost\": 2621.8763980504045,\n        \"totalEfficiency\": 2095.636702932898\n      },\n      \"key_1\": {\n        \"name\": \"string\",\n        \"properties\": {\n          \"cluster\": \"string\",\n          \"node\": \"string\",\n          \"namespace\": \"string\",\n          \"controller\": \"string\",\n          \"controllerKind\": \"string\",\n          \"pod\": \"string\",\n          \"container\": \"string\",\n          \"labels\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\"\n          },\n          \"annotations\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\",\n            \"key_2\": \"string\"\n          },\n          \"services\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"window\": {\n          \"start\": \"2016-06-05T02:26:58.705Z\",\n          \"end\": \"2008-11-18T22:16:34.557Z\"\n        },\n        \"start\": \"2024-09-25T10:27:47.784Z\",\n        \"end\": \"1953-12-05T09:13:54.388Z\",\n        \"cpuCores\": 7413.46478290393,\n        \"cpuCoreRequestAverage\": 625.7741067723189,\n        \"cpuCoreUsageAverage\": 756.4585510508492,\n        \"cpuCoreHours\": 8423.9570977594,\n        \"cpuCost\": 6133.037604667668,\n        \"cpuCostAdjustment\": 3988.4512652743942,\n        \"cpuEfficiency\": 6192.488549855746,\n        \"gpuCount\": 6361.588257539256,\n        \"gpuHours\": 9136.583066301255,\n        \"gpuCost\": 2884.83052087786,\n        \"gpuCostAdjustment\": 3978.1453653220533,\n        \"networkTransferBytes\": 6643.873845085736,\n        \"networkReceiveBytes\": 8909.1758791565,\n        \"networkCost\": 3386.923131660733,\n        \"networkCostAdjustment\": 8417.217153519552,\n        \"loadBalancerCost\": 2204.7297479783965,\n        \"loadBalancerCostAdjustment\": 3610.134061066387,\n        \"pvBytes\": 9050.593592567804,\n        \"pvByteHours\": 8795.893980209297,\n        \"pvCost\": 3661.5269024560694,\n        \"pvCostAdjustment\": 4833.572771514419,\n        \"ramBytes\": 321.98304512734865,\n        \"ramByteRequestAverage\": 9761.972596394624,\n        \"ramByteUsageAverage\": 856.6046836155672,\n        \"ramByteHours\": 7697.989307767654,\n        \"ramCost\": 1025.3262731384161,\n        \"ramCostAdjustment\": 3939.383548729201,\n        \"ramEfficiency\": 1141.6762846840788,\n        \"externalCost\": 4089.629134941143,\n        \"sharedCost\": 6588.97560527945,\n        \"totalCost\": 7460.996780131129,\n        \"totalEfficiency\": 4677.960469180787\n      }\n    },\n    {\n      \"key_0\": {\n        \"name\": \"string\",\n        \"properties\": {\n          \"cluster\": \"string\",\n          \"node\": \"string\",\n          \"namespace\": \"string\",\n          \"controller\": \"string\",\n          \"controllerKind\": \"string\",\n          \"pod\": \"string\",\n          \"container\": \"string\",\n          \"labels\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\",\n            \"key_2\": \"string\"\n          },\n          \"annotations\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\"\n          },\n          \"services\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"window\": {\n          \"start\": \"2022-05-10T11:33:32.705Z\",\n          \"end\": \"1983-03-31T12:48:10.383Z\"\n        },\n        \"start\": \"1991-12-06T02:55:01.725Z\",\n        \"end\": \"1964-10-29T01:15:11.668Z\",\n        \"cpuCores\": 4170.570864254186,\n        \"cpuCoreRequestAverage\": 2650.0612671931212,\n        \"cpuCoreUsageAverage\": 2477.212035955141,\n        \"cpuCoreHours\": 9971.150165580033,\n        \"cpuCost\": 7799.860333383744,\n        \"cpuCostAdjustment\": 9519.142565969807,\n        \"cpuEfficiency\": 426.8153598700986,\n        \"gpuCount\": 41.802129948177445,\n        \"gpuHours\": 3389.8965959285974,\n        \"gpuCost\": 4774.799341643793,\n        \"gpuCostAdjustment\": 7790.146894387245,\n        \"networkTransferBytes\": 2989.8564862054523,\n        \"networkReceiveBytes\": 1482.1811814079722,\n        \"networkCost\": 1724.841740945291,\n        \"networkCostAdjustment\": 1261.359001561133,\n        \"loadBalancerCost\": 8931.40005399927,\n        \"loadBalancerCostAdjustment\": 1290.1879419594363,\n        \"pvBytes\": 5725.119889683488,\n        \"pvByteHours\": 5759.935598594437,\n        \"pvCost\": 3874.7822789666798,\n        \"pvCostAdjustment\": 4338.773133165526,\n        \"ramBytes\": 8573.72700871505,\n        \"ramByteRequestAverage\": 6964.230388887033,\n        \"ramByteUsageAverage\": 3525.7491710477384,\n        \"ramByteHours\": 2474.5530758013547,\n        \"ramCost\": 3597.4031344623945,\n        \"ramCostAdjustment\": 8996.140589242761,\n        \"ramEfficiency\": 3124.958144764336,\n        \"externalCost\": 500.5300381359257,\n        \"sharedCost\": 7513.9165529170805,\n        \"totalCost\": 4512.625349960037,\n        \"totalEfficiency\": 9450.348530446794\n      },\n      \"key_1\": {\n        \"name\": \"string\",\n        \"properties\": {\n          \"cluster\": \"string\",\n          \"node\": \"string\",\n          \"namespace\": \"string\",\n          \"controller\": \"string\",\n          \"controllerKind\": \"string\",\n          \"pod\": \"string\",\n          \"container\": \"string\",\n          \"labels\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\"\n          },\n          \"annotations\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\",\n            \"key_2\": \"string\"\n          },\n          \"services\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"window\": {\n          \"start\": \"2022-01-15T06:22:59.467Z\",\n          \"end\": \"2021-05-22T08:23:11.607Z\"\n        },\n        \"start\": \"1961-12-11T04:26:59.772Z\",\n        \"end\": \"2006-01-12T09:48:54.991Z\",\n        \"cpuCores\": 8610.42298242804,\n        \"cpuCoreRequestAverage\": 2271.4894546505693,\n        \"cpuCoreUsageAverage\": 8371.881523168184,\n        \"cpuCoreHours\": 4814.2762191817465,\n        \"cpuCost\": 541.3519532000655,\n        \"cpuCostAdjustment\": 8988.229549723967,\n        \"cpuEfficiency\": 9238.183260621747,\n        \"gpuCount\": 2302.4210274209677,\n        \"gpuHours\": 3214.84163198973,\n        \"gpuCost\": 8501.556028548843,\n        \"gpuCostAdjustment\": 4764.8734705887955,\n        \"networkTransferBytes\": 9885.685205742213,\n        \"networkReceiveBytes\": 2041.7591202325568,\n        \"networkCost\": 4551.063187293618,\n        \"networkCostAdjustment\": 8971.672231446573,\n        \"loadBalancerCost\": 8871.508198414518,\n        \"loadBalancerCostAdjustment\": 3995.566775265644,\n        \"pvBytes\": 4705.252319911127,\n        \"pvByteHours\": 8742.71496104971,\n        \"pvCost\": 2835.524073342022,\n        \"pvCostAdjustment\": 7283.2945035215735,\n        \"ramBytes\": 5893.229017818903,\n        \"ramByteRequestAverage\": 5176.2416003430635,\n        \"ramByteUsageAverage\": 8469.078853761575,\n        \"ramByteHours\": 9032.010966086844,\n        \"ramCost\": 5966.230486025755,\n        \"ramCostAdjustment\": 3592.57453126437,\n        \"ramEfficiency\": 5880.741736892224,\n        \"externalCost\": 3480.377956715032,\n        \"sharedCost\": 2688.002311142783,\n        \"totalCost\": 4166.283988717601,\n        \"totalEfficiency\": 3339.82836878279\n      },\n      \"key_2\": {\n        \"name\": \"string\",\n        \"properties\": {\n          \"cluster\": \"string\",\n          \"node\": \"string\",\n          \"namespace\": \"string\",\n          \"controller\": \"string\",\n          \"controllerKind\": \"string\",\n          \"pod\": \"string\",\n          \"container\": \"string\",\n          \"labels\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\"\n          },\n          \"annotations\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\"\n          },\n          \"services\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"window\": {\n          \"start\": \"1960-12-08T08:25:28.509Z\",\n          \"end\": \"2012-07-17T19:17:02.940Z\"\n        },\n        \"start\": \"2009-02-06T23:13:24.262Z\",\n        \"end\": \"1949-06-05T18:02:16.265Z\",\n        \"cpuCores\": 2216.1870274815665,\n        \"cpuCoreRequestAverage\": 3830.045852000673,\n        \"cpuCoreUsageAverage\": 2312.046567913103,\n        \"cpuCoreHours\": 6766.364831953167,\n        \"cpuCost\": 9624.001819061863,\n        \"cpuCostAdjustment\": 247.26032727378612,\n        \"cpuEfficiency\": 7611.592506551206,\n        \"gpuCount\": 7528.767910765213,\n        \"gpuHours\": 5476.416109551898,\n        \"gpuCost\": 3329.4364312342927,\n        \"gpuCostAdjustment\": 4075.132968021349,\n        \"networkTransferBytes\": 1670.1170374200613,\n        \"networkReceiveBytes\": 878.4717127481556,\n        \"networkCost\": 9593.035050155526,\n        \"networkCostAdjustment\": 3833.200097860069,\n        \"loadBalancerCost\": 2703.2805431513775,\n        \"loadBalancerCostAdjustment\": 1834.3927157139783,\n        \"pvBytes\": 3782.397769005824,\n        \"pvByteHours\": 7368.359799229197,\n        \"pvCost\": 1286.3019113433227,\n        \"pvCostAdjustment\": 7782.127169971974,\n        \"ramBytes\": 1546.421318218364,\n        \"ramByteRequestAverage\": 8255.56194982436,\n        \"ramByteUsageAverage\": 2200.447813418367,\n        \"ramByteHours\": 1752.970481101801,\n        \"ramCost\": 4685.59496389086,\n        \"ramCostAdjustment\": 1191.837586119513,\n        \"ramEfficiency\": 6417.183446852756,\n        \"externalCost\": 8258.633829334936,\n        \"sharedCost\": 5225.625849249282,\n        \"totalCost\": 6938.547057601614,\n        \"totalEfficiency\": 6364.726388077057\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3f4a790d-26f0-46c4-b65d-260f7b6d081d",
+              "name": "Invalid request parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "allocation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "window",
+                      "value": "3d"
+                    },
+                    {
+                      "key": "aggregate",
+                      "value": "namespace"
+                    },
+                    {
+                      "key": "step",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accumulate",
+                      "value": "false"
+                    },
+                    {
+                      "key": "idle",
+                      "value": "true"
+                    },
+                    {
+                      "key": "external",
+                      "value": "false"
+                    },
+                    {
+                      "key": "filterClusters",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterNamespaces",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterControllerKinds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterControllers",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterLabels",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterAnnotations",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterServices",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "shareIdle",
+                      "value": "false"
+                    },
+                    {
+                      "key": "splitIdle",
+                      "value": "false"
+                    },
+                    {
+                      "key": "idleByNode",
+                      "value": "false"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Address of the Kubecost instance",
+                      "type": "any",
+                      "value": "{{kubecost-address}}",
+                      "key": "kubecost-address"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "255a5614-cfd7-4ebc-98d7-31113c15704c",
+          "name": "Kubecost Query total allocation costs",
+          "request": {
+            "name": "Kubecost Query total allocation costs",
+            "description": {
+              "content": "Returns a single total cost value for the given window, without individual allocations breakdown.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "model",
+                "allocation",
+                "totals"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "window",
+                  "value": "<string>",
+                  "description": "(Required) Duration of time over which to query."
+                },
+                {
+                  "disabled": false,
+                  "key": "aggregate",
+                  "value": "<string>",
+                  "description": "Field by which to aggregate results."
+                },
+                {
+                  "disabled": false,
+                  "key": "filterClusters",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filterNamespaces",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Address of the Kubecost instance",
+                  "type": "any",
+                  "value": "{{kubecost-address}}",
+                  "key": "kubecost-address"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7e1716c4-85c7-4935-8c6a-d09e5a4b182b",
+              "name": "Successful total allocation query response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "allocation",
+                    "totals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "window",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aggregate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterClusters",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterNamespaces",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Address of the Kubecost instance",
+                      "type": "any",
+                      "value": "{{kubecost-address}}",
+                      "key": "kubecost-address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2529,\n  \"data\": [\n    {\n      \"key_0\": {\n        \"name\": \"string\",\n        \"properties\": {\n          \"cluster\": \"string\",\n          \"node\": \"string\",\n          \"namespace\": \"string\",\n          \"controller\": \"string\",\n          \"controllerKind\": \"string\",\n          \"pod\": \"string\",\n          \"container\": \"string\",\n          \"labels\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\",\n            \"key_2\": \"string\"\n          },\n          \"annotations\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\"\n          },\n          \"services\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"window\": {\n          \"start\": \"2019-10-17T19:43:05.591Z\",\n          \"end\": \"1951-10-21T16:05:59.665Z\"\n        },\n        \"start\": \"1957-07-04T01:52:10.773Z\",\n        \"end\": \"2022-01-05T22:24:58.993Z\",\n        \"cpuCores\": 6765.724110090104,\n        \"cpuCoreRequestAverage\": 270.1938976144036,\n        \"cpuCoreUsageAverage\": 5459.316827813536,\n        \"cpuCoreHours\": 1726.5111359609575,\n        \"cpuCost\": 5186.399440250644,\n        \"cpuCostAdjustment\": 1746.3951386732845,\n        \"cpuEfficiency\": 4339.256477374987,\n        \"gpuCount\": 4927.653057517264,\n        \"gpuHours\": 9002.883955433374,\n        \"gpuCost\": 7794.804935034402,\n        \"gpuCostAdjustment\": 4755.415593150128,\n        \"networkTransferBytes\": 851.9238589322487,\n        \"networkReceiveBytes\": 2862.238268974769,\n        \"networkCost\": 8466.967982074968,\n        \"networkCostAdjustment\": 6247.378865155485,\n        \"loadBalancerCost\": 2933.8090923875716,\n        \"loadBalancerCostAdjustment\": 9810.670214614338,\n        \"pvBytes\": 4809.061421956674,\n        \"pvByteHours\": 4679.102924734258,\n        \"pvCost\": 3535.4889971749226,\n        \"pvCostAdjustment\": 3934.948260083413,\n        \"ramBytes\": 6167.43841044832,\n        \"ramByteRequestAverage\": 5931.329939594571,\n        \"ramByteUsageAverage\": 2430.948396720379,\n        \"ramByteHours\": 9980.424706680235,\n        \"ramCost\": 2023.0815986524365,\n        \"ramCostAdjustment\": 361.36343043906226,\n        \"ramEfficiency\": 6973.805942498584,\n        \"externalCost\": 8495.90985231575,\n        \"sharedCost\": 5269.431863018676,\n        \"totalCost\": 9016.315047442191,\n        \"totalEfficiency\": 2580.275385501575\n      }\n    },\n    {\n      \"key_0\": {\n        \"name\": \"string\",\n        \"properties\": {\n          \"cluster\": \"string\",\n          \"node\": \"string\",\n          \"namespace\": \"string\",\n          \"controller\": \"string\",\n          \"controllerKind\": \"string\",\n          \"pod\": \"string\",\n          \"container\": \"string\",\n          \"labels\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\"\n          },\n          \"annotations\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\",\n            \"key_2\": \"string\"\n          },\n          \"services\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"window\": {\n          \"start\": \"1973-12-25T21:56:57.612Z\",\n          \"end\": \"2026-03-27T20:05:23.929Z\"\n        },\n        \"start\": \"1955-05-02T16:29:11.506Z\",\n        \"end\": \"1958-04-09T05:19:15.418Z\",\n        \"cpuCores\": 5259.0210089126585,\n        \"cpuCoreRequestAverage\": 8355.091783275044,\n        \"cpuCoreUsageAverage\": 8786.689404631845,\n        \"cpuCoreHours\": 2165.82755290226,\n        \"cpuCost\": 7433.244226301576,\n        \"cpuCostAdjustment\": 5695.5515335444215,\n        \"cpuEfficiency\": 6731.627766217697,\n        \"gpuCount\": 4697.846054338549,\n        \"gpuHours\": 537.675256807153,\n        \"gpuCost\": 8048.090912837982,\n        \"gpuCostAdjustment\": 4318.0128381581835,\n        \"networkTransferBytes\": 2230.4173500339784,\n        \"networkReceiveBytes\": 4587.827039252635,\n        \"networkCost\": 9953.014415375585,\n        \"networkCostAdjustment\": 6671.917919029275,\n        \"loadBalancerCost\": 2815.585244932042,\n        \"loadBalancerCostAdjustment\": 622.3472670000441,\n        \"pvBytes\": 8692.56035114524,\n        \"pvByteHours\": 6168.182361329397,\n        \"pvCost\": 3028.761247891102,\n        \"pvCostAdjustment\": 4205.833394178213,\n        \"ramBytes\": 1521.6562561364267,\n        \"ramByteRequestAverage\": 6846.094559901297,\n        \"ramByteUsageAverage\": 1885.3279211993802,\n        \"ramByteHours\": 5717.081828058223,\n        \"ramCost\": 9132.11034549559,\n        \"ramCostAdjustment\": 4377.960876906692,\n        \"ramEfficiency\": 5919.549961806941,\n        \"externalCost\": 3310.6338903867704,\n        \"sharedCost\": 9890.484597816549,\n        \"totalCost\": 6836.138043290754,\n        \"totalEfficiency\": 4208.8235990190515\n      },\n      \"key_1\": {\n        \"name\": \"string\",\n        \"properties\": {\n          \"cluster\": \"string\",\n          \"node\": \"string\",\n          \"namespace\": \"string\",\n          \"controller\": \"string\",\n          \"controllerKind\": \"string\",\n          \"pod\": \"string\",\n          \"container\": \"string\",\n          \"labels\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\"\n          },\n          \"annotations\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\"\n          },\n          \"services\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"window\": {\n          \"start\": \"2018-10-28T20:32:42.692Z\",\n          \"end\": \"2026-04-17T17:38:53.099Z\"\n        },\n        \"start\": \"1986-01-17T05:52:30.381Z\",\n        \"end\": \"1967-08-19T22:45:26.386Z\",\n        \"cpuCores\": 1052.7638808697748,\n        \"cpuCoreRequestAverage\": 2642.9575819096353,\n        \"cpuCoreUsageAverage\": 260.392263410244,\n        \"cpuCoreHours\": 6346.918180337772,\n        \"cpuCost\": 7685.029020090566,\n        \"cpuCostAdjustment\": 5706.306170765265,\n        \"cpuEfficiency\": 6446.195715417662,\n        \"gpuCount\": 9642.158318562566,\n        \"gpuHours\": 3589.9269609624807,\n        \"gpuCost\": 6729.251563522124,\n        \"gpuCostAdjustment\": 8276.699941405106,\n        \"networkTransferBytes\": 2310.4261174276708,\n        \"networkReceiveBytes\": 3251.7642221978626,\n        \"networkCost\": 3914.470486764414,\n        \"networkCostAdjustment\": 3075.55611314162,\n        \"loadBalancerCost\": 2342.0219546084286,\n        \"loadBalancerCostAdjustment\": 1778.7068496341008,\n        \"pvBytes\": 5634.332224169244,\n        \"pvByteHours\": 5816.43699748007,\n        \"pvCost\": 4109.134640052197,\n        \"pvCostAdjustment\": 6517.908182079122,\n        \"ramBytes\": 7046.700659475751,\n        \"ramByteRequestAverage\": 1172.104419053177,\n        \"ramByteUsageAverage\": 2290.1931027415058,\n        \"ramByteHours\": 9297.754114861655,\n        \"ramCost\": 9007.232150198713,\n        \"ramCostAdjustment\": 4514.072451926826,\n        \"ramEfficiency\": 8794.458435997572,\n        \"externalCost\": 7587.068653448967,\n        \"sharedCost\": 1955.5151300404384,\n        \"totalCost\": 4314.259702959635,\n        \"totalEfficiency\": 4306.438172892418\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Address of the Kubecost instance",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "localhost:9090",
+      "key": "kubecost-address"
+    },
+    {
+      "type": "string",
+      "value": "http://{{kubecost-address}}",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a1bb63ac-0b7a-4cb3-98ac-ffd1cb0cfd18",
+    "name": "Kubecost Allocation API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Allocation API retrieves cost allocation information for any Kubernetes concept, such as cost by namespace, label, deployment, service, and more. It is directly integrated with the Kubecost ETL caching layer and CSV pipeline so it can scale for large clusters.\n\nContact Support:\n Name: Kubecost",
+      "type": "text/plain"
+    }
+  }
+}

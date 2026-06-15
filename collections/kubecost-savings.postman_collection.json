@@ -1,0 +1,577 @@
+{
+  "item": [
+    {
+      "id": "7e1c284c-f93a-439e-8756-cdbf49157eb8",
+      "name": "Model",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f04e3005-0567-4cc7-b738-22350bdcd269",
+          "name": "Kubecost Get cluster right-sizing recommendations",
+          "request": {
+            "name": "Kubecost Get cluster right-sizing recommendations",
+            "description": {
+              "content": "Returns recommendations for right-sizing clusters based on actual resource usage, including potential monthly savings.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "model",
+                "savings",
+                "clusterSizingETL"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "window",
+                  "value": "48h",
+                  "description": "Duration of time to analyze for recommendations."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Address of the Kubecost instance",
+                  "type": "any",
+                  "value": "{{kubecost-address}}",
+                  "key": "kubecost-address"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fd05f33d-c8a0-4ee8-9ab1-35d55b49bce6",
+              "name": "Cluster right-sizing recommendations.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "savings",
+                    "clusterSizingETL"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "window",
+                      "value": "48h"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Address of the Kubecost instance",
+                      "type": "any",
+                      "value": "{{kubecost-address}}",
+                      "key": "kubecost-address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5599,\n  \"data\": [\n    {\n      \"clusterName\": \"string\",\n      \"currentMonthlyRate\": 3516.7747985397336,\n      \"recommendedMonthlyRate\": 7465.380213629112,\n      \"monthlySavings\": 9206.925233563697,\n      \"currentNodeCount\": 4709,\n      \"recommendedNodeCount\": 3561,\n      \"currentNodeType\": \"string\",\n      \"recommendedNodeType\": \"string\"\n    },\n    {\n      \"clusterName\": \"string\",\n      \"currentMonthlyRate\": 4127.303501406536,\n      \"recommendedMonthlyRate\": 4759.6960175070835,\n      \"monthlySavings\": 1374.1676289919503,\n      \"currentNodeCount\": 7705,\n      \"recommendedNodeCount\": 6296,\n      \"currentNodeType\": \"string\",\n      \"recommendedNodeType\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d710e460-9e86-42f0-b945-3e4158862ce5",
+          "name": "Kubecost Get container request right-sizing recommendations",
+          "request": {
+            "name": "Kubecost Get container request right-sizing recommendations",
+            "description": {
+              "content": "Returns recommendations for right-sizing container resource requests (CPU and memory) based on actual usage patterns.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "model",
+                "savings",
+                "requestSizingV2"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "window",
+                  "value": "<string>",
+                  "description": "(Required) Duration of time to analyze for recommendations."
+                },
+                {
+                  "disabled": false,
+                  "key": "targetCPUUtilization",
+                  "value": "0.65",
+                  "description": "Target CPU utilization percentage (0-1)."
+                },
+                {
+                  "disabled": false,
+                  "key": "targetRAMUtilization",
+                  "value": "0.65",
+                  "description": "Target RAM utilization percentage (0-1)."
+                },
+                {
+                  "disabled": false,
+                  "key": "filterClusters",
+                  "value": "<string>",
+                  "description": "Filter by cluster name (comma-separated)."
+                },
+                {
+                  "disabled": false,
+                  "key": "filterNamespaces",
+                  "value": "<string>",
+                  "description": "Filter by namespace (comma-separated)."
+                },
+                {
+                  "disabled": false,
+                  "key": "filterControllers",
+                  "value": "<string>",
+                  "description": "Filter by controller name (comma-separated)."
+                },
+                {
+                  "disabled": false,
+                  "key": "filterLabels",
+                  "value": "<string>",
+                  "description": "Filter by label in the format label:value."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Address of the Kubecost instance",
+                  "type": "any",
+                  "value": "{{kubecost-address}}",
+                  "key": "kubecost-address"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b34201e1-9bd1-48da-92bd-c1f5bcc2ed68",
+              "name": "Container request right-sizing recommendations.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "savings",
+                    "requestSizingV2"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "window",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "targetCPUUtilization",
+                      "value": "0.65"
+                    },
+                    {
+                      "key": "targetRAMUtilization",
+                      "value": "0.65"
+                    },
+                    {
+                      "key": "filterClusters",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterNamespaces",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterControllers",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterLabels",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Address of the Kubecost instance",
+                      "type": "any",
+                      "value": "{{kubecost-address}}",
+                      "key": "kubecost-address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8294,\n  \"data\": [\n    {\n      \"clusterName\": \"string\",\n      \"namespace\": \"string\",\n      \"controllerKind\": \"string\",\n      \"controllerName\": \"string\",\n      \"containerName\": \"string\",\n      \"currentCPURequest\": 8002.918744047015,\n      \"recommendedCPURequest\": 236.06472871805727,\n      \"currentRAMBytesRequest\": 6358.346188042165,\n      \"recommendedRAMBytesRequest\": 338.33043180282465,\n      \"monthlySavings\": 8938.397795210152\n    },\n    {\n      \"clusterName\": \"string\",\n      \"namespace\": \"string\",\n      \"controllerKind\": \"string\",\n      \"controllerName\": \"string\",\n      \"containerName\": \"string\",\n      \"currentCPURequest\": 2272.667367536333,\n      \"recommendedCPURequest\": 3254.6802346583004,\n      \"currentRAMBytesRequest\": 1527.710934970633,\n      \"recommendedRAMBytesRequest\": 276.42355925756254,\n      \"monthlySavings\": 3566.1845578141847\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "088e2db7-5afe-4fdb-b31b-2eb8498dcab0",
+          "name": "Kubecost List abandoned workloads",
+          "request": {
+            "name": "Kubecost List abandoned workloads",
+            "description": {
+              "content": "Returns a list of workloads that appear to be abandoned based on low resource utilization over the specified window.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "model",
+                "savings",
+                "abandonedWorkloads"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "window",
+                  "value": "7d",
+                  "description": "Duration of time to analyze."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Address of the Kubecost instance",
+                  "type": "any",
+                  "value": "{{kubecost-address}}",
+                  "key": "kubecost-address"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0d8ffbb6-ecb8-45fb-8d85-e80d4920c4e0",
+              "name": "List of abandoned workloads.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "savings",
+                    "abandonedWorkloads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "window",
+                      "value": "7d"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Address of the Kubecost instance",
+                      "type": "any",
+                      "value": "{{kubecost-address}}",
+                      "key": "kubecost-address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2128,\n  \"data\": [\n    {\n      \"cluster\": \"string\",\n      \"namespace\": \"string\",\n      \"controller\": \"string\",\n      \"controllerKind\": \"string\",\n      \"monthlySavings\": 2354.2466153893815\n    },\n    {\n      \"cluster\": \"string\",\n      \"namespace\": \"string\",\n      \"controller\": \"string\",\n      \"controllerKind\": \"string\",\n      \"monthlySavings\": 4303.8619324446\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4d950380-7d3d-479a-80b3-8f0dcb3b70e5",
+          "name": "Kubecost List orphaned disks",
+          "request": {
+            "name": "Kubecost List orphaned disks",
+            "description": {
+              "content": "Returns a list of persistent volumes and disks that are not attached to any running workload.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "model",
+                "savings",
+                "orphanedDisks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Address of the Kubecost instance",
+                  "type": "any",
+                  "value": "{{kubecost-address}}",
+                  "key": "kubecost-address"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e1f8089d-6831-4480-9f33-4ad49290d68e",
+              "name": "List of orphaned disks.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "savings",
+                    "orphanedDisks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Address of the Kubecost instance",
+                      "type": "any",
+                      "value": "{{kubecost-address}}",
+                      "key": "kubecost-address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2074,\n  \"data\": [\n    {\n      \"name\": \"string\",\n      \"cluster\": \"string\",\n      \"region\": \"string\",\n      \"sizeGB\": 6836.304072263929,\n      \"monthlyCost\": 8840.491436926432\n    },\n    {\n      \"name\": \"string\",\n      \"cluster\": \"string\",\n      \"region\": \"string\",\n      \"sizeGB\": 1702.9033465186205,\n      \"monthlyCost\": 8614.700986795791\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b4bde46e-b60f-4d56-8590-bb245da4f419",
+          "name": "Kubecost List orphaned IP addresses",
+          "request": {
+            "name": "Kubecost List orphaned IP addresses",
+            "description": {
+              "content": "Returns a list of allocated IP addresses that are not associated with any active resource.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "model",
+                "savings",
+                "orphanedIPs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Address of the Kubecost instance",
+                  "type": "any",
+                  "value": "{{kubecost-address}}",
+                  "key": "kubecost-address"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4564fe1c-e072-43a2-8452-da916880dabe",
+              "name": "List of orphaned IP addresses.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "savings",
+                    "orphanedIPs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Address of the Kubecost instance",
+                      "type": "any",
+                      "value": "{{kubecost-address}}",
+                      "key": "kubecost-address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 697,\n  \"data\": [\n    {\n      \"address\": \"string\",\n      \"cluster\": \"string\",\n      \"region\": \"string\",\n      \"monthlyCost\": 898.3056164261483\n    },\n    {\n      \"address\": \"string\",\n      \"cluster\": \"string\",\n      \"region\": \"string\",\n      \"monthlyCost\": 4359.619470853864\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Address of the Kubecost instance",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "localhost:9090",
+      "key": "kubecost-address"
+    },
+    {
+      "type": "string",
+      "value": "http://{{kubecost-address}}",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "4fcafa59-ded6-4683-b552-551901a2e5bb",
+    "name": "Kubecost Savings API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Savings APIs provide cost optimization insights, including cluster-level potential savings estimates, recommendations for right-sizing clusters and containers, listing abandoned workloads, orphaned disks, and orphaned IP addresses.\n\nContact Support:\n Name: Kubecost",
+      "type": "text/plain"
+    }
+  }
+}

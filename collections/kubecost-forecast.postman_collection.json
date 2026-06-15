@@ -1,0 +1,252 @@
+{
+  "item": [
+    {
+      "id": "f70a91cf-cbbb-4e91-b534-184622d33dc9",
+      "name": "Model",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9cb37706-5adb-4ad7-a42b-afce9596f3a1",
+          "name": "Kubecost Forecast allocation costs",
+          "request": {
+            "name": "Kubecost Forecast allocation costs",
+            "description": {
+              "content": "Returns a cost forecast for Kubernetes workloads based on historical allocation data, projecting future costs over the specified forecast window.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "model",
+                "forecast",
+                "allocation"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "window",
+                  "value": "<string>",
+                  "description": "(Required) Historical window of time to use as the basis for the forecast."
+                },
+                {
+                  "disabled": false,
+                  "key": "forecastWindow",
+                  "value": "<string>",
+                  "description": "Duration of time to forecast into the future."
+                },
+                {
+                  "disabled": false,
+                  "key": "aggregate",
+                  "value": "<string>",
+                  "description": "Field by which to aggregate results. Supports the same values as the Allocation API aggregate parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "accumulate",
+                  "value": "false",
+                  "description": "If true, sum the entire range into a single set."
+                },
+                {
+                  "disabled": false,
+                  "key": "filterClusters",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filterNamespaces",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Address of the Kubecost instance",
+                  "type": "any",
+                  "value": "{{kubecost-address}}",
+                  "key": "kubecost-address"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9a679d01-3c27-473a-bc60-1bac54ebe3d6",
+              "name": "Successful forecast response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "forecast",
+                    "allocation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "window",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "forecastWindow",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aggregate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accumulate",
+                      "value": "false"
+                    },
+                    {
+                      "key": "filterClusters",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterNamespaces",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Address of the Kubecost instance",
+                      "type": "any",
+                      "value": "{{kubecost-address}}",
+                      "key": "kubecost-address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 200,\n  \"data\": {\n    \"totalCost\": 3284.0019345338146,\n    \"confidence\": 8391.879960116263,\n    \"forecastWindow\": {\n      \"start\": \"1953-01-11T00:44:07.569Z\",\n      \"end\": \"1998-04-02T17:44:46.845Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7ee0ce7b-0783-45f4-835c-5fed377fecc0",
+              "name": "Invalid request parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "forecast",
+                    "allocation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "window",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "forecastWindow",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aggregate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accumulate",
+                      "value": "false"
+                    },
+                    {
+                      "key": "filterClusters",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterNamespaces",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Address of the Kubecost instance",
+                      "type": "any",
+                      "value": "{{kubecost-address}}",
+                      "key": "kubecost-address"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Address of the Kubecost instance",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "localhost:9090",
+      "key": "kubecost-address"
+    },
+    {
+      "type": "string",
+      "value": "http://{{kubecost-address}}",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "0a58a7c7-89b0-4acd-946f-bab6b84fdf10",
+    "name": "Kubecost Forecast API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Forecast API provides cost forecasting capabilities for Kubernetes workloads, allowing you to predict future spend based on historical cost data and trends.\n\nContact Support:\n Name: Kubecost",
+      "type": "text/plain"
+    }
+  }
+}

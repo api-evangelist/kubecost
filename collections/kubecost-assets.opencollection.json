@@ -1,0 +1,132 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kubecost Assets API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Model",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Kubecost Query asset cost data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://{kubecost-address}/model/assets",
+            "params": [
+              {
+                "name": "window",
+                "value": "",
+                "type": "query",
+                "description": "Duration of time over which to query. Accepts units of time (e.g. 3d, 24h, 7d), relative time (e.g. yesterday, lastweek), or RFC3339 date pairs."
+              },
+              {
+                "name": "aggregate",
+                "value": "",
+                "type": "query",
+                "description": "Field by which to aggregate results. Supported values include account, category, cluster, name, project, providerid, provider, service, type, department, environment, owner, product, team, and label:<name>. Supports multi-aggregation via comma-separated values."
+              },
+              {
+                "name": "accumulate",
+                "value": "",
+                "type": "query",
+                "description": "If true, sum the entire range into a single set."
+              },
+              {
+                "name": "filterClusters",
+                "value": "",
+                "type": "query",
+                "description": "Filter by cluster name (comma-separated)."
+              },
+              {
+                "name": "filterTypes",
+                "value": "",
+                "type": "query",
+                "description": "Filter by asset type (comma-separated). Supported values include Node, Disk, LoadBalancer, ClusterManagement, Network, Attached."
+              },
+              {
+                "name": "filterAccounts",
+                "value": "",
+                "type": "query",
+                "description": "Filter by account (comma-separated)."
+              },
+              {
+                "name": "filterProjects",
+                "value": "",
+                "type": "query",
+                "description": "Filter by project (comma-separated)."
+              },
+              {
+                "name": "filterProviders",
+                "value": "",
+                "type": "query",
+                "description": "Filter by provider (comma-separated)."
+              },
+              {
+                "name": "filterCategories",
+                "value": "",
+                "type": "query",
+                "description": "Filter by category (comma-separated)."
+              },
+              {
+                "name": "filterLabels",
+                "value": "",
+                "type": "query",
+                "description": "Filter by label in the format label:value."
+              },
+              {
+                "name": "filterServices",
+                "value": "",
+                "type": "query",
+                "description": "Filter by service (comma-separated)."
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Output format. Supports csv and json."
+              }
+            ]
+          },
+          "docs": "Retrieves cost data for individual Kubernetes assets such as nodes, persistent volumes, load balancers, and cluster management costs."
+        },
+        {
+          "info": {
+            "name": "Kubecost Query total asset costs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://{kubecost-address}/model/assets/totals",
+            "params": [
+              {
+                "name": "window",
+                "value": "",
+                "type": "query",
+                "description": "Duration of time over which to query."
+              },
+              {
+                "name": "filterClusters",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filterTypes",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a single total cost for assets in the given window."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

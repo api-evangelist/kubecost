@@ -1,0 +1,171 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kubecost Cloud Cost API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Model",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Kubecost Query cloud cost data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://{kubecost-address}/model/cloudCost",
+            "params": [
+              {
+                "name": "window",
+                "value": "",
+                "type": "query",
+                "description": "Duration of time over which to query. Accepts daily intervals (e.g. 3d) or RFC3339 date pairs."
+              },
+              {
+                "name": "aggregate",
+                "value": "",
+                "type": "query",
+                "description": "Field by which to aggregate results. Supported values include invoiceEntityID, accountID, provider, service, and label:<name>. Supports multi-aggregation via comma-separated values."
+              },
+              {
+                "name": "accumulate",
+                "value": "",
+                "type": "query",
+                "description": "If true, sum the entire range into a single set."
+              },
+              {
+                "name": "filterInvoiceEntityIDs",
+                "value": "",
+                "type": "query",
+                "description": "Filter by invoice entity ID (comma-separated)."
+              },
+              {
+                "name": "filterAccountIDs",
+                "value": "",
+                "type": "query",
+                "description": "Filter by account ID (comma-separated)."
+              },
+              {
+                "name": "filterProviders",
+                "value": "",
+                "type": "query",
+                "description": "Filter by provider (comma-separated)."
+              },
+              {
+                "name": "filterServices",
+                "value": "",
+                "type": "query",
+                "description": "Filter by service (comma-separated)."
+              },
+              {
+                "name": "filterLabels",
+                "value": "",
+                "type": "query",
+                "description": "Filter by label in the format label:value."
+              }
+            ]
+          },
+          "docs": "Retrieves cloud cost data from cloud service providers, with support for aggregation and filtering."
+        },
+        {
+          "info": {
+            "name": "Kubecost Query cloud cost view data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://{kubecost-address}/model/cloudCost/view",
+            "params": [
+              {
+                "name": "window",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "aggregate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "accumulate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filterInvoiceEntityIDs",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filterAccountIDs",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filterProviders",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filterServices",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Default endpoint for querying cloud costs. Provides a comprehensive view of cloud spending."
+        },
+        {
+          "info": {
+            "name": "Kubecost Query top cloud costs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://{kubecost-address}/model/cloudCost/top",
+            "params": [
+              {
+                "name": "window",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "aggregate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "accumulate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filterProviders",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filterServices",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return."
+              }
+            ]
+          },
+          "docs": "Returns the top cloud cost items. Accepts all parameters of the view endpoint."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
