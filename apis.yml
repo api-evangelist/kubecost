@@ -1,6 +1,8 @@
 aid: kubecost
 url: https://raw.githubusercontent.com/api-search/kubecost/refs/heads/main/apis.yml
 common:
+  - type: AgenticAccess
+    url: agentic-access/kubecost-agentic-access.yml
   - type: DomainSecurity
     url: security/kubecost-domain-security.yml
   - type: GitHubOrganization
