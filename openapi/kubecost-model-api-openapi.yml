@@ -1,0 +1,1232 @@
+openapi: 3.1.0
+info:
+  title: Kubecost Allocation Model API
+  description: The Allocation API retrieves cost allocation information for any Kubernetes concept, such as cost by namespace, label, deployment, service, and more. It is directly integrated with the Kubecost ETL caching layer and CSV pipeline so it can scale for large clusters.
+  version: 2.0.0
+  contact:
+    name: Kubecost
+    url: https://docs.kubecost.com/apis/monitoring-apis/api-allocation
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: http://{kubecost-address}
+  description: Kubecost self-hosted instance
+  variables:
+    kubecost-address:
+      default: localhost:9090
+      description: Address of the Kubecost instance
+tags:
+- name: Model
+paths:
+  /model/allocation:
+    get:
+      operationId: getAllocation
+      summary: Kubecost Query allocation cost data
+      description: Retrieves cost allocation data for Kubernetes workloads, aggregated by the specified field over the given time window.
+      parameters:
+      - name: window
+        in: query
+        required: true
+        description: Duration of time over which to query. Accepts units of time (e.g. 3d, 24h, 7d), relative time (e.g. yesterday, lastweek, lastmonth), or RFC3339 date pairs.
+        schema:
+          type: string
+        examples:
+          days:
+            value: 3d
+            summary: Last 3 days
+          relative:
+            value: lastweek
+            summary: Last week
+      - name: aggregate
+        in: query
+        required: false
+        description: Field by which to aggregate results. Supported values include cluster, namespace, controllerKind, controller, service, deployment, statefulset, daemonset, job, label, annotation, pod, and container. Supports multi-aggregation via comma-separated values.
+        schema:
+          type: string
+        examples:
+          namespace:
+            value: namespace
+          multi:
+            value: namespace,label:app
+      - name: step
+        in: query
+        required: false
+        description: Duration of a single allocation set. If unspecified, this defaults to the window, so that you receive exactly one set for the entire window.
+        schema:
+          type: string
+      - name: accumulate
+        in: query
+        required: false
+        description: If true, sum the entire range of sets into a single set.
+        schema:
+          type: boolean
+          default: false
+      - name: idle
+        in: query
+        required: false
+        description: Whether to return idle cost. If true, idle allocations are returned.
+        schema:
+          type: boolean
+          default: true
+      - name: external
+        in: query
+        required: false
+        description: Whether to include external (out-of-cluster) costs.
+        schema:
+          type: boolean
+          default: false
+      - name: filterClusters
+        in: query
+        required: false
+        description: Filter results by cluster name (comma-separated).
+        schema:
+          type: string
+      - name: filterNamespaces
+        in: query
+        required: false
+        description: Filter results by namespace (comma-separated).
+        schema:
+          type: string
+      - name: filterControllerKinds
+        in: query
+        required: false
+        description: Filter results by controller kind (comma-separated).
+        schema:
+          type: string
+      - name: filterControllers
+        in: query
+        required: false
+        description: Filter results by controller name (comma-separated).
+        schema:
+          type: string
+      - name: filterLabels
+        in: query
+        required: false
+        description: Filter results by label in the format label:value (comma-separated).
+        schema:
+          type: string
+      - name: filterAnnotations
+        in: query
+        required: false
+        description: Filter results by annotation in the format annotation:value (comma-separated).
+        schema:
+          type: string
+      - name: filterServices
+        in: query
+        required: false
+        description: Filter results by service (comma-separated).
+        schema:
+          type: string
+      - name: shareIdle
+        in: query
+        required: false
+        description: If true, idle cost is allocated proportionally across tenants.
+        schema:
+          type: boolean
+          default: false
+      - name: splitIdle
+        in: query
+        required: false
+        description: If true, idle cost is split into separate allocations by cluster and node.
+        schema:
+          type: boolean
+          default: false
+      - name: idleByNode
+        in: query
+        required: false
+        description: If true, idle allocations are created on a per-node basis.
+        schema:
+          type: boolean
+          default: false
+      - name: format
+        in: query
+        required: false
+        description: Output format. Supports csv and json.
+        schema:
+          type: string
+          enum:
+          - json
+          - csv
+          default: json
+      responses:
+        '200':
+          description: Successful allocation query response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 200
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      additionalProperties:
+                        $ref: '#/components/schemas/Allocation'
+        '400':
+          description: Invalid request parameters.
+      tags:
+      - Model
+  /model/allocation/totals:
+    get:
+      operationId: getAllocationTotals
+      summary: Kubecost Query total allocation costs
+      description: Returns a single total cost value for the given window, without individual allocations breakdown.
+      parameters:
+      - name: window
+        in: query
+        required: true
+        description: Duration of time over which to query.
+        schema:
+          type: string
+      - name: aggregate
+        in: query
+        required: false
+        description: Field by which to aggregate results.
+        schema:
+          type: string
+      - name: filterClusters
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: filterNamespaces
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful total allocation query response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      additionalProperties:
+                        $ref: '#/components/schemas/Allocation'
+      tags:
+      - Model
+  /model/assets:
+    get:
+      operationId: getAssets
+      summary: Kubecost Query asset cost data
+      description: Retrieves cost data for individual Kubernetes assets such as nodes, persistent volumes, load balancers, and cluster management costs.
+      parameters:
+      - name: window
+        in: query
+        required: true
+        description: Duration of time over which to query. Accepts units of time (e.g. 3d, 24h, 7d), relative time (e.g. yesterday, lastweek), or RFC3339 date pairs.
+        schema:
+          type: string
+      - name: aggregate
+        in: query
+        required: false
+        description: Field by which to aggregate results. Supported values include account, category, cluster, name, project, providerid, provider, service, type, department, environment, owner, product, team, and label:<name>. Supports multi-aggregation via comma-separated values.
+        schema:
+          type: string
+      - name: accumulate
+        in: query
+        required: false
+        description: If true, sum the entire range into a single set.
+        schema:
+          type: boolean
+          default: false
+      - name: filterClusters
+        in: query
+        required: false
+        description: Filter by cluster name (comma-separated).
+        schema:
+          type: string
+      - name: filterTypes
+        in: query
+        required: false
+        description: Filter by asset type (comma-separated). Supported values include Node, Disk, LoadBalancer, ClusterManagement, Network, Attached.
+        schema:
+          type: string
+      - name: filterAccounts
+        in: query
+        required: false
+        description: Filter by account (comma-separated).
+        schema:
+          type: string
+      - name: filterProjects
+        in: query
+        required: false
+        description: Filter by project (comma-separated).
+        schema:
+          type: string
+      - name: filterProviders
+        in: query
+        required: false
+        description: Filter by provider (comma-separated).
+        schema:
+          type: string
+      - name: filterCategories
+        in: query
+        required: false
+        description: Filter by category (comma-separated).
+        schema:
+          type: string
+      - name: filterLabels
+        in: query
+        required: false
+        description: Filter by label in the format label:value.
+        schema:
+          type: string
+      - name: filterServices
+        in: query
+        required: false
+        description: Filter by service (comma-separated).
+        schema:
+          type: string
+      - name: format
+        in: query
+        required: false
+        description: Output format. Supports csv and json.
+        schema:
+          type: string
+          enum:
+          - json
+          - csv
+          default: json
+      responses:
+        '200':
+          description: Successful assets query response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 200
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      additionalProperties:
+                        $ref: '#/components/schemas/Asset'
+        '400':
+          description: Invalid request parameters.
+      tags:
+      - Model
+  /model/assets/totals:
+    get:
+      operationId: getAssetsTotals
+      summary: Kubecost Query total asset costs
+      description: Returns a single total cost for assets in the given window.
+      parameters:
+      - name: window
+        in: query
+        required: true
+        description: Duration of time over which to query.
+        schema:
+          type: string
+      - name: filterClusters
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: filterTypes
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful total assets query response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                  data:
+                    type: array
+                    items:
+                      type: object
+      tags:
+      - Model
+  /model/budget:
+    get:
+      operationId: listBudgets
+      summary: Kubecost List all budgets
+      description: Retrieves a list of all configured budget rules.
+      responses:
+        '200':
+          description: Successful budget list response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 200
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Budget'
+      tags:
+      - Model
+    post:
+      operationId: createBudget
+      summary: Kubecost Create a budget
+      description: Creates a new recurring budget rule for Kubernetes spending.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BudgetInput'
+      responses:
+        '200':
+          description: Budget created successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                  data:
+                    $ref: '#/components/schemas/Budget'
+        '400':
+          description: Invalid request body.
+      tags:
+      - Model
+  /model/budget/{id}:
+    get:
+      operationId: getBudget
+      summary: Kubecost Get a specific budget
+      description: Retrieves a specific budget rule by ID.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Unique identifier of the budget.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful budget response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                  data:
+                    $ref: '#/components/schemas/Budget'
+        '404':
+          description: Budget not found.
+      tags:
+      - Model
+    put:
+      operationId: updateBudget
+      summary: Kubecost Update a budget
+      description: Updates an existing budget rule.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Unique identifier of the budget.
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BudgetInput'
+      responses:
+        '200':
+          description: Budget updated successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                  data:
+                    $ref: '#/components/schemas/Budget'
+        '400':
+          description: Invalid request body.
+        '404':
+          description: Budget not found.
+      tags:
+      - Model
+    delete:
+      operationId: deleteBudget
+      summary: Kubecost Delete a budget
+      description: Deletes an existing budget rule.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Unique identifier of the budget.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Budget deleted successfully.
+        '404':
+          description: Budget not found.
+      tags:
+      - Model
+  /model/cloudCost:
+    get:
+      operationId: getCloudCost
+      summary: Kubecost Query cloud cost data
+      description: Retrieves cloud cost data from cloud service providers, with support for aggregation and filtering.
+      parameters:
+      - name: window
+        in: query
+        required: true
+        description: Duration of time over which to query. Accepts daily intervals (e.g. 3d) or RFC3339 date pairs.
+        schema:
+          type: string
+      - name: aggregate
+        in: query
+        required: false
+        description: Field by which to aggregate results. Supported values include invoiceEntityID, accountID, provider, service, and label:<name>. Supports multi-aggregation via comma-separated values.
+        schema:
+          type: string
+      - name: accumulate
+        in: query
+        required: false
+        description: If true, sum the entire range into a single set.
+        schema:
+          type: boolean
+          default: false
+      - name: filterInvoiceEntityIDs
+        in: query
+        required: false
+        description: Filter by invoice entity ID (comma-separated).
+        schema:
+          type: string
+      - name: filterAccountIDs
+        in: query
+        required: false
+        description: Filter by account ID (comma-separated).
+        schema:
+          type: string
+      - name: filterProviders
+        in: query
+        required: false
+        description: Filter by provider (comma-separated).
+        schema:
+          type: string
+      - name: filterServices
+        in: query
+        required: false
+        description: Filter by service (comma-separated).
+        schema:
+          type: string
+      - name: filterLabels
+        in: query
+        required: false
+        description: Filter by label in the format label:value.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful cloud cost query response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 200
+                  data:
+                    type: object
+        '400':
+          description: Invalid request parameters.
+      tags:
+      - Model
+  /model/cloudCost/view:
+    get:
+      operationId: getCloudCostView
+      summary: Kubecost Query cloud cost view data
+      description: Default endpoint for querying cloud costs. Provides a comprehensive view of cloud spending.
+      parameters:
+      - name: window
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: aggregate
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: accumulate
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: filterInvoiceEntityIDs
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: filterAccountIDs
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: filterProviders
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: filterServices
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful cloud cost view response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                  data:
+                    type: object
+      tags:
+      - Model
+  /model/cloudCost/top:
+    get:
+      operationId: getCloudCostTop
+      summary: Kubecost Query top cloud costs
+      description: Returns the top cloud cost items. Accepts all parameters of the view endpoint.
+      parameters:
+      - name: window
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: aggregate
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: accumulate
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: filterProviders
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: filterServices
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        required: false
+        description: Maximum number of results to return.
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Successful top cloud cost response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                  data:
+                    type: object
+      tags:
+      - Model
+  /model/forecast/allocation:
+    get:
+      operationId: getForecastAllocation
+      summary: Kubecost Forecast allocation costs
+      description: Returns a cost forecast for Kubernetes workloads based on historical allocation data, projecting future costs over the specified forecast window.
+      parameters:
+      - name: window
+        in: query
+        required: true
+        description: Historical window of time to use as the basis for the forecast.
+        schema:
+          type: string
+      - name: forecastWindow
+        in: query
+        required: false
+        description: Duration of time to forecast into the future.
+        schema:
+          type: string
+      - name: aggregate
+        in: query
+        required: false
+        description: Field by which to aggregate results. Supports the same values as the Allocation API aggregate parameter.
+        schema:
+          type: string
+      - name: accumulate
+        in: query
+        required: false
+        description: If true, sum the entire range into a single set.
+        schema:
+          type: boolean
+          default: false
+      - name: filterClusters
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: filterNamespaces
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful forecast response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 200
+                  data:
+                    type: object
+                    properties:
+                      totalCost:
+                        type: number
+                        description: Total forecasted cost.
+                      confidence:
+                        type: number
+                        description: Confidence level of the forecast (0-1).
+                      forecastWindow:
+                        type: object
+                        properties:
+                          start:
+                            type: string
+                            format: date-time
+                          end:
+                            type: string
+                            format: date-time
+        '400':
+          description: Invalid request parameters.
+      tags:
+      - Model
+  /model/savings/clusterSizingETL:
+    get:
+      operationId: getClusterRightSizing
+      summary: Kubecost Get cluster right-sizing recommendations
+      description: Returns recommendations for right-sizing clusters based on actual resource usage, including potential monthly savings.
+      parameters:
+      - name: window
+        in: query
+        required: false
+        description: Duration of time to analyze for recommendations.
+        schema:
+          type: string
+          default: 48h
+      responses:
+        '200':
+          description: Cluster right-sizing recommendations.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ClusterSizingRecommendation'
+      tags:
+      - Model
+  /model/savings/requestSizingV2:
+    get:
+      operationId: getContainerRequestRightSizing
+      summary: Kubecost Get container request right-sizing recommendations
+      description: Returns recommendations for right-sizing container resource requests (CPU and memory) based on actual usage patterns.
+      parameters:
+      - name: window
+        in: query
+        required: true
+        description: Duration of time to analyze for recommendations.
+        schema:
+          type: string
+      - name: targetCPUUtilization
+        in: query
+        required: false
+        description: Target CPU utilization percentage (0-1).
+        schema:
+          type: number
+          default: 0.65
+      - name: targetRAMUtilization
+        in: query
+        required: false
+        description: Target RAM utilization percentage (0-1).
+        schema:
+          type: number
+          default: 0.65
+      - name: filterClusters
+        in: query
+        required: false
+        description: Filter by cluster name (comma-separated).
+        schema:
+          type: string
+      - name: filterNamespaces
+        in: query
+        required: false
+        description: Filter by namespace (comma-separated).
+        schema:
+          type: string
+      - name: filterControllers
+        in: query
+        required: false
+        description: Filter by controller name (comma-separated).
+        schema:
+          type: string
+      - name: filterLabels
+        in: query
+        required: false
+        description: Filter by label in the format label:value.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Container request right-sizing recommendations.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RequestSizingRecommendation'
+      tags:
+      - Model
+  /model/savings/abandonedWorkloads:
+    get:
+      operationId: getAbandonedWorkloads
+      summary: Kubecost List abandoned workloads
+      description: Returns a list of workloads that appear to be abandoned based on low resource utilization over the specified window.
+      parameters:
+      - name: window
+        in: query
+        required: false
+        description: Duration of time to analyze.
+        schema:
+          type: string
+          default: 7d
+      responses:
+        '200':
+          description: List of abandoned workloads.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        cluster:
+                          type: string
+                        namespace:
+                          type: string
+                        controller:
+                          type: string
+                        controllerKind:
+                          type: string
+                        monthlySavings:
+                          type: number
+      tags:
+      - Model
+  /model/savings/orphanedDisks:
+    get:
+      operationId: getOrphanedDisks
+      summary: Kubecost List orphaned disks
+      description: Returns a list of persistent volumes and disks that are not attached to any running workload.
+      responses:
+        '200':
+          description: List of orphaned disks.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        cluster:
+                          type: string
+                        region:
+                          type: string
+                        sizeGB:
+                          type: number
+                        monthlyCost:
+                          type: number
+      tags:
+      - Model
+  /model/savings/orphanedIPs:
+    get:
+      operationId: getOrphanedIPs
+      summary: Kubecost List orphaned IP addresses
+      description: Returns a list of allocated IP addresses that are not associated with any active resource.
+      responses:
+        '200':
+          description: List of orphaned IP addresses.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        address:
+                          type: string
+                        cluster:
+                          type: string
+                        region:
+                          type: string
+                        monthlyCost:
+                          type: number
+      tags:
+      - Model
+components:
+  schemas:
+    BudgetAction:
+      type: object
+      properties:
+        threshold:
+          type: number
+          description: Percentage threshold (0-1) at which the action triggers.
+        type:
+          type: string
+          enum:
+          - email
+          - slack
+          - msteams
+          description: Type of notification channel.
+        target:
+          type: string
+          description: Target for the notification (email address, webhook URL, etc.).
+    ClusterSizingRecommendation:
+      type: object
+      properties:
+        clusterName:
+          type: string
+        currentMonthlyRate:
+          type: number
+        recommendedMonthlyRate:
+          type: number
+        monthlySavings:
+          type: number
+        currentNodeCount:
+          type: integer
+        recommendedNodeCount:
+          type: integer
+        currentNodeType:
+          type: string
+        recommendedNodeType:
+          type: string
+    RequestSizingRecommendation:
+      type: object
+      properties:
+        clusterName:
+          type: string
+        namespace:
+          type: string
+        controllerKind:
+          type: string
+        controllerName:
+          type: string
+        containerName:
+          type: string
+        currentCPURequest:
+          type: number
+        recommendedCPURequest:
+          type: number
+        currentRAMBytesRequest:
+          type: number
+        recommendedRAMBytesRequest:
+          type: number
+        monthlySavings:
+          type: number
+    Budget:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the budget.
+        name:
+          type: string
+          description: Name of the budget rule.
+        amount:
+          type: number
+          description: Budget amount limit.
+        interval:
+          type: string
+          enum:
+          - weekly
+          - monthly
+          description: Recurrence interval of the budget.
+        aggregation:
+          type: string
+          description: The field used to scope the budget, such as namespace, cluster, or label.
+        filter:
+          type: string
+          description: Filter expression to scope the budget to specific workloads.
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/BudgetAction'
+          description: Alert actions when budget thresholds are reached.
+        currentSpend:
+          type: number
+          description: Current spend within the budget period.
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    Asset:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Type of asset (Node, Disk, LoadBalancer, ClusterManagement, etc.)
+        properties:
+          type: object
+          properties:
+            cluster:
+              type: string
+            name:
+              type: string
+            providerID:
+              type: string
+            provider:
+              type: string
+            account:
+              type: string
+            project:
+              type: string
+            service:
+              type: string
+            category:
+              type: string
+            labels:
+              type: object
+              additionalProperties:
+                type: string
+        window:
+          type: object
+          properties:
+            start:
+              type: string
+              format: date-time
+            end:
+              type: string
+              format: date-time
+        start:
+          type: string
+          format: date-time
+        end:
+          type: string
+          format: date-time
+        minutes:
+          type: number
+        adjustment:
+          type: number
+        totalCost:
+          type: number
+    BudgetInput:
+      type: object
+      required:
+      - name
+      - amount
+      - interval
+      properties:
+        name:
+          type: string
+          description: Name of the budget rule.
+        amount:
+          type: number
+          description: Budget amount limit.
+        interval:
+          type: string
+          enum:
+          - weekly
+          - monthly
+          description: Recurrence interval of the budget.
+        aggregation:
+          type: string
+          description: The field used to scope the budget.
+        filter:
+          type: string
+          description: Filter expression to scope the budget.
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/BudgetAction'
+          description: Alert actions for threshold notifications.
+    Allocation:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the allocation.
+        properties:
+          type: object
+          properties:
+            cluster:
+              type: string
+            node:
+              type: string
+            namespace:
+              type: string
+            controller:
+              type: string
+            controllerKind:
+              type: string
+            pod:
+              type: string
+            container:
+              type: string
+            labels:
+              type: object
+              additionalProperties:
+                type: string
+            annotations:
+              type: object
+              additionalProperties:
+                type: string
+            services:
+              type: array
+              items:
+                type: string
+        window:
+          type: object
+          properties:
+            start:
+              type: string
+              format: date-time
+            end:
+              type: string
+              format: date-time
+        start:
+          type: string
+          format: date-time
+        end:
+          type: string
+          format: date-time
+        cpuCores:
+          type: number
+        cpuCoreRequestAverage:
+          type: number
+        cpuCoreUsageAverage:
+          type: number
+        cpuCoreHours:
+          type: number
+        cpuCost:
+          type: number
+        cpuCostAdjustment:
+          type: number
+        cpuEfficiency:
+          type: number
+        gpuCount:
+          type: number
+        gpuHours:
+          type: number
+        gpuCost:
+          type: number
+        gpuCostAdjustment:
+          type: number
+        networkTransferBytes:
+          type: number
+        networkReceiveBytes:
+          type: number
+        networkCost:
+          type: number
+        networkCostAdjustment:
+          type: number
+        loadBalancerCost:
+          type: number
+        loadBalancerCostAdjustment:
+          type: number
+        pvBytes:
+          type: number
+        pvByteHours:
+          type: number
+        pvCost:
+          type: number
+        pvCostAdjustment:
+          type: number
+        ramBytes:
+          type: number
+        ramByteRequestAverage:
+          type: number
+        ramByteUsageAverage:
+          type: number
+        ramByteHours:
+          type: number
+        ramCost:
+          type: number
+        ramCostAdjustment:
+          type: number
+        ramEfficiency:
+          type: number
+        externalCost:
+          type: number
+        sharedCost:
+          type: number
+        totalCost:
+          type: number
+        totalEfficiency:
+          type: number
