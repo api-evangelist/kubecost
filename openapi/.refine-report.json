@@ -1,0 +1,14 @@
+{
+  "provider": "kubecost",
+  "sources": [
+    "kubecost-model-api-openapi.yml"
+  ],
+  "outputs": [
+    "kubecost-model-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
