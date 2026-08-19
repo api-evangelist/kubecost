@@ -1,0 +1,684 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kubecost Allocation Model API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Model",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Kubecost Query allocation cost data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://{kubecost-address}/model/allocation",
+            "params": [
+              {
+                "name": "window",
+                "value": "",
+                "type": "query",
+                "description": "Duration of time over which to query. Accepts units of time (e.g. 3d, 24h, 7d), relative time (e.g. yesterday, lastweek, lastmonth), or RFC3339 date pairs."
+              },
+              {
+                "name": "aggregate",
+                "value": "",
+                "type": "query",
+                "description": "Field by which to aggregate results. Supported values include cluster, namespace, controllerKind, controller, service, deployment, statefulset, daemonset, job, label, annotation, pod, and container. Supports multi-aggregation via comma-separated values."
+              },
+              {
+                "name": "step",
+                "value": "",
+                "type": "query",
+                "description": "Duration of a single allocation set. If unspecified, this defaults to the window, so that you receive exactly one set for the entire window."
+              },
+              {
+                "name": "accumulate",
+                "value": "",
+                "type": "query",
+                "description": "If true, sum the entire range of sets into a single set."
+              },
+              {
+                "name": "idle",
+                "value": "",
+                "type": "query",
+                "description": "Whether to return idle cost. If true, idle allocations are returned."
+              },
+              {
+                "name": "external",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include external (out-of-cluster) costs."
+              },
+              {
+                "name": "filterClusters",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by cluster name (comma-separated)."
+              },
+              {
+                "name": "filterNamespaces",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by namespace (comma-separated)."
+              },
+              {
+                "name": "filterControllerKinds",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by controller kind (comma-separated)."
+              },
+              {
+                "name": "filterControllers",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by controller name (comma-separated)."
+              },
+              {
+                "name": "filterLabels",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by label in the format label:value (comma-separated)."
+              },
+              {
+                "name": "filterAnnotations",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by annotation in the format annotation:value (comma-separated)."
+              },
+              {
+                "name": "filterServices",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by service (comma-separated)."
+              },
+              {
+                "name": "shareIdle",
+                "value": "",
+                "type": "query",
+                "description": "If true, idle cost is allocated proportionally across tenants."
+              },
+              {
+                "name": "splitIdle",
+                "value": "",
+                "type": "query",
+                "description": "If true, idle cost is split into separate allocations by cluster and node."
+              },
+              {
+                "name": "idleByNode",
+                "value": "",
+                "type": "query",
+                "description": "If true, idle allocations are created on a per-node basis."
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Output format. Supports csv and json."
+              }
+            ]
+          },
+          "docs": "Retrieves cost allocation data for Kubernetes workloads, aggregated by the specified field over the given time window."
+        },
+        {
+          "info": {
+            "name": "Kubecost Query total allocation costs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://{kubecost-address}/model/allocation/totals",
+            "params": [
+              {
+                "name": "window",
+                "value": "",
+                "type": "query",
+                "description": "Duration of time over which to query."
+              },
+              {
+                "name": "aggregate",
+                "value": "",
+                "type": "query",
+                "description": "Field by which to aggregate results."
+              },
+              {
+                "name": "filterClusters",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filterNamespaces",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a single total cost value for the given window, without individual allocations breakdown."
+        },
+        {
+          "info": {
+            "name": "Kubecost Query asset cost data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://{kubecost-address}/model/assets",
+            "params": [
+              {
+                "name": "window",
+                "value": "",
+                "type": "query",
+                "description": "Duration of time over which to query. Accepts units of time (e.g. 3d, 24h, 7d), relative time (e.g. yesterday, lastweek), or RFC3339 date pairs."
+              },
+              {
+                "name": "aggregate",
+                "value": "",
+                "type": "query",
+                "description": "Field by which to aggregate results. Supported values include account, category, cluster, name, project, providerid, provider, service, type, department, environment, owner, product, team, and label:<name>. Supports multi-aggregation via comma-separated values."
+              },
+              {
+                "name": "accumulate",
+                "value": "",
+                "type": "query",
+                "description": "If true, sum the entire range into a single set."
+              },
+              {
+                "name": "filterClusters",
+                "value": "",
+                "type": "query",
+                "description": "Filter by cluster name (comma-separated)."
+              },
+              {
+                "name": "filterTypes",
+                "value": "",
+                "type": "query",
+                "description": "Filter by asset type (comma-separated). Supported values include Node, Disk, LoadBalancer, ClusterManagement, Network, Attached."
+              },
+              {
+                "name": "filterAccounts",
+                "value": "",
+                "type": "query",
+                "description": "Filter by account (comma-separated)."
+              },
+              {
+                "name": "filterProjects",
+                "value": "",
+                "type": "query",
+                "description": "Filter by project (comma-separated)."
+              },
+              {
+                "name": "filterProviders",
+                "value": "",
+                "type": "query",
+                "description": "Filter by provider (comma-separated)."
+              },
+              {
+                "name": "filterCategories",
+                "value": "",
+                "type": "query",
+                "description": "Filter by category (comma-separated)."
+              },
+              {
+                "name": "filterLabels",
+                "value": "",
+                "type": "query",
+                "description": "Filter by label in the format label:value."
+              },
+              {
+                "name": "filterServices",
+                "value": "",
+                "type": "query",
+                "description": "Filter by service (comma-separated)."
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Output format. Supports csv and json."
+              }
+            ]
+          },
+          "docs": "Retrieves cost data for individual Kubernetes assets such as nodes, persistent volumes, load balancers, and cluster management costs."
+        },
+        {
+          "info": {
+            "name": "Kubecost Query total asset costs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://{kubecost-address}/model/assets/totals",
+            "params": [
+              {
+                "name": "window",
+                "value": "",
+                "type": "query",
+                "description": "Duration of time over which to query."
+              },
+              {
+                "name": "filterClusters",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filterTypes",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a single total cost for assets in the given window."
+        },
+        {
+          "info": {
+            "name": "Kubecost List all budgets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://{kubecost-address}/model/budget"
+          },
+          "docs": "Retrieves a list of all configured budget rules."
+        },
+        {
+          "info": {
+            "name": "Kubecost Create a budget",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://{kubecost-address}/model/budget",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new recurring budget rule for Kubernetes spending."
+        },
+        {
+          "info": {
+            "name": "Kubecost Get a specific budget",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://{kubecost-address}/model/budget/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the budget."
+              }
+            ]
+          },
+          "docs": "Retrieves a specific budget rule by ID."
+        },
+        {
+          "info": {
+            "name": "Kubecost Update a budget",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://{kubecost-address}/model/budget/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the budget."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing budget rule."
+        },
+        {
+          "info": {
+            "name": "Kubecost Delete a budget",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://{kubecost-address}/model/budget/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the budget."
+              }
+            ]
+          },
+          "docs": "Deletes an existing budget rule."
+        },
+        {
+          "info": {
+            "name": "Kubecost Query cloud cost data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://{kubecost-address}/model/cloudCost",
+            "params": [
+              {
+                "name": "window",
+                "value": "",
+                "type": "query",
+                "description": "Duration of time over which to query. Accepts daily intervals (e.g. 3d) or RFC3339 date pairs."
+              },
+              {
+                "name": "aggregate",
+                "value": "",
+                "type": "query",
+                "description": "Field by which to aggregate results. Supported values include invoiceEntityID, accountID, provider, service, and label:<name>. Supports multi-aggregation via comma-separated values."
+              },
+              {
+                "name": "accumulate",
+                "value": "",
+                "type": "query",
+                "description": "If true, sum the entire range into a single set."
+              },
+              {
+                "name": "filterInvoiceEntityIDs",
+                "value": "",
+                "type": "query",
+                "description": "Filter by invoice entity ID (comma-separated)."
+              },
+              {
+                "name": "filterAccountIDs",
+                "value": "",
+                "type": "query",
+                "description": "Filter by account ID (comma-separated)."
+              },
+              {
+                "name": "filterProviders",
+                "value": "",
+                "type": "query",
+                "description": "Filter by provider (comma-separated)."
+              },
+              {
+                "name": "filterServices",
+                "value": "",
+                "type": "query",
+                "description": "Filter by service (comma-separated)."
+              },
+              {
+                "name": "filterLabels",
+                "value": "",
+                "type": "query",
+                "description": "Filter by label in the format label:value."
+              }
+            ]
+          },
+          "docs": "Retrieves cloud cost data from cloud service providers, with support for aggregation and filtering."
+        },
+        {
+          "info": {
+            "name": "Kubecost Query cloud cost view data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://{kubecost-address}/model/cloudCost/view",
+            "params": [
+              {
+                "name": "window",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "aggregate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "accumulate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filterInvoiceEntityIDs",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filterAccountIDs",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filterProviders",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filterServices",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Default endpoint for querying cloud costs. Provides a comprehensive view of cloud spending."
+        },
+        {
+          "info": {
+            "name": "Kubecost Query top cloud costs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://{kubecost-address}/model/cloudCost/top",
+            "params": [
+              {
+                "name": "window",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "aggregate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "accumulate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filterProviders",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filterServices",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return."
+              }
+            ]
+          },
+          "docs": "Returns the top cloud cost items. Accepts all parameters of the view endpoint."
+        },
+        {
+          "info": {
+            "name": "Kubecost Forecast allocation costs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://{kubecost-address}/model/forecast/allocation",
+            "params": [
+              {
+                "name": "window",
+                "value": "",
+                "type": "query",
+                "description": "Historical window of time to use as the basis for the forecast."
+              },
+              {
+                "name": "forecastWindow",
+                "value": "",
+                "type": "query",
+                "description": "Duration of time to forecast into the future."
+              },
+              {
+                "name": "aggregate",
+                "value": "",
+                "type": "query",
+                "description": "Field by which to aggregate results. Supports the same values as the Allocation API aggregate parameter."
+              },
+              {
+                "name": "accumulate",
+                "value": "",
+                "type": "query",
+                "description": "If true, sum the entire range into a single set."
+              },
+              {
+                "name": "filterClusters",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filterNamespaces",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a cost forecast for Kubernetes workloads based on historical allocation data, projecting future costs over the specified forecast window."
+        },
+        {
+          "info": {
+            "name": "Kubecost Get cluster right-sizing recommendations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://{kubecost-address}/model/savings/clusterSizingETL",
+            "params": [
+              {
+                "name": "window",
+                "value": "",
+                "type": "query",
+                "description": "Duration of time to analyze for recommendations."
+              }
+            ]
+          },
+          "docs": "Returns recommendations for right-sizing clusters based on actual resource usage, including potential monthly savings."
+        },
+        {
+          "info": {
+            "name": "Kubecost Get container request right-sizing recommendations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://{kubecost-address}/model/savings/requestSizingV2",
+            "params": [
+              {
+                "name": "window",
+                "value": "",
+                "type": "query",
+                "description": "Duration of time to analyze for recommendations."
+              },
+              {
+                "name": "targetCPUUtilization",
+                "value": "",
+                "type": "query",
+                "description": "Target CPU utilization percentage (0-1)."
+              },
+              {
+                "name": "targetRAMUtilization",
+                "value": "",
+                "type": "query",
+                "description": "Target RAM utilization percentage (0-1)."
+              },
+              {
+                "name": "filterClusters",
+                "value": "",
+                "type": "query",
+                "description": "Filter by cluster name (comma-separated)."
+              },
+              {
+                "name": "filterNamespaces",
+                "value": "",
+                "type": "query",
+                "description": "Filter by namespace (comma-separated)."
+              },
+              {
+                "name": "filterControllers",
+                "value": "",
+                "type": "query",
+                "description": "Filter by controller name (comma-separated)."
+              },
+              {
+                "name": "filterLabels",
+                "value": "",
+                "type": "query",
+                "description": "Filter by label in the format label:value."
+              }
+            ]
+          },
+          "docs": "Returns recommendations for right-sizing container resource requests (CPU and memory) based on actual usage patterns."
+        },
+        {
+          "info": {
+            "name": "Kubecost List abandoned workloads",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://{kubecost-address}/model/savings/abandonedWorkloads",
+            "params": [
+              {
+                "name": "window",
+                "value": "",
+                "type": "query",
+                "description": "Duration of time to analyze."
+              }
+            ]
+          },
+          "docs": "Returns a list of workloads that appear to be abandoned based on low resource utilization over the specified window."
+        },
+        {
+          "info": {
+            "name": "Kubecost List orphaned disks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://{kubecost-address}/model/savings/orphanedDisks"
+          },
+          "docs": "Returns a list of persistent volumes and disks that are not attached to any running workload."
+        },
+        {
+          "info": {
+            "name": "Kubecost List orphaned IP addresses",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://{kubecost-address}/model/savings/orphanedIPs"
+          },
+          "docs": "Returns a list of allocated IP addresses that are not associated with any active resource."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

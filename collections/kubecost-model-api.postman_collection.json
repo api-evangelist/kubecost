@@ -1,0 +1,2979 @@
+{
+  "item": [
+    {
+      "id": "69141d7c-77c0-439d-9430-ab5e7a22e800",
+      "name": "Model",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9abec705-87e8-41e2-a313-eefb196b26ec",
+          "name": "Kubecost Query allocation cost data",
+          "request": {
+            "name": "Kubecost Query allocation cost data",
+            "description": {
+              "content": "Retrieves cost allocation data for Kubernetes workloads, aggregated by the specified field over the given time window.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "model",
+                "allocation"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "window",
+                  "value": "<string>",
+                  "description": "(Required) Duration of time over which to query. Accepts units of time (e.g. 3d, 24h, 7d), relative time (e.g. yesterday, lastweek, lastmonth), or RFC3339 date pairs."
+                },
+                {
+                  "disabled": false,
+                  "key": "aggregate",
+                  "value": "<string>",
+                  "description": "Field by which to aggregate results. Supported values include cluster, namespace, controllerKind, controller, service, deployment, statefulset, daemonset, job, label, annotation, pod, and container. Supports multi-aggregation via comma-separated values."
+                },
+                {
+                  "disabled": false,
+                  "key": "step",
+                  "value": "<string>",
+                  "description": "Duration of a single allocation set. If unspecified, this defaults to the window, so that you receive exactly one set for the entire window."
+                },
+                {
+                  "disabled": false,
+                  "key": "accumulate",
+                  "value": "false",
+                  "description": "If true, sum the entire range of sets into a single set."
+                },
+                {
+                  "disabled": false,
+                  "key": "idle",
+                  "value": "true",
+                  "description": "Whether to return idle cost. If true, idle allocations are returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "external",
+                  "value": "false",
+                  "description": "Whether to include external (out-of-cluster) costs."
+                },
+                {
+                  "disabled": false,
+                  "key": "filterClusters",
+                  "value": "<string>",
+                  "description": "Filter results by cluster name (comma-separated)."
+                },
+                {
+                  "disabled": false,
+                  "key": "filterNamespaces",
+                  "value": "<string>",
+                  "description": "Filter results by namespace (comma-separated)."
+                },
+                {
+                  "disabled": false,
+                  "key": "filterControllerKinds",
+                  "value": "<string>",
+                  "description": "Filter results by controller kind (comma-separated)."
+                },
+                {
+                  "disabled": false,
+                  "key": "filterControllers",
+                  "value": "<string>",
+                  "description": "Filter results by controller name (comma-separated)."
+                },
+                {
+                  "disabled": false,
+                  "key": "filterLabels",
+                  "value": "<string>",
+                  "description": "Filter results by label in the format label:value (comma-separated)."
+                },
+                {
+                  "disabled": false,
+                  "key": "filterAnnotations",
+                  "value": "<string>",
+                  "description": "Filter results by annotation in the format annotation:value (comma-separated)."
+                },
+                {
+                  "disabled": false,
+                  "key": "filterServices",
+                  "value": "<string>",
+                  "description": "Filter results by service (comma-separated)."
+                },
+                {
+                  "disabled": false,
+                  "key": "shareIdle",
+                  "value": "false",
+                  "description": "If true, idle cost is allocated proportionally across tenants."
+                },
+                {
+                  "disabled": false,
+                  "key": "splitIdle",
+                  "value": "false",
+                  "description": "If true, idle cost is split into separate allocations by cluster and node."
+                },
+                {
+                  "disabled": false,
+                  "key": "idleByNode",
+                  "value": "false",
+                  "description": "If true, idle allocations are created on a per-node basis."
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "json",
+                  "description": "Output format. Supports csv and json."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Address of the Kubecost instance",
+                  "type": "any",
+                  "value": "{{kubecost-address}}",
+                  "key": "kubecost-address"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a4010559-9140-4da0-9dba-2a0fd006a888",
+              "name": "Successful allocation query response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "allocation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "window",
+                      "value": "3d"
+                    },
+                    {
+                      "key": "aggregate",
+                      "value": "namespace"
+                    },
+                    {
+                      "key": "step",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accumulate",
+                      "value": "false"
+                    },
+                    {
+                      "key": "idle",
+                      "value": "true"
+                    },
+                    {
+                      "key": "external",
+                      "value": "false"
+                    },
+                    {
+                      "key": "filterClusters",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterNamespaces",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterControllerKinds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterControllers",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterLabels",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterAnnotations",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterServices",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "shareIdle",
+                      "value": "false"
+                    },
+                    {
+                      "key": "splitIdle",
+                      "value": "false"
+                    },
+                    {
+                      "key": "idleByNode",
+                      "value": "false"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Address of the Kubecost instance",
+                      "type": "any",
+                      "value": "{{kubecost-address}}",
+                      "key": "kubecost-address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 200,\n  \"data\": [\n    {\n      \"key_0\": {\n        \"name\": \"string\",\n        \"properties\": {\n          \"cluster\": \"string\",\n          \"node\": \"string\",\n          \"namespace\": \"string\",\n          \"controller\": \"string\",\n          \"controllerKind\": \"string\",\n          \"pod\": \"string\",\n          \"container\": \"string\",\n          \"labels\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\"\n          },\n          \"annotations\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\"\n          },\n          \"services\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"window\": {\n          \"start\": \"1997-09-25T12:11:35.774Z\",\n          \"end\": \"1995-01-02T18:54:36.282Z\"\n        },\n        \"start\": \"2010-05-08T23:47:50.152Z\",\n        \"end\": \"2026-03-25T13:06:39.515Z\",\n        \"cpuCores\": 1805.1840218589132,\n        \"cpuCoreRequestAverage\": 7793.274421185501,\n        \"cpuCoreUsageAverage\": 8696.390169535794,\n        \"cpuCoreHours\": 8687.737514070253,\n        \"cpuCost\": 4391.945637244351,\n        \"cpuCostAdjustment\": 9303.318290968908,\n        \"cpuEfficiency\": 507.50705707642396,\n        \"gpuCount\": 912.6294802823054,\n        \"gpuHours\": 817.4942189988054,\n        \"gpuCost\": 6942.584133787237,\n        \"gpuCostAdjustment\": 3678.819946572751,\n        \"networkTransferBytes\": 228.68242827014384,\n        \"networkReceiveBytes\": 428.4481841709975,\n        \"networkCost\": 3307.8097904607516,\n        \"networkCostAdjustment\": 7889.812353667154,\n        \"loadBalancerCost\": 8795.047535198675,\n        \"loadBalancerCostAdjustment\": 229.41739098757296,\n        \"pvBytes\": 1708.6618690025168,\n        \"pvByteHours\": 2579.931330530668,\n        \"pvCost\": 7783.303935141572,\n        \"pvCostAdjustment\": 4957.647688940875,\n        \"ramBytes\": 3439.7653290058383,\n        \"ramByteRequestAverage\": 1560.82913124025,\n        \"ramByteUsageAverage\": 5202.43636290001,\n        \"ramByteHours\": 4919.492571898862,\n        \"ramCost\": 8106.712177310589,\n        \"ramCostAdjustment\": 1207.4542229166152,\n        \"ramEfficiency\": 563.1239583760961,\n        \"externalCost\": 1466.380001194042,\n        \"sharedCost\": 1108.5232925178645,\n        \"totalCost\": 5127.118779161052,\n        \"totalEfficiency\": 2250.1272988660426\n      }\n    },\n    {\n      \"key_0\": {\n        \"name\": \"string\",\n        \"properties\": {\n          \"cluster\": \"string\",\n          \"node\": \"string\",\n          \"namespace\": \"string\",\n          \"controller\": \"string\",\n          \"controllerKind\": \"string\",\n          \"pod\": \"string\",\n          \"container\": \"string\",\n          \"labels\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\",\n            \"key_2\": \"string\"\n          },\n          \"annotations\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\",\n            \"key_2\": \"string\",\n            \"key_3\": \"string\"\n          },\n          \"services\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"window\": {\n          \"start\": \"1955-09-22T04:19:06.964Z\",\n          \"end\": \"2020-10-24T19:22:01.792Z\"\n        },\n        \"start\": \"2009-08-09T02:30:57.666Z\",\n        \"end\": \"1978-07-02T19:40:57.707Z\",\n        \"cpuCores\": 4792.482719603538,\n        \"cpuCoreRequestAverage\": 6060.08809965983,\n        \"cpuCoreUsageAverage\": 8815.35334820445,\n        \"cpuCoreHours\": 4212.764358945938,\n        \"cpuCost\": 3509.4209967236147,\n        \"cpuCostAdjustment\": 6355.977219628599,\n        \"cpuEfficiency\": 8087.303051355059,\n        \"gpuCount\": 597.2575928212253,\n        \"gpuHours\": 9013.67367435313,\n        \"gpuCost\": 5363.821467172924,\n        \"gpuCostAdjustment\": 9994.443041833341,\n        \"networkTransferBytes\": 8169.64304946006,\n        \"networkReceiveBytes\": 6995.155637660117,\n        \"networkCost\": 1680.2889321836833,\n        \"networkCostAdjustment\": 1685.7457887904636,\n        \"loadBalancerCost\": 8892.846404141888,\n        \"loadBalancerCostAdjustment\": 4266.124128057075,\n        \"pvBytes\": 221.50057516348687,\n        \"pvByteHours\": 5621.087135893345,\n        \"pvCost\": 2973.048438147912,\n        \"pvCostAdjustment\": 69.44942247454789,\n        \"ramBytes\": 3453.6643493672104,\n        \"ramByteRequestAverage\": 599.6091456854169,\n        \"ramByteUsageAverage\": 9385.597737499453,\n        \"ramByteHours\": 8160.183311596064,\n        \"ramCost\": 6019.098135058518,\n        \"ramCostAdjustment\": 8967.241749085599,\n        \"ramEfficiency\": 347.52574666614856,\n        \"externalCost\": 2533.8724086567067,\n        \"sharedCost\": 3267.674614811821,\n        \"totalCost\": 9485.046300251066,\n        \"totalEfficiency\": 8858.268526759004\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5a6d3448-6d03-4361-8aac-1337a17e26d3",
+              "name": "Invalid request parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "allocation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "window",
+                      "value": "3d"
+                    },
+                    {
+                      "key": "aggregate",
+                      "value": "namespace"
+                    },
+                    {
+                      "key": "step",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accumulate",
+                      "value": "false"
+                    },
+                    {
+                      "key": "idle",
+                      "value": "true"
+                    },
+                    {
+                      "key": "external",
+                      "value": "false"
+                    },
+                    {
+                      "key": "filterClusters",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterNamespaces",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterControllerKinds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterControllers",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterLabels",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterAnnotations",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterServices",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "shareIdle",
+                      "value": "false"
+                    },
+                    {
+                      "key": "splitIdle",
+                      "value": "false"
+                    },
+                    {
+                      "key": "idleByNode",
+                      "value": "false"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Address of the Kubecost instance",
+                      "type": "any",
+                      "value": "{{kubecost-address}}",
+                      "key": "kubecost-address"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2b6bbed2-aa55-49d4-a3fc-693aaae1fe1b",
+          "name": "Kubecost Query total allocation costs",
+          "request": {
+            "name": "Kubecost Query total allocation costs",
+            "description": {
+              "content": "Returns a single total cost value for the given window, without individual allocations breakdown.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "model",
+                "allocation",
+                "totals"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "window",
+                  "value": "<string>",
+                  "description": "(Required) Duration of time over which to query."
+                },
+                {
+                  "disabled": false,
+                  "key": "aggregate",
+                  "value": "<string>",
+                  "description": "Field by which to aggregate results."
+                },
+                {
+                  "disabled": false,
+                  "key": "filterClusters",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filterNamespaces",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Address of the Kubecost instance",
+                  "type": "any",
+                  "value": "{{kubecost-address}}",
+                  "key": "kubecost-address"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "91c9b6a5-e916-4112-a12a-d82c8729374c",
+              "name": "Successful total allocation query response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "allocation",
+                    "totals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "window",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aggregate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterClusters",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterNamespaces",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Address of the Kubecost instance",
+                      "type": "any",
+                      "value": "{{kubecost-address}}",
+                      "key": "kubecost-address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 4849,\n  \"data\": [\n    {\n      \"key_0\": {\n        \"name\": \"string\",\n        \"properties\": {\n          \"cluster\": \"string\",\n          \"node\": \"string\",\n          \"namespace\": \"string\",\n          \"controller\": \"string\",\n          \"controllerKind\": \"string\",\n          \"pod\": \"string\",\n          \"container\": \"string\",\n          \"labels\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\"\n          },\n          \"annotations\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\",\n            \"key_2\": \"string\",\n            \"key_3\": \"string\"\n          },\n          \"services\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"window\": {\n          \"start\": \"1992-08-08T08:29:20.612Z\",\n          \"end\": \"1979-03-19T02:17:59.985Z\"\n        },\n        \"start\": \"1991-03-05T02:34:52.875Z\",\n        \"end\": \"1965-07-13T13:57:28.593Z\",\n        \"cpuCores\": 7489.795444120787,\n        \"cpuCoreRequestAverage\": 1836.8732839060585,\n        \"cpuCoreUsageAverage\": 4329.037555793079,\n        \"cpuCoreHours\": 261.13917490794836,\n        \"cpuCost\": 3572.7175373085197,\n        \"cpuCostAdjustment\": 3279.6374466733314,\n        \"cpuEfficiency\": 2374.7605613249057,\n        \"gpuCount\": 9465.70059594243,\n        \"gpuHours\": 6595.803575479181,\n        \"gpuCost\": 6133.032877831954,\n        \"gpuCostAdjustment\": 3179.785056560215,\n        \"networkTransferBytes\": 6119.824819168306,\n        \"networkReceiveBytes\": 3479.4196152753775,\n        \"networkCost\": 7445.870653552772,\n        \"networkCostAdjustment\": 1732.0432760642168,\n        \"loadBalancerCost\": 7716.5291384029415,\n        \"loadBalancerCostAdjustment\": 4779.731648737868,\n        \"pvBytes\": 1669.236271137432,\n        \"pvByteHours\": 3109.727312446774,\n        \"pvCost\": 575.9096312913181,\n        \"pvCostAdjustment\": 1163.5360337769084,\n        \"ramBytes\": 480.2868425897444,\n        \"ramByteRequestAverage\": 880.4933548612793,\n        \"ramByteUsageAverage\": 4694.9411405799865,\n        \"ramByteHours\": 8093.123993216352,\n        \"ramCost\": 1255.2157953431342,\n        \"ramCostAdjustment\": 5674.108404676923,\n        \"ramEfficiency\": 2438.141702183271,\n        \"externalCost\": 3799.153841786499,\n        \"sharedCost\": 777.9440759066136,\n        \"totalCost\": 2982.202107537925,\n        \"totalEfficiency\": 8707.060823192354\n      }\n    },\n    {\n      \"key_0\": {\n        \"name\": \"string\",\n        \"properties\": {\n          \"cluster\": \"string\",\n          \"node\": \"string\",\n          \"namespace\": \"string\",\n          \"controller\": \"string\",\n          \"controllerKind\": \"string\",\n          \"pod\": \"string\",\n          \"container\": \"string\",\n          \"labels\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\",\n            \"key_2\": \"string\"\n          },\n          \"annotations\": {\n            \"key_0\": \"string\"\n          },\n          \"services\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"window\": {\n          \"start\": \"1978-10-27T22:40:45.705Z\",\n          \"end\": \"1997-04-02T11:41:40.619Z\"\n        },\n        \"start\": \"1974-06-06T23:10:53.856Z\",\n        \"end\": \"1970-07-27T22:17:57.235Z\",\n        \"cpuCores\": 1378.7732436810595,\n        \"cpuCoreRequestAverage\": 8253.416168373355,\n        \"cpuCoreUsageAverage\": 7543.219877732525,\n        \"cpuCoreHours\": 2972.9241919158344,\n        \"cpuCost\": 9884.234761390644,\n        \"cpuCostAdjustment\": 5549.6024447730315,\n        \"cpuEfficiency\": 2061.075566458971,\n        \"gpuCount\": 3071.4991856708784,\n        \"gpuHours\": 3730.908120225441,\n        \"gpuCost\": 6711.93886154563,\n        \"gpuCostAdjustment\": 7166.854102314613,\n        \"networkTransferBytes\": 1586.0755152224915,\n        \"networkReceiveBytes\": 1352.062911523556,\n        \"networkCost\": 8556.387087398887,\n        \"networkCostAdjustment\": 8587.54542213114,\n        \"loadBalancerCost\": 8426.687111292105,\n        \"loadBalancerCostAdjustment\": 3659.4387471960476,\n        \"pvBytes\": 5489.854360547154,\n        \"pvByteHours\": 5168.422108514261,\n        \"pvCost\": 9338.653838136599,\n        \"pvCostAdjustment\": 9924.408469593194,\n        \"ramBytes\": 3878.470386335798,\n        \"ramByteRequestAverage\": 8891.654531628927,\n        \"ramByteUsageAverage\": 3731.3394492195207,\n        \"ramByteHours\": 7859.360060417301,\n        \"ramCost\": 8084.721262461486,\n        \"ramCostAdjustment\": 5301.323296241398,\n        \"ramEfficiency\": 8286.809503875946,\n        \"externalCost\": 9389.14054339421,\n        \"sharedCost\": 4078.900211690507,\n        \"totalCost\": 8341.904135042758,\n        \"totalEfficiency\": 4876.706851120021\n      },\n      \"key_1\": {\n        \"name\": \"string\",\n        \"properties\": {\n          \"cluster\": \"string\",\n          \"node\": \"string\",\n          \"namespace\": \"string\",\n          \"controller\": \"string\",\n          \"controllerKind\": \"string\",\n          \"pod\": \"string\",\n          \"container\": \"string\",\n          \"labels\": {\n            \"key_0\": \"string\"\n          },\n          \"annotations\": {\n            \"key_0\": \"string\"\n          },\n          \"services\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"window\": {\n          \"start\": \"1949-07-21T01:22:49.679Z\",\n          \"end\": \"1971-02-15T10:02:06.277Z\"\n        },\n        \"start\": \"1997-03-26T21:34:40.928Z\",\n        \"end\": \"1981-01-20T07:08:21.851Z\",\n        \"cpuCores\": 2399.3845309804183,\n        \"cpuCoreRequestAverage\": 1561.4671498224386,\n        \"cpuCoreUsageAverage\": 6006.3862353742625,\n        \"cpuCoreHours\": 3587.057902599007,\n        \"cpuCost\": 6447.7113707530025,\n        \"cpuCostAdjustment\": 2649.674422391404,\n        \"cpuEfficiency\": 5698.267129026533,\n        \"gpuCount\": 3289.212232364711,\n        \"gpuHours\": 7910.93787369742,\n        \"gpuCost\": 5787.683794578659,\n        \"gpuCostAdjustment\": 90.30569792684906,\n        \"networkTransferBytes\": 3604.263997079632,\n        \"networkReceiveBytes\": 3507.7667279762613,\n        \"networkCost\": 9505.09637361236,\n        \"networkCostAdjustment\": 287.2594540401885,\n        \"loadBalancerCost\": 364.1830703490723,\n        \"loadBalancerCostAdjustment\": 1508.985620541128,\n        \"pvBytes\": 7792.6115373707335,\n        \"pvByteHours\": 1558.321159601095,\n        \"pvCost\": 1307.1927161470164,\n        \"pvCostAdjustment\": 7193.6590332528,\n        \"ramBytes\": 1136.5727119418568,\n        \"ramByteRequestAverage\": 3240.5476756448816,\n        \"ramByteUsageAverage\": 1002.7465375158163,\n        \"ramByteHours\": 6695.490821153162,\n        \"ramCost\": 5554.881112321841,\n        \"ramCostAdjustment\": 4186.418805880367,\n        \"ramEfficiency\": 2740.5943229057707,\n        \"externalCost\": 988.1886938266782,\n        \"sharedCost\": 9497.164562941187,\n        \"totalCost\": 8578.971908773605,\n        \"totalEfficiency\": 9492.249490626964\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f7a80a5a-3278-46e1-98ea-ce68586a357b",
+          "name": "Kubecost Query asset cost data",
+          "request": {
+            "name": "Kubecost Query asset cost data",
+            "description": {
+              "content": "Retrieves cost data for individual Kubernetes assets such as nodes, persistent volumes, load balancers, and cluster management costs.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "model",
+                "assets"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "window",
+                  "value": "<string>",
+                  "description": "(Required) Duration of time over which to query. Accepts units of time (e.g. 3d, 24h, 7d), relative time (e.g. yesterday, lastweek), or RFC3339 date pairs."
+                },
+                {
+                  "disabled": false,
+                  "key": "aggregate",
+                  "value": "<string>",
+                  "description": "Field by which to aggregate results. Supported values include account, category, cluster, name, project, providerid, provider, service, type, department, environment, owner, product, team, and label:<name>. Supports multi-aggregation via comma-separated values."
+                },
+                {
+                  "disabled": false,
+                  "key": "accumulate",
+                  "value": "false",
+                  "description": "If true, sum the entire range into a single set."
+                },
+                {
+                  "disabled": false,
+                  "key": "filterClusters",
+                  "value": "<string>",
+                  "description": "Filter by cluster name (comma-separated)."
+                },
+                {
+                  "disabled": false,
+                  "key": "filterTypes",
+                  "value": "<string>",
+                  "description": "Filter by asset type (comma-separated). Supported values include Node, Disk, LoadBalancer, ClusterManagement, Network, Attached."
+                },
+                {
+                  "disabled": false,
+                  "key": "filterAccounts",
+                  "value": "<string>",
+                  "description": "Filter by account (comma-separated)."
+                },
+                {
+                  "disabled": false,
+                  "key": "filterProjects",
+                  "value": "<string>",
+                  "description": "Filter by project (comma-separated)."
+                },
+                {
+                  "disabled": false,
+                  "key": "filterProviders",
+                  "value": "<string>",
+                  "description": "Filter by provider (comma-separated)."
+                },
+                {
+                  "disabled": false,
+                  "key": "filterCategories",
+                  "value": "<string>",
+                  "description": "Filter by category (comma-separated)."
+                },
+                {
+                  "disabled": false,
+                  "key": "filterLabels",
+                  "value": "<string>",
+                  "description": "Filter by label in the format label:value."
+                },
+                {
+                  "disabled": false,
+                  "key": "filterServices",
+                  "value": "<string>",
+                  "description": "Filter by service (comma-separated)."
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "json",
+                  "description": "Output format. Supports csv and json."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Address of the Kubecost instance",
+                  "type": "any",
+                  "value": "{{kubecost-address}}",
+                  "key": "kubecost-address"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5a440ce1-fb4b-4759-90da-6ad23a565be8",
+              "name": "Successful assets query response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "assets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "window",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aggregate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accumulate",
+                      "value": "false"
+                    },
+                    {
+                      "key": "filterClusters",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterTypes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterAccounts",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterProjects",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterProviders",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterCategories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterLabels",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterServices",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Address of the Kubecost instance",
+                      "type": "any",
+                      "value": "{{kubecost-address}}",
+                      "key": "kubecost-address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 200,\n  \"data\": [\n    {\n      \"key_0\": {\n        \"type\": \"string\",\n        \"properties\": {\n          \"cluster\": \"string\",\n          \"name\": \"string\",\n          \"providerID\": \"string\",\n          \"provider\": \"string\",\n          \"account\": \"string\",\n          \"project\": \"string\",\n          \"service\": \"string\",\n          \"category\": \"string\",\n          \"labels\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\",\n            \"key_2\": \"string\"\n          }\n        },\n        \"window\": {\n          \"start\": \"2003-09-19T16:25:55.183Z\",\n          \"end\": \"1999-04-10T04:38:56.384Z\"\n        },\n        \"start\": \"1991-02-17T15:45:00.241Z\",\n        \"end\": \"2024-11-11T04:30:25.328Z\",\n        \"minutes\": 2503.5148070587265,\n        \"adjustment\": 1386.703953071765,\n        \"totalCost\": 304.6090220985098\n      },\n      \"key_1\": {\n        \"type\": \"string\",\n        \"properties\": {\n          \"cluster\": \"string\",\n          \"name\": \"string\",\n          \"providerID\": \"string\",\n          \"provider\": \"string\",\n          \"account\": \"string\",\n          \"project\": \"string\",\n          \"service\": \"string\",\n          \"category\": \"string\",\n          \"labels\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\"\n          }\n        },\n        \"window\": {\n          \"start\": \"1982-04-20T10:25:27.729Z\",\n          \"end\": \"2021-04-19T10:54:16.383Z\"\n        },\n        \"start\": \"1972-07-23T04:38:44.980Z\",\n        \"end\": \"1976-10-09T00:22:42.860Z\",\n        \"minutes\": 6501.966355196651,\n        \"adjustment\": 6166.482782091584,\n        \"totalCost\": 2967.9146439599026\n      },\n      \"key_2\": {\n        \"type\": \"string\",\n        \"properties\": {\n          \"cluster\": \"string\",\n          \"name\": \"string\",\n          \"providerID\": \"string\",\n          \"provider\": \"string\",\n          \"account\": \"string\",\n          \"project\": \"string\",\n          \"service\": \"string\",\n          \"category\": \"string\",\n          \"labels\": {\n            \"key_0\": \"string\"\n          }\n        },\n        \"window\": {\n          \"start\": \"1983-05-15T07:51:29.536Z\",\n          \"end\": \"1948-07-30T03:49:09.517Z\"\n        },\n        \"start\": \"1965-10-25T10:35:01.717Z\",\n        \"end\": \"1998-05-30T03:58:35.235Z\",\n        \"minutes\": 9539.632106910223,\n        \"adjustment\": 6905.262489338373,\n        \"totalCost\": 5117.095054120094\n      },\n      \"key_3\": {\n        \"type\": \"string\",\n        \"properties\": {\n          \"cluster\": \"string\",\n          \"name\": \"string\",\n          \"providerID\": \"string\",\n          \"provider\": \"string\",\n          \"account\": \"string\",\n          \"project\": \"string\",\n          \"service\": \"string\",\n          \"category\": \"string\",\n          \"labels\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\",\n            \"key_2\": \"string\"\n          }\n        },\n        \"window\": {\n          \"start\": \"2019-05-31T20:42:52.113Z\",\n          \"end\": \"1968-05-18T09:16:31.662Z\"\n        },\n        \"start\": \"2020-12-19T10:27:50.185Z\",\n        \"end\": \"1955-12-03T23:50:14.254Z\",\n        \"minutes\": 5116.871108699719,\n        \"adjustment\": 7139.600506109928,\n        \"totalCost\": 9196.713320615516\n      },\n      \"key_4\": {\n        \"type\": \"string\",\n        \"properties\": {\n          \"cluster\": \"string\",\n          \"name\": \"string\",\n          \"providerID\": \"string\",\n          \"provider\": \"string\",\n          \"account\": \"string\",\n          \"project\": \"string\",\n          \"service\": \"string\",\n          \"category\": \"string\",\n          \"labels\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\",\n            \"key_2\": \"string\"\n          }\n        },\n        \"window\": {\n          \"start\": \"1953-07-06T23:28:29.737Z\",\n          \"end\": \"1994-03-10T08:33:16.582Z\"\n        },\n        \"start\": \"2011-05-29T08:37:58.376Z\",\n        \"end\": \"2022-01-18T22:55:47.343Z\",\n        \"minutes\": 696.6230428309328,\n        \"adjustment\": 705.1372720294357,\n        \"totalCost\": 2155.7174421694526\n      }\n    },\n    {\n      \"key_0\": {\n        \"type\": \"string\",\n        \"properties\": {\n          \"cluster\": \"string\",\n          \"name\": \"string\",\n          \"providerID\": \"string\",\n          \"provider\": \"string\",\n          \"account\": \"string\",\n          \"project\": \"string\",\n          \"service\": \"string\",\n          \"category\": \"string\",\n          \"labels\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\"\n          }\n        },\n        \"window\": {\n          \"start\": \"1953-05-29T15:55:15.751Z\",\n          \"end\": \"1973-03-21T04:19:36.734Z\"\n        },\n        \"start\": \"2012-09-26T05:57:38.732Z\",\n        \"end\": \"1997-08-20T16:25:06.132Z\",\n        \"minutes\": 9696.493099622332,\n        \"adjustment\": 389.7835317441145,\n        \"totalCost\": 8292.06970755941\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "adb72e81-9f27-473b-9242-0b154b36b6e8",
+              "name": "Invalid request parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "assets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "window",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aggregate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accumulate",
+                      "value": "false"
+                    },
+                    {
+                      "key": "filterClusters",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterTypes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterAccounts",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterProjects",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterProviders",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterCategories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterLabels",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterServices",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Address of the Kubecost instance",
+                      "type": "any",
+                      "value": "{{kubecost-address}}",
+                      "key": "kubecost-address"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1a2feff9-29ae-4992-a50e-a32978ad6248",
+          "name": "Kubecost Query total asset costs",
+          "request": {
+            "name": "Kubecost Query total asset costs",
+            "description": {
+              "content": "Returns a single total cost for assets in the given window.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "model",
+                "assets",
+                "totals"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "window",
+                  "value": "<string>",
+                  "description": "(Required) Duration of time over which to query."
+                },
+                {
+                  "disabled": false,
+                  "key": "filterClusters",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filterTypes",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Address of the Kubecost instance",
+                  "type": "any",
+                  "value": "{{kubecost-address}}",
+                  "key": "kubecost-address"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ac36fe0b-6c00-437f-a834-8afbd08b9ca5",
+              "name": "Successful total assets query response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "assets",
+                    "totals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "window",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterClusters",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterTypes",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Address of the Kubecost instance",
+                      "type": "any",
+                      "value": "{{kubecost-address}}",
+                      "key": "kubecost-address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 7151\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fc7cf2c2-f4f8-483b-b42f-1d6e63e88912",
+          "name": "Kubecost List all budgets",
+          "request": {
+            "name": "Kubecost List all budgets",
+            "description": {
+              "content": "Retrieves a list of all configured budget rules.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "model",
+                "budget"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Address of the Kubecost instance",
+                  "type": "any",
+                  "value": "{{kubecost-address}}",
+                  "key": "kubecost-address"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "24a7e5f4-8bff-4daf-98c3-14a2e9f8bfb8",
+              "name": "Successful budget list response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "budget"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Address of the Kubecost instance",
+                      "type": "any",
+                      "value": "{{kubecost-address}}",
+                      "key": "kubecost-address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 200,\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"amount\": 8989.491903012962,\n      \"interval\": \"monthly\",\n      \"aggregation\": \"string\",\n      \"filter\": \"string\",\n      \"actions\": [\n        {\n          \"threshold\": 2660.0312280085536,\n          \"type\": \"msteams\",\n          \"target\": \"string\"\n        },\n        {\n          \"threshold\": 3785.3722276812196,\n          \"type\": \"slack\",\n          \"target\": \"string\"\n        }\n      ],\n      \"currentSpend\": 4971.97622427057,\n      \"createdAt\": \"2018-10-07T17:47:39.399Z\",\n      \"updatedAt\": \"1955-10-15T00:38:11.951Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"amount\": 8032.11497419345,\n      \"interval\": \"monthly\",\n      \"aggregation\": \"string\",\n      \"filter\": \"string\",\n      \"actions\": [\n        {\n          \"threshold\": 1709.8053623200415,\n          \"type\": \"email\",\n          \"target\": \"string\"\n        },\n        {\n          \"threshold\": 7862.894310009399,\n          \"type\": \"msteams\",\n          \"target\": \"string\"\n        }\n      ],\n      \"currentSpend\": 6059.411553616741,\n      \"createdAt\": \"2000-12-09T01:39:56.328Z\",\n      \"updatedAt\": \"1986-09-07T05:04:46.273Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ba568b72-7ba7-4b40-8fb8-48cf7aeb9546",
+          "name": "Kubecost Create a budget",
+          "request": {
+            "name": "Kubecost Create a budget",
+            "description": {
+              "content": "Creates a new recurring budget rule for Kubernetes spending.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "model",
+                "budget"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Address of the Kubecost instance",
+                  "type": "any",
+                  "value": "{{kubecost-address}}",
+                  "key": "kubecost-address"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"amount\": \"<number>\",\n  \"interval\": \"<string>\",\n  \"aggregation\": \"<string>\",\n  \"filter\": \"<string>\",\n  \"actions\": [\n    {\n      \"threshold\": \"<number>\",\n      \"type\": \"<string>\",\n      \"target\": \"<string>\"\n    },\n    {\n      \"threshold\": \"<number>\",\n      \"type\": \"<string>\",\n      \"target\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "889ad717-a7c7-48e7-891a-37d9f0f0b04e",
+              "name": "Budget created successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "budget"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Address of the Kubecost instance",
+                      "type": "any",
+                      "value": "{{kubecost-address}}",
+                      "key": "kubecost-address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"amount\": \"<number>\",\n  \"interval\": \"<string>\",\n  \"aggregation\": \"<string>\",\n  \"filter\": \"<string>\",\n  \"actions\": [\n    {\n      \"threshold\": 4389.553829950258,\n      \"type\": \"slack\",\n      \"target\": \"string\"\n    },\n    {\n      \"threshold\": 118.74268314235104,\n      \"type\": \"msteams\",\n      \"target\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6573,\n  \"data\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"amount\": 3680.503886410902,\n    \"interval\": \"monthly\",\n    \"aggregation\": \"string\",\n    \"filter\": \"string\",\n    \"actions\": [\n      {\n        \"threshold\": 5069.467200531105,\n        \"type\": \"email\",\n        \"target\": \"string\"\n      },\n      {\n        \"threshold\": 147.07855134166948,\n        \"type\": \"msteams\",\n        \"target\": \"string\"\n      }\n    ],\n    \"currentSpend\": 5141.322370543685,\n    \"createdAt\": \"1987-04-12T15:14:35.552Z\",\n    \"updatedAt\": \"1985-09-16T00:09:28.955Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8807e05a-fb0d-4577-a6aa-308c7f6551e1",
+              "name": "Invalid request body.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "budget"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Address of the Kubecost instance",
+                      "type": "any",
+                      "value": "{{kubecost-address}}",
+                      "key": "kubecost-address"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"amount\": \"<number>\",\n  \"interval\": \"<string>\",\n  \"aggregation\": \"<string>\",\n  \"filter\": \"<string>\",\n  \"actions\": [\n    {\n      \"threshold\": 4389.553829950258,\n      \"type\": \"slack\",\n      \"target\": \"string\"\n    },\n    {\n      \"threshold\": 118.74268314235104,\n      \"type\": \"msteams\",\n      \"target\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7da477f9-a789-405b-a051-358d97f79a05",
+          "name": "Kubecost Get a specific budget",
+          "request": {
+            "name": "Kubecost Get a specific budget",
+            "description": {
+              "content": "Retrieves a specific budget rule by ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "model",
+                "budget",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Unique identifier of the budget."
+                },
+                {
+                  "description": "Address of the Kubecost instance",
+                  "type": "any",
+                  "value": "{{kubecost-address}}",
+                  "key": "kubecost-address"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c5c8d05a-b0e8-452a-aca2-4572aa16df05",
+              "name": "Successful budget response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "budget",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique identifier of the budget."
+                    },
+                    {
+                      "description": "Address of the Kubecost instance",
+                      "type": "any",
+                      "value": "{{kubecost-address}}",
+                      "key": "kubecost-address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6573,\n  \"data\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"amount\": 3680.503886410902,\n    \"interval\": \"monthly\",\n    \"aggregation\": \"string\",\n    \"filter\": \"string\",\n    \"actions\": [\n      {\n        \"threshold\": 5069.467200531105,\n        \"type\": \"email\",\n        \"target\": \"string\"\n      },\n      {\n        \"threshold\": 147.07855134166948,\n        \"type\": \"msteams\",\n        \"target\": \"string\"\n      }\n    ],\n    \"currentSpend\": 5141.322370543685,\n    \"createdAt\": \"1987-04-12T15:14:35.552Z\",\n    \"updatedAt\": \"1985-09-16T00:09:28.955Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4cb9d3df-2a48-4bb8-89ec-b1caf965b54d",
+              "name": "Budget not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "budget",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique identifier of the budget."
+                    },
+                    {
+                      "description": "Address of the Kubecost instance",
+                      "type": "any",
+                      "value": "{{kubecost-address}}",
+                      "key": "kubecost-address"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "122cc017-4313-4f0c-95de-84d0d9865310",
+          "name": "Kubecost Update a budget",
+          "request": {
+            "name": "Kubecost Update a budget",
+            "description": {
+              "content": "Updates an existing budget rule.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "model",
+                "budget",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Unique identifier of the budget."
+                },
+                {
+                  "description": "Address of the Kubecost instance",
+                  "type": "any",
+                  "value": "{{kubecost-address}}",
+                  "key": "kubecost-address"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"amount\": \"<number>\",\n  \"interval\": \"<string>\",\n  \"aggregation\": \"<string>\",\n  \"filter\": \"<string>\",\n  \"actions\": [\n    {\n      \"threshold\": \"<number>\",\n      \"type\": \"<string>\",\n      \"target\": \"<string>\"\n    },\n    {\n      \"threshold\": \"<number>\",\n      \"type\": \"<string>\",\n      \"target\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8e5f3ac6-1314-4db4-b139-5df1cdc1bb32",
+              "name": "Budget updated successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "budget",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique identifier of the budget."
+                    },
+                    {
+                      "description": "Address of the Kubecost instance",
+                      "type": "any",
+                      "value": "{{kubecost-address}}",
+                      "key": "kubecost-address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"amount\": \"<number>\",\n  \"interval\": \"<string>\",\n  \"aggregation\": \"<string>\",\n  \"filter\": \"<string>\",\n  \"actions\": [\n    {\n      \"threshold\": 4389.553829950258,\n      \"type\": \"slack\",\n      \"target\": \"string\"\n    },\n    {\n      \"threshold\": 118.74268314235104,\n      \"type\": \"msteams\",\n      \"target\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6573,\n  \"data\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"amount\": 3680.503886410902,\n    \"interval\": \"monthly\",\n    \"aggregation\": \"string\",\n    \"filter\": \"string\",\n    \"actions\": [\n      {\n        \"threshold\": 5069.467200531105,\n        \"type\": \"email\",\n        \"target\": \"string\"\n      },\n      {\n        \"threshold\": 147.07855134166948,\n        \"type\": \"msteams\",\n        \"target\": \"string\"\n      }\n    ],\n    \"currentSpend\": 5141.322370543685,\n    \"createdAt\": \"1987-04-12T15:14:35.552Z\",\n    \"updatedAt\": \"1985-09-16T00:09:28.955Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cf53eb92-0eff-4ad4-9226-64c8dc16a754",
+              "name": "Invalid request body.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "budget",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique identifier of the budget."
+                    },
+                    {
+                      "description": "Address of the Kubecost instance",
+                      "type": "any",
+                      "value": "{{kubecost-address}}",
+                      "key": "kubecost-address"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"amount\": \"<number>\",\n  \"interval\": \"<string>\",\n  \"aggregation\": \"<string>\",\n  \"filter\": \"<string>\",\n  \"actions\": [\n    {\n      \"threshold\": 4389.553829950258,\n      \"type\": \"slack\",\n      \"target\": \"string\"\n    },\n    {\n      \"threshold\": 118.74268314235104,\n      \"type\": \"msteams\",\n      \"target\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "845b19fd-9617-4a46-a388-b7de2b58c544",
+              "name": "Budget not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "budget",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique identifier of the budget."
+                    },
+                    {
+                      "description": "Address of the Kubecost instance",
+                      "type": "any",
+                      "value": "{{kubecost-address}}",
+                      "key": "kubecost-address"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"amount\": \"<number>\",\n  \"interval\": \"<string>\",\n  \"aggregation\": \"<string>\",\n  \"filter\": \"<string>\",\n  \"actions\": [\n    {\n      \"threshold\": 4389.553829950258,\n      \"type\": \"slack\",\n      \"target\": \"string\"\n    },\n    {\n      \"threshold\": 118.74268314235104,\n      \"type\": \"msteams\",\n      \"target\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "04e77c27-ae7b-450c-b49f-dab8d777c277",
+          "name": "Kubecost Delete a budget",
+          "request": {
+            "name": "Kubecost Delete a budget",
+            "description": {
+              "content": "Deletes an existing budget rule.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "model",
+                "budget",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Unique identifier of the budget."
+                },
+                {
+                  "description": "Address of the Kubecost instance",
+                  "type": "any",
+                  "value": "{{kubecost-address}}",
+                  "key": "kubecost-address"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f2c83728-2e96-41b6-bf3d-5825ba69002f",
+              "name": "Budget deleted successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "budget",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique identifier of the budget."
+                    },
+                    {
+                      "description": "Address of the Kubecost instance",
+                      "type": "any",
+                      "value": "{{kubecost-address}}",
+                      "key": "kubecost-address"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8ca3c64f-0c06-4b86-b2b3-87e8a90a1ca4",
+              "name": "Budget not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "budget",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique identifier of the budget."
+                    },
+                    {
+                      "description": "Address of the Kubecost instance",
+                      "type": "any",
+                      "value": "{{kubecost-address}}",
+                      "key": "kubecost-address"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7b585a79-f1cb-4500-8fe4-71e2f232b7ed",
+          "name": "Kubecost Query cloud cost data",
+          "request": {
+            "name": "Kubecost Query cloud cost data",
+            "description": {
+              "content": "Retrieves cloud cost data from cloud service providers, with support for aggregation and filtering.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "model",
+                "cloudCost"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "window",
+                  "value": "<string>",
+                  "description": "(Required) Duration of time over which to query. Accepts daily intervals (e.g. 3d) or RFC3339 date pairs."
+                },
+                {
+                  "disabled": false,
+                  "key": "aggregate",
+                  "value": "<string>",
+                  "description": "Field by which to aggregate results. Supported values include invoiceEntityID, accountID, provider, service, and label:<name>. Supports multi-aggregation via comma-separated values."
+                },
+                {
+                  "disabled": false,
+                  "key": "accumulate",
+                  "value": "false",
+                  "description": "If true, sum the entire range into a single set."
+                },
+                {
+                  "disabled": false,
+                  "key": "filterInvoiceEntityIDs",
+                  "value": "<string>",
+                  "description": "Filter by invoice entity ID (comma-separated)."
+                },
+                {
+                  "disabled": false,
+                  "key": "filterAccountIDs",
+                  "value": "<string>",
+                  "description": "Filter by account ID (comma-separated)."
+                },
+                {
+                  "disabled": false,
+                  "key": "filterProviders",
+                  "value": "<string>",
+                  "description": "Filter by provider (comma-separated)."
+                },
+                {
+                  "disabled": false,
+                  "key": "filterServices",
+                  "value": "<string>",
+                  "description": "Filter by service (comma-separated)."
+                },
+                {
+                  "disabled": false,
+                  "key": "filterLabels",
+                  "value": "<string>",
+                  "description": "Filter by label in the format label:value."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Address of the Kubecost instance",
+                  "type": "any",
+                  "value": "{{kubecost-address}}",
+                  "key": "kubecost-address"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1664e451-5ac7-47d5-ab41-5eaf5c6d8637",
+              "name": "Successful cloud cost query response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "cloudCost"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "window",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aggregate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accumulate",
+                      "value": "false"
+                    },
+                    {
+                      "key": "filterInvoiceEntityIDs",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterAccountIDs",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterProviders",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterServices",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterLabels",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Address of the Kubecost instance",
+                      "type": "any",
+                      "value": "{{kubecost-address}}",
+                      "key": "kubecost-address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 200,\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f761c05a-21e8-4e22-a537-0214bccb6c80",
+              "name": "Invalid request parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "cloudCost"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "window",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aggregate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accumulate",
+                      "value": "false"
+                    },
+                    {
+                      "key": "filterInvoiceEntityIDs",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterAccountIDs",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterProviders",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterServices",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterLabels",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Address of the Kubecost instance",
+                      "type": "any",
+                      "value": "{{kubecost-address}}",
+                      "key": "kubecost-address"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "79053598-196f-4cad-8f37-40330bd6a676",
+          "name": "Kubecost Query cloud cost view data",
+          "request": {
+            "name": "Kubecost Query cloud cost view data",
+            "description": {
+              "content": "Default endpoint for querying cloud costs. Provides a comprehensive view of cloud spending.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "model",
+                "cloudCost",
+                "view"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "window",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "aggregate",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "accumulate",
+                  "value": "false"
+                },
+                {
+                  "disabled": false,
+                  "key": "filterInvoiceEntityIDs",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filterAccountIDs",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filterProviders",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filterServices",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Address of the Kubecost instance",
+                  "type": "any",
+                  "value": "{{kubecost-address}}",
+                  "key": "kubecost-address"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f6e9f12e-ea96-408a-9504-b94ed34ea437",
+              "name": "Successful cloud cost view response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "cloudCost",
+                    "view"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "window",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aggregate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accumulate",
+                      "value": "false"
+                    },
+                    {
+                      "key": "filterInvoiceEntityIDs",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterAccountIDs",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterProviders",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterServices",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Address of the Kubecost instance",
+                      "type": "any",
+                      "value": "{{kubecost-address}}",
+                      "key": "kubecost-address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5823,\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8a747e55-3c20-4504-9a07-3a5f85230394",
+          "name": "Kubecost Query top cloud costs",
+          "request": {
+            "name": "Kubecost Query top cloud costs",
+            "description": {
+              "content": "Returns the top cloud cost items. Accepts all parameters of the view endpoint.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "model",
+                "cloudCost",
+                "top"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "window",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "aggregate",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "accumulate",
+                  "value": "false"
+                },
+                {
+                  "disabled": false,
+                  "key": "filterProviders",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filterServices",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Maximum number of results to return."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Address of the Kubecost instance",
+                  "type": "any",
+                  "value": "{{kubecost-address}}",
+                  "key": "kubecost-address"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "030cd31a-68f8-4e51-8c71-b2fcda37341d",
+              "name": "Successful top cloud cost response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "cloudCost",
+                    "top"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "window",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aggregate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accumulate",
+                      "value": "false"
+                    },
+                    {
+                      "key": "filterProviders",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterServices",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Address of the Kubecost instance",
+                      "type": "any",
+                      "value": "{{kubecost-address}}",
+                      "key": "kubecost-address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5823,\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c8452a73-aec5-4392-85a8-72af4c07a25a",
+          "name": "Kubecost Forecast allocation costs",
+          "request": {
+            "name": "Kubecost Forecast allocation costs",
+            "description": {
+              "content": "Returns a cost forecast for Kubernetes workloads based on historical allocation data, projecting future costs over the specified forecast window.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "model",
+                "forecast",
+                "allocation"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "window",
+                  "value": "<string>",
+                  "description": "(Required) Historical window of time to use as the basis for the forecast."
+                },
+                {
+                  "disabled": false,
+                  "key": "forecastWindow",
+                  "value": "<string>",
+                  "description": "Duration of time to forecast into the future."
+                },
+                {
+                  "disabled": false,
+                  "key": "aggregate",
+                  "value": "<string>",
+                  "description": "Field by which to aggregate results. Supports the same values as the Allocation API aggregate parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "accumulate",
+                  "value": "false",
+                  "description": "If true, sum the entire range into a single set."
+                },
+                {
+                  "disabled": false,
+                  "key": "filterClusters",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filterNamespaces",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Address of the Kubecost instance",
+                  "type": "any",
+                  "value": "{{kubecost-address}}",
+                  "key": "kubecost-address"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ffd1c0ed-7d8b-4e00-aaed-a2526aa16320",
+              "name": "Successful forecast response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "forecast",
+                    "allocation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "window",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "forecastWindow",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aggregate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accumulate",
+                      "value": "false"
+                    },
+                    {
+                      "key": "filterClusters",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterNamespaces",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Address of the Kubecost instance",
+                      "type": "any",
+                      "value": "{{kubecost-address}}",
+                      "key": "kubecost-address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 200,\n  \"data\": {\n    \"totalCost\": 7131.103825573776,\n    \"confidence\": 7556.707159286127,\n    \"forecastWindow\": {\n      \"start\": \"1958-09-08T13:26:20.893Z\",\n      \"end\": \"2008-02-20T15:07:04.097Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d762bf30-e7b9-4ebd-90d4-7ca0636fd240",
+              "name": "Invalid request parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "forecast",
+                    "allocation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "window",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "forecastWindow",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aggregate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accumulate",
+                      "value": "false"
+                    },
+                    {
+                      "key": "filterClusters",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterNamespaces",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Address of the Kubecost instance",
+                      "type": "any",
+                      "value": "{{kubecost-address}}",
+                      "key": "kubecost-address"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "36f1877a-62ff-4a0f-8ec8-11e674595afd",
+          "name": "Kubecost Get cluster right-sizing recommendations",
+          "request": {
+            "name": "Kubecost Get cluster right-sizing recommendations",
+            "description": {
+              "content": "Returns recommendations for right-sizing clusters based on actual resource usage, including potential monthly savings.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "model",
+                "savings",
+                "clusterSizingETL"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "window",
+                  "value": "48h",
+                  "description": "Duration of time to analyze for recommendations."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Address of the Kubecost instance",
+                  "type": "any",
+                  "value": "{{kubecost-address}}",
+                  "key": "kubecost-address"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cb84f8b7-6a51-409e-a599-71e6aed96bc9",
+              "name": "Cluster right-sizing recommendations.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "savings",
+                    "clusterSizingETL"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "window",
+                      "value": "48h"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Address of the Kubecost instance",
+                      "type": "any",
+                      "value": "{{kubecost-address}}",
+                      "key": "kubecost-address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6105,\n  \"data\": [\n    {\n      \"clusterName\": \"string\",\n      \"currentMonthlyRate\": 9041.992115732704,\n      \"recommendedMonthlyRate\": 6075.3501162141065,\n      \"monthlySavings\": 1039.8352708177795,\n      \"currentNodeCount\": 2965,\n      \"recommendedNodeCount\": 4090,\n      \"currentNodeType\": \"string\",\n      \"recommendedNodeType\": \"string\"\n    },\n    {\n      \"clusterName\": \"string\",\n      \"currentMonthlyRate\": 3525.086680770211,\n      \"recommendedMonthlyRate\": 5638.13730475521,\n      \"monthlySavings\": 9546.961570406822,\n      \"currentNodeCount\": 1462,\n      \"recommendedNodeCount\": 6222,\n      \"currentNodeType\": \"string\",\n      \"recommendedNodeType\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c78fd129-5706-4973-9024-06f3b9179cf5",
+          "name": "Kubecost Get container request right-sizing recommendations",
+          "request": {
+            "name": "Kubecost Get container request right-sizing recommendations",
+            "description": {
+              "content": "Returns recommendations for right-sizing container resource requests (CPU and memory) based on actual usage patterns.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "model",
+                "savings",
+                "requestSizingV2"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "window",
+                  "value": "<string>",
+                  "description": "(Required) Duration of time to analyze for recommendations."
+                },
+                {
+                  "disabled": false,
+                  "key": "targetCPUUtilization",
+                  "value": "0.65",
+                  "description": "Target CPU utilization percentage (0-1)."
+                },
+                {
+                  "disabled": false,
+                  "key": "targetRAMUtilization",
+                  "value": "0.65",
+                  "description": "Target RAM utilization percentage (0-1)."
+                },
+                {
+                  "disabled": false,
+                  "key": "filterClusters",
+                  "value": "<string>",
+                  "description": "Filter by cluster name (comma-separated)."
+                },
+                {
+                  "disabled": false,
+                  "key": "filterNamespaces",
+                  "value": "<string>",
+                  "description": "Filter by namespace (comma-separated)."
+                },
+                {
+                  "disabled": false,
+                  "key": "filterControllers",
+                  "value": "<string>",
+                  "description": "Filter by controller name (comma-separated)."
+                },
+                {
+                  "disabled": false,
+                  "key": "filterLabels",
+                  "value": "<string>",
+                  "description": "Filter by label in the format label:value."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Address of the Kubecost instance",
+                  "type": "any",
+                  "value": "{{kubecost-address}}",
+                  "key": "kubecost-address"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c81e6c8c-32d2-4f46-a5f6-159af3f095ec",
+              "name": "Container request right-sizing recommendations.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "savings",
+                    "requestSizingV2"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "window",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "targetCPUUtilization",
+                      "value": "0.65"
+                    },
+                    {
+                      "key": "targetRAMUtilization",
+                      "value": "0.65"
+                    },
+                    {
+                      "key": "filterClusters",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterNamespaces",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterControllers",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterLabels",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Address of the Kubecost instance",
+                      "type": "any",
+                      "value": "{{kubecost-address}}",
+                      "key": "kubecost-address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8106,\n  \"data\": [\n    {\n      \"clusterName\": \"string\",\n      \"namespace\": \"string\",\n      \"controllerKind\": \"string\",\n      \"controllerName\": \"string\",\n      \"containerName\": \"string\",\n      \"currentCPURequest\": 1021.4739243258452,\n      \"recommendedCPURequest\": 4136.470704277975,\n      \"currentRAMBytesRequest\": 2362.0961781531537,\n      \"recommendedRAMBytesRequest\": 6651.371342413726,\n      \"monthlySavings\": 2528.432849597254\n    },\n    {\n      \"clusterName\": \"string\",\n      \"namespace\": \"string\",\n      \"controllerKind\": \"string\",\n      \"controllerName\": \"string\",\n      \"containerName\": \"string\",\n      \"currentCPURequest\": 5369.04503019272,\n      \"recommendedCPURequest\": 4794.071174988218,\n      \"currentRAMBytesRequest\": 3571.0931037825335,\n      \"recommendedRAMBytesRequest\": 7891.388490309608,\n      \"monthlySavings\": 3623.8369058644857\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "520b156b-da36-4963-8c3a-d25050e917cb",
+          "name": "Kubecost List abandoned workloads",
+          "request": {
+            "name": "Kubecost List abandoned workloads",
+            "description": {
+              "content": "Returns a list of workloads that appear to be abandoned based on low resource utilization over the specified window.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "model",
+                "savings",
+                "abandonedWorkloads"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "window",
+                  "value": "7d",
+                  "description": "Duration of time to analyze."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Address of the Kubecost instance",
+                  "type": "any",
+                  "value": "{{kubecost-address}}",
+                  "key": "kubecost-address"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e4b16182-719b-40c3-ba12-b719d659559e",
+              "name": "List of abandoned workloads.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "savings",
+                    "abandonedWorkloads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "window",
+                      "value": "7d"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Address of the Kubecost instance",
+                      "type": "any",
+                      "value": "{{kubecost-address}}",
+                      "key": "kubecost-address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2558,\n  \"data\": [\n    {\n      \"cluster\": \"string\",\n      \"namespace\": \"string\",\n      \"controller\": \"string\",\n      \"controllerKind\": \"string\",\n      \"monthlySavings\": 8765.429680714751\n    },\n    {\n      \"cluster\": \"string\",\n      \"namespace\": \"string\",\n      \"controller\": \"string\",\n      \"controllerKind\": \"string\",\n      \"monthlySavings\": 435.75739635093316\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6be25941-89ba-4049-a0c6-773a3bebbc8c",
+          "name": "Kubecost List orphaned disks",
+          "request": {
+            "name": "Kubecost List orphaned disks",
+            "description": {
+              "content": "Returns a list of persistent volumes and disks that are not attached to any running workload.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "model",
+                "savings",
+                "orphanedDisks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Address of the Kubecost instance",
+                  "type": "any",
+                  "value": "{{kubecost-address}}",
+                  "key": "kubecost-address"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "beaf9975-80aa-429d-94d3-d4020b9d223b",
+              "name": "List of orphaned disks.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "savings",
+                    "orphanedDisks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Address of the Kubecost instance",
+                      "type": "any",
+                      "value": "{{kubecost-address}}",
+                      "key": "kubecost-address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 3535,\n  \"data\": [\n    {\n      \"name\": \"string\",\n      \"cluster\": \"string\",\n      \"region\": \"string\",\n      \"sizeGB\": 8604.128769418676,\n      \"monthlyCost\": 5190.336803296765\n    },\n    {\n      \"name\": \"string\",\n      \"cluster\": \"string\",\n      \"region\": \"string\",\n      \"sizeGB\": 3959.3559507653654,\n      \"monthlyCost\": 1518.3745129658155\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d782677b-8914-4e57-ad07-0823c8be3597",
+          "name": "Kubecost List orphaned IP addresses",
+          "request": {
+            "name": "Kubecost List orphaned IP addresses",
+            "description": {
+              "content": "Returns a list of allocated IP addresses that are not associated with any active resource.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "model",
+                "savings",
+                "orphanedIPs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Address of the Kubecost instance",
+                  "type": "any",
+                  "value": "{{kubecost-address}}",
+                  "key": "kubecost-address"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a6175994-a6f3-479b-a219-d77b8628bb0b",
+              "name": "List of orphaned IP addresses.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "savings",
+                    "orphanedIPs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Address of the Kubecost instance",
+                      "type": "any",
+                      "value": "{{kubecost-address}}",
+                      "key": "kubecost-address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 88,\n  \"data\": [\n    {\n      \"address\": \"string\",\n      \"cluster\": \"string\",\n      \"region\": \"string\",\n      \"monthlyCost\": 70.31290988205541\n    },\n    {\n      \"address\": \"string\",\n      \"cluster\": \"string\",\n      \"region\": \"string\",\n      \"monthlyCost\": 3715.860400253144\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Address of the Kubecost instance",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "localhost:9090",
+      "key": "kubecost-address"
+    },
+    {
+      "type": "string",
+      "value": "http://{{kubecost-address}}",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "48160cb8-f07b-482a-be6a-ba8799af7fd5",
+    "name": "Kubecost Allocation Model API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Allocation API retrieves cost allocation information for any Kubernetes concept, such as cost by namespace, label, deployment, service, and more. It is directly integrated with the Kubecost ETL caching layer and CSV pipeline so it can scale for large clusters.\n\nContact Support:\n Name: Kubecost",
+      "type": "text/plain"
+    }
+  }
+}
