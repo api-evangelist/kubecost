@@ -1,6 +1,9 @@
 aid: kubecost
 url: https://raw.githubusercontent.com/api-search/kubecost/refs/heads/main/apis.yml
 common:
+  - type: CapabilityMap
+    url: capabilities/kubecost-capability-edges.yml
+    name: Kubecost Business Capability Map
   - type: AgenticAccess
     url: agentic-access/kubecost-agentic-access.yml
   - type: DomainSecurity
@@ -55,6 +58,17 @@ tags:
   - Optimization
   - Spending
 kind: contract
+deliveryModel:
+  model: unknown
+  open_source: false
+  commercial: false
+  callable_host: false
+  label: Delivery model not determined — needs a product licence on record
+  confidence: low
+  source:
+  - openapi
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: enterprise
   onboarding: unknown
