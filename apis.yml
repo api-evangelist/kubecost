@@ -1,17 +1,19 @@
 aid: kubecost
 url: https://raw.githubusercontent.com/api-search/kubecost/refs/heads/main/apis.yml
 common:
-  - type: CapabilityMap
-    url: capabilities/kubecost-capability-edges.yml
-    name: Kubecost Business Capability Map
-  - type: AgenticAccess
-    url: agentic-access/kubecost-agentic-access.yml
-  - type: DomainSecurity
-    url: security/kubecost-domain-security.yml
-  - type: GitHubOrganization
-    url: https://github.com/kubecost
-  - type: LinkedIn
-    url: https://www.linkedin.com/company/kubecost
+- type: Website
+  url: https://kubecost.com
+- type: CapabilityMap
+  url: capabilities/kubecost-capability-edges.yml
+  name: Kubecost Business Capability Map
+- type: AgenticAccess
+  url: agentic-access/kubecost-agentic-access.yml
+- type: DomainSecurity
+  url: security/kubecost-domain-security.yml
+- type: GitHubOrganization
+  url: https://github.com/kubecost
+- type: LinkedIn
+  url: https://www.linkedin.com/company/kubecost
 apis:
 - aid: kubecost:kubecost-model-api
   name: Kubecost Model API
@@ -52,11 +54,11 @@ apis:
     url: json-schema/savings-recommendation.json
 name: Kubecost
 tags:
-  - Cloud Cost
-  - Cost Monitoring
-  - Kubernetes
-  - Optimization
-  - Spending
+- Cloud Cost
+- Cost Monitoring
+- Kubernetes
+- Optimization
+- Spending
 kind: contract
 deliveryModel:
   model: unknown
@@ -84,13 +86,12 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/kubecost.png
 access: 3rd-Party
 created: '2024-11-13'
-modified: '2026-05-19'
+modified: '2026-09-16'
 position: Consuming
-description: >-
-  Kubecost provides real-time cost monitoring and management for Kubernetes environments. Its APIs enable programmatic
-  access to cost allocation data, asset costs, cloud provider spend, budget governance, cost forecasting, and savings
-  recommendations for optimizing Kubernetes and cloud infrastructure spending.
+description: Kubecost provides real-time cost monitoring and management for Kubernetes environments. Its
+  APIs enable programmatic access to cost allocation data, asset costs, cloud provider spend, budget governance,
+  cost forecasting, and savings recommendations for optimizing Kubernetes and cloud infrastructure spending.
 maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- FN: Kin Lane
+  email: kin@apievangelist.com
 specificationVersion: '0.23'
