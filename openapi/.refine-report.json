@@ -1,7 +1,12 @@
 {
   "provider": "kubecost",
   "sources": [
-    "kubecost-model-api-openapi.yml"
+    "_original/kubecost-allocation-openapi.yml",
+    "_original/kubecost-assets-openapi.yml",
+    "_original/kubecost-budget-openapi.yml",
+    "_original/kubecost-cloud-cost-openapi.yml",
+    "_original/kubecost-forecast-openapi.yml",
+    "_original/kubecost-savings-openapi.yml"
   ],
   "outputs": [
     "kubecost-model-api-openapi.yml"
@@ -9,6 +14,18 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (6 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "kubecost-allocation-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "kubecost-assets-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "kubecost-budget-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "kubecost-cloud-cost-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "kubecost-forecast-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "kubecost-savings-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "tag 'Model' spans 6 source specs (kubecost-allocation-openapi.yml, kubecost-assets-openapi.yml, kubecost-budget-openapi.yml, kubecost-cloud-cost-openapi.yml, kubecost-forecast-openapi.yml, kubecost-savings-openapi.yml): per-path servers applied",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "kubecost-model-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

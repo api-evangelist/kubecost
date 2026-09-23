@@ -1,0 +1,29 @@
+# Front Door AI Index — kubecost — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: kubecost
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: kubecost.com
+  final_host: www.apptio.com
+  ownership: own
+  owner: kubecost
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 6
+  host_score: 6
+  density: 3.83
+  words: 1567
+  tiers:
+    agentic: 0
+    core: 6
+    model: 0
+  ambiguous: 12
+  top_terms:
+    intelligence: 7
+    AI: 6
+    automation: 3
+    agent: 1
+    smart: 1
