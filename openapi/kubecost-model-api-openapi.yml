@@ -1206,6 +1206,36 @@ components:
           type: number
         totalCost:
           type: number
+    BudgetInput:
+      type: object
+      required:
+      - name
+      - amount
+      - interval
+      properties:
+        name:
+          type: string
+          description: Name of the budget rule.
+        amount:
+          type: number
+          description: Budget amount limit.
+        interval:
+          type: string
+          enum:
+          - weekly
+          - monthly
+          description: Recurrence interval of the budget.
+        aggregation:
+          type: string
+          description: The field used to scope the budget.
+        filter:
+          type: string
+          description: Filter expression to scope the budget.
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/BudgetAction'
+          description: Alert actions for threshold notifications.
     Budget:
       type: object
       properties:
@@ -1244,36 +1274,6 @@ components:
         updatedAt:
           type: string
           format: date-time
-    BudgetInput:
-      type: object
-      required:
-      - name
-      - amount
-      - interval
-      properties:
-        name:
-          type: string
-          description: Name of the budget rule.
-        amount:
-          type: number
-          description: Budget amount limit.
-        interval:
-          type: string
-          enum:
-          - weekly
-          - monthly
-          description: Recurrence interval of the budget.
-        aggregation:
-          type: string
-          description: The field used to scope the budget.
-        filter:
-          type: string
-          description: Filter expression to scope the budget.
-        actions:
-          type: array
-          items:
-            $ref: '#/components/schemas/BudgetAction'
-          description: Alert actions for threshold notifications.
     BudgetAction:
       type: object
       properties:
@@ -1290,25 +1290,6 @@ components:
         target:
           type: string
           description: Target for the notification (email address, webhook URL, etc.).
-    ClusterSizingRecommendation:
-      type: object
-      properties:
-        clusterName:
-          type: string
-        currentMonthlyRate:
-          type: number
-        recommendedMonthlyRate:
-          type: number
-        monthlySavings:
-          type: number
-        currentNodeCount:
-          type: integer
-        recommendedNodeCount:
-          type: integer
-        currentNodeType:
-          type: string
-        recommendedNodeType:
-          type: string
     RequestSizingRecommendation:
       type: object
       properties:
@@ -1332,6 +1313,25 @@ components:
           type: number
         monthlySavings:
           type: number
+    ClusterSizingRecommendation:
+      type: object
+      properties:
+        clusterName:
+          type: string
+        currentMonthlyRate:
+          type: number
+        recommendedMonthlyRate:
+          type: number
+        monthlySavings:
+          type: number
+        currentNodeCount:
+          type: integer
+        recommendedNodeCount:
+          type: integer
+        currentNodeType:
+          type: string
+        recommendedNodeType:
+          type: string
 x-refined-from:
 - kubecost-allocation-openapi.yml
 - kubecost-assets-openapi.yml
