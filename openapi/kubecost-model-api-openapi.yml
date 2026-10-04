@@ -1206,22 +1206,6 @@ components:
           type: number
         totalCost:
           type: number
-    BudgetAction:
-      type: object
-      properties:
-        threshold:
-          type: number
-          description: Percentage threshold (0-1) at which the action triggers.
-        type:
-          type: string
-          enum:
-          - email
-          - slack
-          - msteams
-          description: Type of notification channel.
-        target:
-          type: string
-          description: Target for the notification (email address, webhook URL, etc.).
     BudgetInput:
       type: object
       required:
@@ -1252,6 +1236,22 @@ components:
           items:
             $ref: '#/components/schemas/BudgetAction'
           description: Alert actions for threshold notifications.
+    BudgetAction:
+      type: object
+      properties:
+        threshold:
+          type: number
+          description: Percentage threshold (0-1) at which the action triggers.
+        type:
+          type: string
+          enum:
+          - email
+          - slack
+          - msteams
+          description: Type of notification channel.
+        target:
+          type: string
+          description: Target for the notification (email address, webhook URL, etc.).
     Budget:
       type: object
       properties:
