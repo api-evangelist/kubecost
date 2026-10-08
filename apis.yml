@@ -1,6 +1,12 @@
 aid: kubecost
 url: https://raw.githubusercontent.com/api-search/kubecost/refs/heads/main/apis.yml
 common:
+- type: Plans
+  url: plans/kubecost-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/kubecost-rate-limits.yml
+- type: FinOps
+  url: finops/kubecost-finops.yml
 - type: Website
   url: https://kubecost.com
 - type: CapabilityMap
