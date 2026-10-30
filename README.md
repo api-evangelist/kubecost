@@ -1,4 +1,4 @@
-# Kubecost (kubecost)
+# Kubecost
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,163 +66,161 @@
 
 Kubecost provides real-time cost monitoring and management for Kubernetes environments. Its APIs enable programmatic access to cost allocation data, asset costs, cloud provider spend, budget governance, cost forecasting, and savings recommendations for optimizing Kubernetes and cloud infrastructure spending.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-search/kubecost/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-search/kubecost/refs/heads/main/apis.yml)
+**Areas:** Cloud Cost · Cost Monitoring · Kubernetes · Optimization · Spending
 
-## Scope
+## Kubecost on APIs.io
 
-- **Position:** Consuming
-- **Access:** 3rd-Party
+Everything profiled for Kubecost is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/kubecost/](https://apis.io/providers/kubecost/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (1)
 
-- Cloud Cost
-- Cost Monitoring
-- Kubernetes
-- Optimization
-- Spending
+- [Kubecost Model API](https://apis.io/apis/kubecost/kubecost-model-api/) — The Model API from Kubecost — 15 operation(s) for model.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2024-11-13
-- **Modified:** 2026-05-19
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Agentic access (1)
 
-### Kubecost Allocation API
+Which operations an agent can call, which act, and which need a human in the loop.
 
-The Allocation API retrieves cost allocation information for any Kubernetes concept, such as cost by namespace, label, deployment, service, and more. It is directly integrated with the Kubecost ETL caching layer and CSV pipeline so it can scale for large clusters.
+- [Kubecost Agentic Access](https://apis.io/agentic-access/kubecost/kubecost-agentic-access/)
 
-- **Human URL:** [https://docs.kubecost.com/apis/monitoring-apis/api-allocation](https://docs.kubecost.com/apis/monitoring-apis/api-allocation)
+#### JSON Schema (14)
 
-#### Tags
+The data models the API reads and writes.
 
-- Cost Allocation
-- Kubernetes
-- Monitoring
+- [Kubecost Allocation](https://apis.io/schemas/kubecost/allocation/)
+- [Kubecost Asset](https://apis.io/schemas/kubecost/asset/)
+- [Kubecost Budget](https://apis.io/schemas/kubecost/budget/)
+- [Kubecost Budget Action](https://apis.io/schemas/kubecost/budget-action/)
+- [Kubecost Cloud Cost](https://apis.io/schemas/kubecost/cloud-cost/)
+- [Kubecost Forecast](https://apis.io/schemas/kubecost/forecast/)
+- [Allocation](https://apis.io/schemas/kubecost/kubecost-allocation/)
+- [Asset](https://apis.io/schemas/kubecost/kubecost-asset/)
+- [Budget](https://apis.io/schemas/kubecost/kubecost-budget/)
+- [BudgetAction](https://apis.io/schemas/kubecost/kubecost-budgetaction/)
+- [BudgetInput](https://apis.io/schemas/kubecost/kubecost-budgetinput/)
+- [ClusterSizingRecommendation](https://apis.io/schemas/kubecost/kubecost-clustersizingrecommendation/)
+- [RequestSizingRecommendation](https://apis.io/schemas/kubecost/kubecost-requestsizingrecommendation/)
+- [Kubecost Savings Recommendation](https://apis.io/schemas/kubecost/savings-recommendation/)
 
-#### Properties
+#### JSON Structure (1)
 
-- [Documentation](https://docs.kubecost.com/apis/monitoring-apis/api-allocation)
-- [OpenAPI](openapi/kubecost-allocation-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/kubecost-allocation.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/kubecost-allocation.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [JSON Schema](json-schema/allocation.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON-LD](json-ld/kubecost-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
+Data models expressed in JSON Structure.
 
-### Kubecost Assets API
+- [Kubecost Structure](https://apis.io/json-structure/kubecost/kubecost-structure/)
 
-The Assets API retrieves backing cost data broken down by individual Kubernetes assets in your cluster, such as nodes, disks, load balancers, and more. It also provides various aggregations of this data.
+#### JSON-LD (1)
 
-- **Human URL:** [https://docs.kubecost.com/apis/monitoring-apis/assets-api](https://docs.kubecost.com/apis/monitoring-apis/assets-api)
+Linked-data contexts for the provider's vocabulary.
 
-#### Tags
+- [Kubecost Context](https://apis.io/jsonld/kubecost/kubecost-context/)
 
-- Assets
-- Kubernetes
-- Monitoring
+#### Vocabulary (1)
 
-#### Properties
+The provider's domain terms, defined.
 
-- [Documentation](https://docs.kubecost.com/apis/monitoring-apis/assets-api)
-- [OpenAPI](openapi/kubecost-assets-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/kubecost-assets.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/kubecost-assets.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [JSON Schema](json-schema/asset.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON-LD](json-ld/kubecost-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
+- [Kubecost Domain Vocabulary](https://apis.io/vocabularies/kubecost/kubecost-vocabulary/)
 
-### Kubecost Cloud Cost API
+#### Collections (7)
 
-The Cloud Cost API provides accurate cost information from your cloud service providers (CSPs), including AWS, Azure, and GCP. It offers multiple endpoints for querying, aggregating, and analyzing cloud costs.
+Postman and Open Collection request collections.
 
-- **Human URL:** [https://docs.kubecost.com/apis/monitoring-apis/cloud-cost-api](https://docs.kubecost.com/apis/monitoring-apis/cloud-cost-api)
+- [Kubecost Allocation API](https://apis.io/collections/kubecost/open-kubecost-allocation/)
+- [Kubecost Assets API](https://apis.io/collections/kubecost/open-kubecost-assets/)
+- [Kubecost Budget API](https://apis.io/collections/kubecost/open-kubecost-budget/)
+- [Kubecost Cloud Cost API](https://apis.io/collections/kubecost/open-kubecost-cloud-cost/)
+- [Kubecost Forecast API](https://apis.io/collections/kubecost/open-kubecost-forecast/)
+- [Kubecost Allocation Model API](https://apis.io/collections/kubecost/open-kubecost-model-api/)
+- [Kubecost Savings API](https://apis.io/collections/kubecost/open-kubecost-savings/)
 
-#### Tags
+#### Governance rules (1)
 
-- AWS
-- Azure
-- Cloud Cost
-- GCP
-- Monitoring
+Spectral rulesets for the provider's contracts.
 
-#### Properties
+- [Kubecost — jsonschema rules](https://apis.io/rules/kubecost/kubecost-jsonschema-spectral-rules/)
 
-- [Documentation](https://docs.kubecost.com/apis/monitoring-apis/cloud-cost-api)
-- [OpenAPI](openapi/kubecost-cloud-cost-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/kubecost-cloud-cost.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/kubecost-cloud-cost.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [JSON Schema](json-schema/cloud-cost.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON-LD](json-ld/kubecost-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
+#### Security (1)
 
-### Kubecost Budget API
+Authentication, trust centre, and vulnerability disclosure.
 
-The Budget API allows you to create, update, and delete recurring budget rules to control your Kubernetes spending. Weekly and monthly budgets can be established on workloads to set limits on cost spend, with the option to configure alerts for reaching specified budget thresholds via email, Slack, or Microsoft Teams.
+- [Kubecost Domain Security](https://apis.io/security/kubecost/kubecost-domain-security/)
 
-- **Human URL:** [https://docs.kubecost.com/apis/governance-apis/budget-api](https://docs.kubecost.com/apis/governance-apis/budget-api)
+#### Plans and pricing (1)
 
-#### Tags
+Published plans, tiers and prices.
 
-- Budget
-- Governance
-- Spending
+- [Kubecost Plans Pricing](https://apis.io/plans/kubecost/kubecost-plans-pricing/)
 
-#### Properties
+#### Rate limits (1)
 
-- [Documentation](https://docs.kubecost.com/apis/governance-apis/budget-api)
-- [OpenAPI](openapi/kubecost-budget-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/kubecost-budget.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/kubecost-budget.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [JSON Schema](json-schema/budget.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/budget-action.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON-LD](json-ld/kubecost-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
+Published request limits.
 
-### Kubecost Forecast API
+- [Kubecost Rate Limits](https://apis.io/rate-limits/kubecost/kubecost-rate-limits/)
 
-The Forecast API provides cost forecasting capabilities for Kubernetes workloads, allowing you to predict future spend based on historical cost data and trends.
+#### FinOps (1)
 
-- **Human URL:** [https://docs.kubecost.com/apis/governance-apis/forecast-api](https://docs.kubecost.com/apis/governance-apis/forecast-api)
+What the API costs to run, by operation.
 
-#### Tags
+- [Kubecost Finops](https://apis.io/finops/kubecost/kubecost-finops/)
 
-- Cost Prediction
-- Forecast
-- Governance
+## Where to find this API
 
-#### Properties
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-- [Documentation](https://docs.kubecost.com/apis/governance-apis/forecast-api)
-- [OpenAPI](openapi/kubecost-forecast-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/kubecost-forecast.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/kubecost-forecast.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [JSON Schema](json-schema/forecast.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON-LD](json-ld/kubecost-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
+- [Website](https://kubecost.com)
+- [GitHub](https://github.com/kubecost)
 
-### Kubecost Savings API
+## API Evangelist rating
 
-The Savings APIs provide cost optimization insights, including cluster-level potential savings estimates, recommendations for right-sizing clusters and containers, listing abandoned workloads, orphaned disks, and orphaned IP addresses.
+**Kin Score 24.2** — emerging · rubric 0.24.0 · scored 2026-10-17
 
-- **Human URL:** [https://docs.kubecost.com/apis/savings-apis](https://docs.kubecost.com/apis/savings-apis)
+| Facet | Score |
+|---|---|
+| Discoverability | 62.5 |
+| Contract quality | 54.6 |
+| Contract governance | 9.8 |
+| Operational transparency | 7.9 |
+| Developer ergonomics | 9.5 |
+| Access clarity | 7.9 |
 
-#### Tags
+**Agent readiness 17.9** — agent-aware
 
-- Optimization
-- Right-Sizing
-- Savings
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | — |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
 
-#### Properties
+**Regulatory alignment 10.8** — Horizontal (data, software, accessibility, platform)
 
-- [Documentation](https://docs.kubecost.com/apis/savings-apis)
-- [OpenAPI](openapi/kubecost-savings-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/kubecost-savings.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/kubecost-savings.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [JSON Schema](json-schema/savings-recommendation.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON-LD](json-ld/kubecost-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/kubecost/](https://apis.io/providers/kubecost/).
 
-## Common Properties
+## How this profile is made
 
-- [GitHub Organization](https://github.com/kubecost)
-- [LinkedIn](https://www.linkedin.com/company/kubecost)
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
 
-## Maintainers
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Kubecost: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/kubecost/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
